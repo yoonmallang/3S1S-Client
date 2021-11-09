@@ -7,20 +7,32 @@
   width: 150px;
   height: 120px;
   margin-top: 25px;
+  margin-left: 3%;
+  float: left;
 }
 
 .img-person {
-  width: 37px;
-  height: 37px;
+  width: 33px;
+  height: 33px;
   margin-top: 2px;
 }
 
 .img-alarm {
-  width: 37px;
-  height: 37px;
+  width: 33px;
+  height: 33px;
   margin-top: 2px;
 }
 
 .user-name-dropdown {
+  margin-top: 3px;
   color: black;
+}
+
+.nav-profile {
+  float: right;
+  margin-right: 3%;
+}
+
+.contanier {
+  height: 50px;
 }

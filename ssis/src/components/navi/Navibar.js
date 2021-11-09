@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/navi/Navibar.css';
+import Middlebar from './Middlebar'
 
 class Navibar extends Component {
     constructor() {
         super();
         this.state = {
-            isLogin : false
+            isLogin : false,
+            needMiddleBar : false
         }
     }
 
@@ -18,26 +19,48 @@ class Navibar extends Component {
         }
     }
 
+    checkMiddleBar() {
+        if(localStorage.getItem('needMiddlebar')) {
+            this.setState({needMiddleBar: true})
+        }
+    }
     logout() {
         console.log("로그아웃")
     }
     
     render() {
         this.checkLogin();
+        this.checkMiddleBar();
         const isLogin = this.state.isLogin;
-        const username = "김동국"
+        const needMiddleBar = this.state.needMiddleBar;
+        let username;
+        let profile;
+        let middelbar;
+
+        if (!isLogin) {
+            username = "김동국";
+            profile = "img/blank-person.png";
+        }
+        else {
+            username = "xxx";
+            profile = "img/blank-person.png";
+        }
+
+        if(!needMiddleBar) {
+            middelbar = <Middlebar/>
+        }
 
         if (!isLogin) {
             return (
                 <div className = "Navigation">
                     <Navbar className="color-nav" variant="dark">
-                        <Container>
+                        <Container className="contanier">
                             <Navbar.Brand href="/">
                                 <img alt="" src="img/logo.png" className="img-logo"/>
                             </Navbar.Brand>
-                            <Nav className="me-auto">
+                            <Nav className="nav-profile">
                                 <Navbar.Brand><img alt="" src="img/alarm.png" className="img-alarm"/></Navbar.Brand>
-                                <Navbar.Brand><img alt="" src="img/blank-person.png" className="img-person"/></Navbar.Brand>
+                                <Navbar.Brand><img alt="" src={profile} className="img-person"/></Navbar.Brand>
                                 <NavDropdown title={username} className="user-name-dropdown" id="collasible-nav-dropdown">
                                     <NavDropdown.Item href="/mypage/1">마이페이지</NavDropdown.Item>
                                     <NavDropdown.Divider />
@@ -46,6 +69,7 @@ class Navibar extends Component {
                             </Nav>
                         </Container>
                     </Navbar>
+                    {middelbar}
               </div>
             );
         }
