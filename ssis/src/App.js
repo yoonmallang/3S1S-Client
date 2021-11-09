@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import './App.css';
 
-import Navbar from './components/navi/Navbar';
+import Navbar from './components/navi/Navibar';
 import findIdPwd from './components/login/FindIdPwd'
 import login from './components/login/Login'
 import register from './components/login/Register';

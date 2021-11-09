@@ -1,0 +1,26 @@
+.color-nav {
+  background-color: #96bcf8;
+  height: 50px;
+}
+
+.img-logo {
+  width: 150px;
+  height: 120px;
+  margin-top: 25px;
+}
+
+.img-person {
+  width: 37px;
+  height: 37px;
+  margin-top: 2px;
+}
+
+.img-alarm {
+  width: 37px;
+  height: 37px;
+  margin-top: 2px;
+}
+
+.user-name-dropdown {
+  color: black;
+}
