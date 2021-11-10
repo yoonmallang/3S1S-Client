@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { postRegiter, checkId } from '../../api/apiClient';
+import axios from 'axios';
 import { Form, Button} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/login/register.css';
@@ -26,7 +26,7 @@ class Register extends Component {
     belongChange = (e) => {this.setState({belong: e.target.value})};
 
     onClickSubmit = () => {
-        postRegiter({
+        axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/signup", {
             id: this.state.id,
             is_valid: this.state.is_valid,
             password: this.state.password,
@@ -35,27 +35,31 @@ class Register extends Component {
             email: this.state.email,
             belong: this.state.belong,
         }).then((res) => {
-            console.log("ddddd")
-            console.log(res.data.status)
-            console.log(res.data.message)
-            alert("회원가입이 완료되었습니다");
-            document.location.href = "/login";
+            if (res.status === 210) {
+                alert(res.data.message)
+            }
+            else {
+                alert(res.data.message)
+                document.location.href = "/login";
+            }
         }).catch((err) => {
             console.log(err);
         })
     }
 
     onClickCheckId = () => {
-        checkId({
-            id: this.state.id
-        }).then((res) => {
-            this.setState({is_valid: true});
-            console.log(res)
-            if(this.state.is_valid) {
-                alert("사용가능한 아이디입니다.")
+        axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/checkid", {
+            params: {
+                id: this.state.id,
             }
-            else {
-                alert("중복된 아이디입니다.")
+        }).then((res) => {
+            if (res.status === 210) {
+                this.setState({is_valid: res.data.is_valid})
+                alert(res.data.message)
+            }
+            else if (res.status === 200) {
+                this.setState({is_valid: res.data.is_valid})
+                alert(res.data.message)
             }
         }).catch((err) => {
             console.log(err);
@@ -71,7 +75,7 @@ class Register extends Component {
                             <Form.Control className="idInput-form" placeholder="Enter Id" onChange={this.idChange}/>
                         </Form.Group>
 
-                        <Button className="idCheck-Button" variant="primary" onClick={this.onClickSubmit}>
+                        <Button className="idCheck-Button" variant="primary" onClick={this.onClickCheckId}>
                             중복확인
                         </Button>
                     
