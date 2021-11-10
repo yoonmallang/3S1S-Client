@@ -39,7 +39,7 @@ class Middlebar extends Component {
                     <div className = "menu">
                         {menu.map((item) => {
                             return (
-                                <Link to={item.url} className={item.cName}>{item.title}</Link>
+                                <Link to={item.url} key={item.id} className={item.cName}>{item.title}</Link>
                             )
                         })}
                     </div>
