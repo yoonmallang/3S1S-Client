@@ -26,11 +26,15 @@ class List extends Component {
                             <div className = "Image">
                                 <img src = "img/group.png" className = "Img" alt = "img/group.png"></img>
                             </div>
-                            <div className = "Team">
-                                3s1s
+                            <div className = "TeamBox">
+                                <div className = "Team">
+                                    3s1s
+                                </div>
+                                <div className="Progress">
+                                    <progress value="22" max="100" className="ProgressBar"></progress>
+                                </div>
                             </div>
-                        </div>
-                        <progress value="22" max="100" className="ProgressBar"></progress>
+                        </div>  
                     </div>
                     <div className = "ProjectBox">
                         <div className = "Title">
@@ -42,11 +46,15 @@ class List extends Component {
                             <div className = "Image">
                                 <img src = "img/group.png" className = "Img" alt = "img/group.png"></img>
                             </div>
-                            <div className = "Team">
-                                SSIS
+                            <div className = "TeamBox">
+                                <div className = "Team">
+                                    ssis
+                                </div>
+                                <div className="Progress">
+                                    <progress value="22" max="100" className="ProgressBar"></progress>
+                                </div>
                             </div>
-                        </div>
-                        <progress value="22" max="100" className="ProgressBar"></progress>
+                        </div>  
                     </div>
                     <div className = "ProjectBox">
                         <div className = "Title">
@@ -58,11 +66,15 @@ class List extends Component {
                             <div className = "Image">
                                 <img src = "img/group.png" className = "Img" alt = "img/group.png"></img>
                             </div>
-                            <div className = "Team">
-                                삼성일식
+                            <div className = "TeamBox">
+                                <div className = "Team">
+                                    삼성일식
+                                </div>
+                                <div className="Progress">
+                                    <progress value="22" max="100" className="ProgressBar"></progress>
+                                </div>
                             </div>
-                        </div>
-                        <progress value="22" max="100" className="ProgressBar"></progress>
+                        </div>  
                     </div>
                     <div className = "ProjectBox">
                         <div className = "Title">
@@ -74,18 +86,20 @@ class List extends Component {
                             <div className = "Image">
                                 <img src = "img/group.png" className = "Img" alt = "img/group.png"></img>
                             </div>
-                            <div className = "Team">
-                                삼성일식
+                            <div className = "TeamBox">
+                                <div className = "Team">
+                                    삼성일식
+                                </div>
+                                <div className="Progress">
+                                    <progress value="22" max="100" className="ProgressBar"></progress>
+                                </div>
                             </div>
-                        </div>
-                        <progress value="22" max="100" className="ProgressBar"></progress>
+                        </div>  
                     </div>
-                        
                         
                     
                     <div className = "AddProject">
-                        <button type="button" class="btm_add" id="img_btn"><img src="img/plus.png" class="btm_image" ></img></button>
-                        
+                        <button type="button" class="btm_add" id="img_btn"><img src="img/plus.png" class="btm_image" ></img></button>   
                     </div>
                     <p>
                     project list
