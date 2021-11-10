@@ -1,0 +1,107 @@
+.Project {
+  height: 1000px;
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+.ProjectContent {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  margin-left: 4%;
+  margin-right: 4%;
+}
+
+.ProjectBox {
+  background-color: #e5efff;
+  width: 30%;
+  height: 350px;
+  border-radius: 15px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  float: left;
+}
+
+.Title {
+  margin-left: 5%;
+  margin-top: 3%;
+  font-size: 60px;
+  float: left;
+  width: 78%;
+  height: 30%;
+  text-align: left;
+}
+
+.ImgTeam {
+  width: 100%;
+  margin-top: 5%;
+  vertical-align: middle;
+}
+
+.Image {
+  vertical-align: middle;
+}
+
+.Img {
+  margin-left: 15%;
+  border: 1px;
+  border-radius: 60%;
+  width: 120px;
+  height: 120px;
+  float: left;
+  vertical-align: middle;
+}
+
+.Team {
+  margin-top: 3%;
+  font-size: 50px;
+  width: 60%;
+  text-align: center;
+  float: right;
+  vertical-align: middle;
+}
+
+.AddProject {
+  background-color: #e5efff;
+  width: 30%;
+  height: 350px;
+  border-radius: 15px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  float: left;
+  vertical-align: middle;
+}
+
+.ProgressBar {
+  margin-top: 6%;
+  width: 90%;
+  height: 12%;
+}
+
+.btm {
+  margin-top: 5%;
+  margin-right: 3%;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.btm_add {
+  width: 100px;
+  height: 100px;
+  padding: 0;
+  border: none;
+  background: none;
+  vertical-align: middle;
+  margin-top: 125px;
+}
+
+.btm_image {
+  width: 90%;
+  height: 90%;
+}
