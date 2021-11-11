@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Button} from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/login/login.css';
 import { postSignIn } from '../../api/apiClient';
@@ -45,13 +45,13 @@ class Login extends Component {
             id: this.state.id,
             password: this.state.password
         }).then(function(res) {
-                        // 로그인 성공
-                       console.log(res)
-                       document.location.href = "/dfdf";
-                    }).catch(function(err) {
-                        console.log(err);
-                    });
-        }
+            // 로그인 성공
+            console.log(res)
+            document.location.href = "/dfdf";
+        }).catch(function(err) {
+            console.log(err);
+        });
+    }
 
     render() {
         return (
@@ -64,10 +64,10 @@ class Login extends Component {
                     <Form.Group className="mb-3" controlId="formGroupPassword">
                         <Form.Control type="password" placeholder="****" onChange={this.pwdChange}/>
                     </Form.Group>
-                    <Button className="in-login-Button" variant="primary" type="submit" onClick={this.onClickSubmit}>
-                            로그인
-                    </Button>
                 </Form>
+                <Button className="in-login-Button" variant="primary" type="submit" onClick={this.onClickSubmit}>
+                            로그인
+                </Button>
                 <Link to="/register" style={{ textDecoration: 'none' }}><Button className="in-login-Button" variant="primary" >
                     회원가입
                 </Button></Link>

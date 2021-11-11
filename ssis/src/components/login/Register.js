@@ -106,11 +106,11 @@ class Register extends Component {
                             <Form.Label className="text">소속</Form.Label>
                             <Form.Control placeholder="Enter Belong" onChange={this.belongChange}/>
                         </Form.Group>
-
-                        <Button className="register-Button" variant="primary" type="submit" onClick={this.onClickSubmit}>
-                            가입하기
-                        </Button>
                     </Form>
+                    
+                    <Button className="register-Button" variant="primary" type="submit" onClick={this.onClickSubmit}>
+                            가입하기
+                    </Button>
                 </div>
         );
     }
