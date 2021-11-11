@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/login/login.css';
-import { postSignIn } from '../../api/apiClient';
+// import { postSignIn } from '../../api/apiClient';
+import axios from 'axios';
 
 class Login extends Component {
     constructor() {
@@ -17,41 +18,33 @@ class Login extends Component {
     idChange = (e) => {this.setState({id: e.target.value})};
     pwdChange = (e) => {this.setState({password: e.target.value})};
     
-    // onClickSubmit = () => {
-    //     console.log(this.state.id)
-    //     console.log(this.state.password)
-    //     axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/signin", {
-    //         id: this.state.id,
-    //         password: this.state.password,
-    //     }).then((res) => {
-    //         console.log(res.data);
-    //         if (res.status === 200) {
-    //             alert("로그인 성공");
-    //             document.location.href = "/project";
-    //             //localStorage.setItem("isLogin", true)
-    //             //localStorage.setItem("id", res.data.token)
-    //         }
-    //         else if (res.status === 210) {
-    //             alert(res.data.message);
-    //         }
-    //     }).catch((err) => {
-    //         console.log(err);
-    //     })
-    // }
-
     onClickSubmit = () => {
-     
-        postSignIn({
+        console.log(this.state.id)
+        console.log(this.state.password)
+        axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/signin", {
             id: this.state.id,
-            password: this.state.password
-        }).then(function(res) {
-            // 로그인 성공
-            console.log(res)
-            document.location.href = "/dfdf";
-        }).catch(function(err) {
+            password: this.state.password,
+        }).then((res) => {
+            console.log(res.data);
+            if (res.status === 200) {
+                alert("로그인 성공");
+                document.location.href = "/project";
+                localStorage.setItem("isLogin", true)
+                localStorage.setItem("id", res.data.token)
+            }
+            else if (res.status === 210) {
+                alert(res.data.message);
+            }
+        }).catch((err) => {
             console.log(err);
-        });
+        })
     }
+
+    handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            this.onClickSubmit();
+        }
+    };
 
     render() {
         return (
@@ -62,7 +55,7 @@ class Login extends Component {
                         <Form.Control placeholder="user id" onChange={this.idChange}/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formGroupPassword">
-                        <Form.Control type="password" placeholder="****" onChange={this.pwdChange}/>
+                        <Form.Control type="password"  onKeyPress={this.handleKeyPress} placeholder="****" onChange={this.pwdChange}/>
                     </Form.Group>
                 </Form>
                 <Button className="in-login-Button" variant="primary" type="submit" onClick={this.onClickSubmit}>

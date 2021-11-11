@@ -69,6 +69,12 @@ class Register extends Component {
         })
     }
 
+    handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            this.onClickSubmit();
+        }
+    };
+
     render() {
         return (
                 <div className = "registerForm">
@@ -104,7 +110,7 @@ class Register extends Component {
 
                         <Form.Group className="div-form" controlId="formGridBelong">
                             <Form.Label className="text">소속</Form.Label>
-                            <Form.Control placeholder="Enter Belong" onChange={this.belongChange}/>
+                            <Form.Control placeholder="Enter Belong"  onKeyPress={this.handleKeyPress} onChange={this.belongChange}/>
                         </Form.Group>
                     </Form>
                     
