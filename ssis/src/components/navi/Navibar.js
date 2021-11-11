@@ -36,8 +36,9 @@ class Navibar extends Component {
         let username;
         let profile;
         let middelbar;
-
-        if (!isLogin) {
+        console.log(isLogin)
+        console.log(!needMiddleBar)
+        if (isLogin) {
             username = "김동국";
             profile = "img/blank-person.png";
         }

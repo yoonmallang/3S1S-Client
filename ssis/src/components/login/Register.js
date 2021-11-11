@@ -35,12 +35,14 @@ class Register extends Component {
             email: this.state.email,
             belong: this.state.belong,
         }).then((res) => {
+            console.log(res)
             if (res.status === 210) {
+                console.log(res.data)
                 alert(res.data.message)
+                document.location.href = "/";
             }
             else {
                 alert(res.data.message)
-                document.location.href = "/login";
             }
         }).catch((err) => {
             console.log(err);
@@ -53,6 +55,7 @@ class Register extends Component {
                 id: this.state.id,
             }
         }).then((res) => {
+            console.log(res)
             if (res.status === 210) {
                 this.setState({is_valid: res.data.is_valid})
                 alert(res.data.message)
