@@ -19,8 +19,6 @@ class Login extends Component {
     pwdChange = (e) => {this.setState({password: e.target.value})};
     
     onClickSubmit = () => {
-        console.log(this.state.id)
-        console.log(this.state.password)
         axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/signin", {
             id: this.state.id,
             password: this.state.password,
