@@ -3,6 +3,7 @@ import '../../css/todo/list.css';
 import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
+import Create from './Create.js'
 
 class List extends Component {
     constructor() {
@@ -66,6 +67,7 @@ class List extends Component {
 
         return (
             <div className = "todo-page">
+                <Create/>
                 <div className = "todoList">
                     <div className = "state left">
                         <span className="p1">시작전</span>

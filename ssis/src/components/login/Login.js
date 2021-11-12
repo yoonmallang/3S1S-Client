@@ -27,7 +27,6 @@ class Login extends Component {
         }).then((res) => {
             console.log(res.data);
             if (res.status === 200) {
-                alert("로그인 성공");
                 document.location.href = "/project";
                 localStorage.setItem("isLogin", true)
                 localStorage.setItem("id", res.data.token)
