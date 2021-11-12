@@ -9,36 +9,44 @@ class Navibar extends Component {
         super();
         this.state = {
             isLogin : false,
-            needMiddleBar : false
+            needMiddleBar : true,
+            loginedName : "",
         }
     }
 
-    checkLogin() {
+    checkLogin = () => {
         if (localStorage.getItem('isLogin')) {
             this.setState({isLogin: true});
+            this.setState({loginedName: localStorage.getItem("id")});
         }
     }
 
-    checkMiddleBar() {
+    checkMiddleBar = () => {
         if(localStorage.getItem('needMiddlebar')) {
             this.setState({needMiddleBar: true})
         }
     }
+
+    componentDidMount() {
+        const { checkLogin, checkMiddleBar } = this;
+        checkLogin();
+        checkMiddleBar();
+    }
+
     logout() {
+        localStorage.removeItem("isLogin")
+        localStorage.removeItem("id")
         console.log("로그아웃")
     }
     
     render() {
-        this.checkLogin();
-        this.checkMiddleBar();
         const isLogin = this.state.isLogin;
         const needMiddleBar = this.state.needMiddleBar;
         let username;
         let profile;
         let middelbar;
-
-        if (!isLogin) {
-            username = "김동국";
+        if (isLogin) {
+            username = this.state.loginedName;
             profile = "img/blank-person.png";
         }
         else {
@@ -46,16 +54,16 @@ class Navibar extends Component {
             profile = "img/blank-person.png";
         }
 
-        if(!needMiddleBar) {
+        if(needMiddleBar) {
             middelbar = <Middlebar/>
         }
 
-        if (!isLogin) {
+        if (isLogin) {
             return (
                 <div className = "Navigation">
                     <Navbar className="color-nav" variant="dark">
                         <Container className="contanier">
-                            <Navbar.Brand href="/">
+                            <Navbar.Brand href="/project">
                                 <img alt="" src="img/logo.png" className="img-logo"/>
                             </Navbar.Brand>
                             <Nav className="nav-profile">
@@ -64,7 +72,7 @@ class Navibar extends Component {
                                 <NavDropdown title={username} className="user-name-dropdown" id="collasible-nav-dropdown">
                                     <NavDropdown.Item href="/mypage/1">마이페이지</NavDropdown.Item>
                                     <NavDropdown.Divider />
-                                    <NavDropdown.Item onClick={this.logout} href="/login">로그아웃</NavDropdown.Item>
+                                    <NavDropdown.Item onClick={this.logout} href="/">로그아웃</NavDropdown.Item>
                                 </NavDropdown>
                             </Nav>
                         </Container>

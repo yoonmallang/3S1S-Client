@@ -35,12 +35,14 @@ class Register extends Component {
             email: this.state.email,
             belong: this.state.belong,
         }).then((res) => {
+            console.log(res)
             if (res.status === 210) {
+                console.log(res.data)
                 alert(res.data.message)
+                document.location.href = "/";
             }
             else {
                 alert(res.data.message)
-                document.location.href = "/login";
             }
         }).catch((err) => {
             console.log(err);
@@ -53,6 +55,7 @@ class Register extends Component {
                 id: this.state.id,
             }
         }).then((res) => {
+            console.log(res)
             if (res.status === 210) {
                 this.setState({is_valid: res.data.is_valid})
                 alert(res.data.message)
@@ -65,6 +68,12 @@ class Register extends Component {
             console.log(err);
         })
     }
+
+    handleKeyPress = (e) => {
+        if (e.key === "Enter") {
+            this.onClickSubmit();
+        }
+    };
 
     render() {
         return (
@@ -101,13 +110,13 @@ class Register extends Component {
 
                         <Form.Group className="div-form" controlId="formGridBelong">
                             <Form.Label className="text">소속</Form.Label>
-                            <Form.Control placeholder="Enter Belong" onChange={this.belongChange}/>
+                            <Form.Control placeholder="Enter Belong"  onKeyPress={this.handleKeyPress} onChange={this.belongChange}/>
                         </Form.Group>
-
-                        <Button className="register-Button" variant="primary" type="submit" onClick={this.onClickSubmit}>
-                            가입하기
-                        </Button>
                     </Form>
+                    
+                    <Button className="register-Button" variant="primary" type="submit" onClick={this.onClickSubmit}>
+                            가입하기
+                    </Button>
                 </div>
         );
     }
