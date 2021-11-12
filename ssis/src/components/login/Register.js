@@ -9,7 +9,7 @@ class Register extends Component {
         super();
         this.state = {
             id: "",
-            is_valid: true,
+            checked_id: "",
             password: "",
             password_check: "",
             name: "",
@@ -28,7 +28,7 @@ class Register extends Component {
     onClickSubmit = () => {
         axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/signup", {
             id: this.state.id,
-            is_valid: this.state.is_valid,
+            checked_id: this.state.checked_id,
             password: this.state.password,
             password_check: this.state.password_check,
             name: this.state.name,
@@ -57,11 +57,11 @@ class Register extends Component {
         }).then((res) => {
             console.log(res)
             if (res.status === 210) {
-                this.setState({is_valid: res.data.is_valid})
+                this.setState({checked_id: res.data.checked_id})
                 alert(res.data.message)
             }
             else if (res.status === 200) {
-                this.setState({is_valid: res.data.is_valid})
+                this.setState({checked_id: res.data.checked_id})
                 alert(res.data.message)
             }
         }).catch((err) => {
