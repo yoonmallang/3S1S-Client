@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import '../../css/todo/create.css';
 import axios from 'axios';
 
 class Create extends Component {
@@ -93,7 +94,7 @@ class Create extends Component {
 
         return (
             <div>
-                <Button variant="primary" onClick={this.handleShow}>
+                <Button className="add-todo-button" onClick={this.handleShow}>
                     투두추가
                 </Button>
         
@@ -113,42 +114,46 @@ class Create extends Component {
                         <Form.Control as="textarea" rows={3} placeholder="ToDo의 상세내용을 입력하세요." onChange={this.descriptionChange}/>
                     </Form.Group>
                 
-                    <Form.Group className="div-form" controlId="formGridPassword1">
-                        <Form.Label className="text">시작 일시</Form.Label>
-                        <input type="date" className="form-control" onChange={this.startDateChange}/>
-                    </Form.Group>
-
-                    <Form.Group className="div-form" controlId="formGridPassword1">
-                        <Form.Label className="text">종료 일시</Form.Label>
-                        <input type="date" className="form-control"  onChange={this.endDateChange}/>
-                    </Form.Group>
-
-                    <Form.Select className="me-sm-2" onChange={this.handleSelect} id="inlineFormCustomSelect">
-                        <option value="0">추가할 참여자를 선택하세요.</option>
-                        {participants.map((item)=> {
-                            return (
-                                <option key={item.id} value={item.user_id}>{item.user_id}</option>
-                            )
-                        })}
-                    </Form.Select>
                     <div>
-                        {selectedParticipants.map((item)=> {
-                            return (
-                                <div>
-                                    <span>{item}</span>
-                                    <button onClick={()=>this.removeSelect(item)}>삭제</button>
-                                </div>
-                            )
-                        })}
+                        <Form.Group className="date-form" controlId="formGridPassword1">
+                            <Form.Label className="text">시작 일시</Form.Label>
+                            <input type="date" className="form-control" onChange={this.startDateChange}/>
+                        </Form.Group>
+
+                        <Form.Group className="date-form" controlId="formGridPassword1">
+                            <Form.Label className="text">종료 일시</Form.Label>
+                            <input type="date" className="form-control"  onChange={this.endDateChange}/>
+                        </Form.Group>
                     </div>
-                </Form>
-                <Button className="register-Button" variant="primary" type="submit" onClick={this.onClickSubmit}>
-                        생성
-                </Button>
+                    
+                    <div>
+                        <Form.Select className="participant-form" onChange={this.handleSelect} id="inlineFormCustomSelect">
+                            <option value="none" hidden>참여자를 선택하세요.</option>
+                            {participants.map((item)=> {
+                                return (
+                                    <option key={item.id} value={item.user_id}>{item.user_id}</option>
+                                )
+                            })}
+                        </Form.Select>
+                        <div className="participant-form">
+                            {selectedParticipants.map((item)=> {
+                                return (
+                                    <div>
+                                        <span>{item}</span>
+                                        <button onClick={()=>this.removeSelect(item)} className="cancel-button"><img alt="" src="img/cancel.png" className="img-cancel"/></button>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </Form> 
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={this.handleClose}>
-                    Close
+                        취소
+                    </Button>
+                    <Button className="add-todo-Button" type="submit" onClick={this.onClickSubmit}>
+                        생성
                     </Button>
                 </Modal.Footer>
                 </Modal>

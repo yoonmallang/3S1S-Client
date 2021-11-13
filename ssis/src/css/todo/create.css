@@ -1,0 +1,35 @@
+.date-form {
+  float: left;
+  width: 50%;
+}
+
+.participant-form {
+  float: left;
+  width: 45%;
+  margin-top: 5%;
+  margin-right: 4%;
+  margin-bottom: 8%;
+}
+
+.img-cancel {
+  width: 8px;
+  height: 8px;
+}
+
+.cancel-button {
+  width: 8px;
+  height: 8px;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  color: #ffffff;
+}
+
+.add-todo-Button {
+  color: black;
+  background-color: #99c0ff;
+}
+
+.add-todo-button {
+}
