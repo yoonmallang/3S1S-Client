@@ -17,7 +17,7 @@ class Navibar extends Component {
     checkLogin = () => {
         if (localStorage.getItem('isLogin')) {
             this.setState({isLogin: true});
-            this.setState({loginedName: localStorage.getItem("id")});
+            this.setState({loginedName: localStorage.getItem("name")});
         }
     }
 
