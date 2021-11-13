@@ -27,7 +27,8 @@ class Login extends Component {
             if (res.status === 200) {
                 document.location.href = "/project";
                 localStorage.setItem("isLogin", true)
-                localStorage.setItem("id", res.data.token)
+                localStorage.setItem("id", res.data.id)
+                localStorage.setItem("name", res.data.name)
             }
             else if (res.status === 210) {
                 alert(res.data.message);

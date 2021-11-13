@@ -61,7 +61,6 @@ class List extends Component {
 
     render() {
         const todos_0 = this.state.todos_0
-        console.log(todos_0)
         const todos_1 = this.state.todos_1
         const todos_2 = this.state.todos_2
 
