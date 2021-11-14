@@ -1,0 +1,60 @@
+.modal {
+  width: 100%;
+}
+
+.div-form1 {
+  margin-top: 1%;
+  width: 60%;
+  float: right;
+}
+
+.div-form {
+  margin-top: 1%;
+  width: 100%;
+  float: right;
+}
+
+.div-form_subject {
+  margin-top: 1%;
+  width: 48%;
+  float: left;
+}
+
+.div-form_purpose {
+  margin-top: 1%;
+  width: 48%;
+  float: right;
+}
+
+.ImageBox {
+  width: 40%;
+  float: left;
+  vertical-align: middle;
+}
+
+.Image_c {
+  width: 100%;
+  margin-top: 5%;
+  vertical-align: middle;
+}
+
+.Img_c {
+  margin-left: 20%;
+  margin-top: 5%;
+  border: 1px;
+  border-radius: 60%;
+  width: 55%;
+  height: 55%;
+  float: left;
+  vertical-align: middle;
+}
+
+.btm_add {
+  width: 20%;
+  height: 20%;
+  margin-top: 21%;
+  padding: 0;
+  border: none;
+  background: none;
+  vertical-align: middle;
+}
