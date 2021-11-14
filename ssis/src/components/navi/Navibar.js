@@ -65,6 +65,14 @@ class Navibar extends Component {
                         <Container className="contanier">
                             <Navbar.Brand href="/project">
                                 <img alt="" src="img/logo.png" className="img-logo"/>
+                                <NavDropdown title="Link" id="navbarScrollingDropdown">
+                    {/* <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                    <NavDropdown.Item href="#action4">Another action</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#action5">
+                        Something else here
+                    </NavDropdown.Item>
+                    </NavDropdown> */}
                             </Navbar.Brand>
                             <Nav className="nav-profile">
                                 <Navbar.Brand><img alt="" src="img/alarm.png" className="img-alarm"/></Navbar.Brand>
