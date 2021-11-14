@@ -3,6 +3,7 @@ import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/navi/Navibar.css';
 import Middlebar from './Middlebar'
+import List from '../notifications/List.js'
 
 class Navibar extends Component {
     constructor() {
@@ -65,10 +66,9 @@ class Navibar extends Component {
                         <Container className="contanier">
                             <Navbar.Brand href="/project">
                                 <img alt="" src="img/logo.png" className="img-logo"/>
-                                <NavDropdown title="Link" id="navbarScrollingDropdown"></NavDropdown>
                             </Navbar.Brand>
                             <Nav className="nav-profile">
-                                <Navbar.Brand><img alt="" src="img/alarm.png" className="img-alarm"/></Navbar.Brand>
+                                <List/>
                                 <Navbar.Brand><img alt="" src={profile} className="img-person"/></Navbar.Brand>
                                 <NavDropdown title={username} className="user-name-dropdown" id="collasible-nav-dropdown">
                                     <NavDropdown.Item href="/mypage/1">마이페이지</NavDropdown.Item>
