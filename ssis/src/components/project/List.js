@@ -40,8 +40,8 @@ class List extends Component {
             <div className = "Title">
                 {project.title}
             </div>
-            <button type="button" className="btm" id="img_btn"><img src="img/pencil.png" className="btm_image" ></img></button>
-            <button type="button" className="btm" id="img_btn"><img src="img/cancel.png" className="btm_image" ></img></button>
+            <button type="button" className="btm" id="img_btn"><img src="img/pencil.png" alt ="" className="btm_image" ></img></button>
+            <button type="button" className="btm" id="img_btn"><img src="img/cancel.png" alt ="" className="btm_image" ></img></button>
             <div className = "ImgTeam">
                 <div className = "Image">
                     <img src = {project.img_url} className = "Img" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="img/group.png"}}></img>

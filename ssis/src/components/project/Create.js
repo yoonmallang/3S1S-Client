@@ -54,7 +54,7 @@ class Create extends Component {
 
         return (
             <div>
-                <button type="button" className="btm_add" id="img_btn" variant="primary" onClick={this.handleShow}><img src="img/plus.png" className="btm_image" ></img></button>
+                <button type="button" className="btm_add" id="img_btn" variant="primary" onClick={this.handleShow}><img alt="" src="img/plus.png" className="btm_image" ></img></button>
                 
         
                 <Modal show={show} onHide={this.handleClose} className="modal">
