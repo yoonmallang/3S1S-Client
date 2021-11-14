@@ -1,109 +1,71 @@
 import React, { Component } from 'react';
 import '../../css/project/project.css';
-import { Stack } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios'; 
+import Create from "./Create.js"
 
 class List extends Component {
     constructor() {
         super();
         this.state = {
-            isLogin : false,
-            needMiddleBar : false
+            projects: [],
         }
     }
+
+    loadingData = async () => { 
+        try { 
+            const response = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects", {
+                params:{
+                    id : "kdsvip5",
+                }
+            });
+            this.setState({projects: response.data.project_list})
+            
+            console.log(`STATUS : ${response.status}`)
+            console.log(this.state)
+        } catch (e) 
+        { console.log(e); }
+    };
+
+    componentDidMount(){
+        const {loadingData} = this;
+        loadingData();
+    }
+    
     render() {
+        const projects = this.state.projects
+        
+        let project_list = projects && projects.map(project =>
+        <button className = "ProjectBox" id = {project.id}>
+            <div className = "Title">
+                {project.title}
+            </div>
+            <button type="button" className="btm" id="img_btn"><img src="img/pencil.png" className="btm_image" ></img></button>
+            <button type="button" className="btm" id="img_btn"><img src="img/cancel.png" className="btm_image" ></img></button>
+            <div className = "ImgTeam">
+                <div className = "Image">
+                    <img src = {project.img_url} className = "Img" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="img/group.png"}}></img>
+                </div>
+                <div className = "TeamBox">
+                    <div className = "Team">
+                        {project.team}
+                    </div>
+                    <div className="Progress">
+                        <progress value="22" max="100" className="ProgressBar"></progress>
+                    </div>
+                </div>
+            </div>  
+        </button>
+        ); 
+
+        
         return (
             <div className = "Project">
                 <div className = "ProjectContent">
-                    
-                    <div className = "ProjectBox">
-                        <div className = "Title">
-                            OSS 공모전
-                        </div>
-                        <button type="button" class="btm" id="img_btn"><img src="img/pencil.png" class="btm_image" ></img></button>
-                        <button type="button" class="btm" id="img_btn"><img src="img/cancel.png" class="btm_image" ></img></button>
-                        <div className = "ImgTeam">
-                            <div className = "Image">
-                                <img src = "img/group.png" className = "Img" alt = "img/group.png"></img>
-                            </div>
-                            <div className = "TeamBox">
-                                <div className = "Team">
-                                    3s1s
-                                </div>
-                                <div className="Progress">
-                                    <progress value="22" max="100" className="ProgressBar"></progress>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
-                    <div className = "ProjectBox">
-                        <div className = "Title">
-                            소공 플젝
-                        </div>
-                        <button type="button" class="btm" id="img_btn"><img src="img/pencil.png" class="btm_image" ></img></button>
-                        <button type="button" class="btm" id="img_btn"><img src="img/cancel.png" class="btm_image" ></img></button>
-                        <div className = "ImgTeam">
-                            <div className = "Image">
-                                <img src = "img/group.png" className = "Img" alt = "img/group.png"></img>
-                            </div>
-                            <div className = "TeamBox">
-                                <div className = "Team">
-                                    ssis
-                                </div>
-                                <div className="Progress">
-                                    <progress value="22" max="100" className="ProgressBar"></progress>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
-                    <div className = "ProjectBox">
-                        <div className = "Title">
-                            쏘공 스터디
-                        </div>
-                        <button type="button" class="btm" id="img_btn"><img src="img/pencil.png" class="btm_image" ></img></button>
-                        <button type="button" class="btm" id="img_btn"><img src="img/cancel.png" class="btm_image" ></img></button>
-                        <div className = "ImgTeam">
-                            <div className = "Image">
-                                <img src = "img/group.png" className = "Img" alt = "img/group.png"></img>
-                            </div>
-                            <div className = "TeamBox">
-                                <div className = "Team">
-                                    삼성일식
-                                </div>
-                                <div className="Progress">
-                                    <progress value="22" max="100" className="ProgressBar"></progress>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
-                    <div className = "ProjectBox">
-                        <div className = "Title">
-                            알고리즘 스터디
-                        </div>
-                        <button type="button" class="btm" id="img_btn"><img src="img/pencil.png" class="btm_image" ></img></button>
-                        <button type="button" class="btm" id="img_btn"><img src="img/cancel.png" class="btm_image" ></img></button>
-                        <div className = "ImgTeam">
-                            <div className = "Image">
-                                <img src = "img/group.png" className = "Img" alt = "img/group.png"></img>
-                            </div>
-                            <div className = "TeamBox">
-                                <div className = "Team">
-                                    삼성일식
-                                </div>
-                                <div className="Progress">
-                                    <progress value="22" max="100" className="ProgressBar"></progress>
-                                </div>
-                            </div>
-                        </div>  
-                    </div>
-                        
-                    
+                    {project_list}   
                     <div className = "AddProject">
-                        <button type="button" class="btm_add" id="img_btn"><img src="img/plus.png" class="btm_image" ></img></button>   
+                    <Create/>
                     </div>
-                    <p>
-                    project list
-                    </p>
                 </div>
             </div>
         );
