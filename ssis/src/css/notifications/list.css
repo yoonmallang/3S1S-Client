@@ -10,6 +10,10 @@
   border: none;
 }
 
+.nofi-menu {
+  background-color: #e5efff;
+}
+
 .nofi-text-area {
   float: left;
   width: 65%;
@@ -38,6 +42,6 @@
   width: auto;
   border-radius: 7%;
   font-size: 8px;
-  background-color: gray;
-  border-color: gray;
+  background-color: #737880;
+  border-color: #737880;
 }

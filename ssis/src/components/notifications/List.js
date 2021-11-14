@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { DropdownButton, Dropdown, Button } from 'react-bootstrap';
+import { Dropdown, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'; 
 import '../../css/notifications/list.css';
@@ -27,6 +27,34 @@ class List extends Component {
         }
     }
 
+    selectAccept = (proj_id) => {
+        axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/notifications/response", {
+            accept: 1,
+            project : proj_id,
+            user: localStorage.getItem('name'),
+            leader: 0,
+            contribution_rate: 0,
+        }).then((res) => {  
+            alert(res.data.message)
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    selectReject = (proj_id) => {
+        axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/notifications/response", {
+            accept: 0,
+            project : proj_id,
+            user: localStorage.getItem('name'),
+            leader: 0,
+            contribution_rate: 0,
+        }).then((res) => {  
+            alert(res.data.message)
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
     componentDidMount() { 
         const { loadingAlarms } = this; 
         loadingAlarms(); 
@@ -41,26 +69,25 @@ class List extends Component {
                     <Dropdown.Toggle className="nofi-dropButoon">
                         <img alt="" src="img/alarm.png" className="img-alarm"/>
                     </Dropdown.Toggle>
-                    <Dropdown.Menu>
+                    <Dropdown.Menu className="nofi-menu">
                     {alarms.map((item) => {
                         return (
-                            <div>
-                                
+                            <div key={item.id}>
                                 <Dropdown.Item className="nofi-navDrop">
                                     <div className="nofi-text-area">
-                                        {item.inviter_id}님께서 회원님을<br/>
-                                        {item.project_id}에 초대했습니다.
+                                        <b>{item.inviter_id}</b>님께서 회원님을<br/>
+                                        <b>{item.project_id}</b>에 초대했습니다.
                                     </div>
                                     <div className="nofi-button-area">
-                                        <Button className="nofi-accept-button">
+                                        <Button className="nofi-accept-button" onClick={()=>this.selectAccept(item.project_id)}>
                                             수락
                                         </Button>
-                                        <Button className="nofi-reject-button">
+                                        <Button className="nofi-reject-button" onClick={()=>this.selectReject(item.project_id)}>
                                             거절
                                         </Button>
                                     </div>
                                 </Dropdown.Item>
-                                <Dropdown.Divider />
+                                <Dropdown.Divider/>
                             </div>
                         )
                     })}
