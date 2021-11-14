@@ -17,17 +17,12 @@ class Create extends Component {
 
     onClickSubmit = () => {
         axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/", {
-            project: 1,
-            writer : this.state.writer,
             title: this.state.title,
             description: this.state.description,
-            start_date: this.state.start_date,
-            end_date: this.state.end_date,
-            participants: this.state.seletedParticipants,
         }).then((res) => {
             console.log(res.data);
             if (res.status === 201) {
-                document.location.href = "/todo";
+                document.location.href = "/project";
             }
             else if (res.status === 210) {
                 alert(res.data.message);
@@ -39,8 +34,6 @@ class Create extends Component {
 
     titleChange = (e) => {this.setState({title: e.target.value})};
     descriptionChange = (e) => {this.setState({description: e.target.value})};
-    startDateChange = (e) => {this.setState({start_date: e.target.value})};
-    endDateChange = (e) => {this.setState({end_date: e.target.value})};
 
     handleClose = () => {
         this.setState({show: false});
