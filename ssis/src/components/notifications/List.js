@@ -31,11 +31,11 @@ class List extends Component {
         axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/notifications/response", {
             accept: 1,
             project : proj_id,
-            user: localStorage.getItem('name'),
-            leader: 0,
-            contribution_rate: 0,
+            user: localStorage.getItem('id'),
         }).then((res) => {  
+            console.log(res);
             alert(res.data.message)
+            this.loadingAlarms();
         }).catch((err) => {
             console.log(err);
         })
@@ -45,11 +45,10 @@ class List extends Component {
         axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/notifications/response", {
             accept: 0,
             project : proj_id,
-            user: localStorage.getItem('name'),
-            leader: 0,
-            contribution_rate: 0,
+            user: localStorage.getItem('id'),
         }).then((res) => {  
             alert(res.data.message)
+            this.loadingAlarms();
         }).catch((err) => {
             console.log(err);
         })
@@ -61,8 +60,6 @@ class List extends Component {
     }
     
     render() {
-        const alarms = this.state.alarms;
-
         return (
             <div>
                 <Dropdown align="end" drop="down">
@@ -70,7 +67,7 @@ class List extends Component {
                         <img alt="" src="img/alarm.png" className="img-alarm"/>
                     </Dropdown.Toggle>
                     <Dropdown.Menu className="nofi-menu">
-                    {alarms.map((item) => {
+                    {this.state.alarms.map((item) => {
                         return (
                             <div key={item.id}>
                                 <Dropdown.Item className="nofi-navDrop">
