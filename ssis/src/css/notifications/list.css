@@ -8,6 +8,17 @@
   background-image: none !important;
   border-color: transparent;
   border: none;
+  padding: 0;
+  margin-right: 15px;
+}
+
+.nofi-dropButoon:focus,
+.nofi-dropButoon:active {
+  padding: 0;
+}
+
+.nofi-dropButoon::after {
+  display: none;
 }
 
 .nofi-menu {

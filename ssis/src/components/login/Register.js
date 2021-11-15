@@ -78,15 +78,14 @@ class Register extends Component {
     render() {
         return (
                 <div className = "registerForm">
-                    <Form>
+                        <Form>
                         <Form.Group className="div-form" controlId="formGridId">
                             <Form.Label className="text">아이디</Form.Label>
                             <Form.Control className="idInput-form" placeholder="Enter Id" onChange={this.idChange}/>
-                        </Form.Group>
-
-                        <Button className="idCheck-Button" variant="primary" onClick={this.onClickCheckId}>
+                            <Button className="idCheck-Button" variant="primary" onClick={this.onClickCheckId}>
                             중복확인
-                        </Button>
+                            </Button>
+                        </Form.Group>
                     
                         <Form.Group className="div-form" controlId="formGridPassword1">
                             <Form.Label className="text">비밀번호</Form.Label>

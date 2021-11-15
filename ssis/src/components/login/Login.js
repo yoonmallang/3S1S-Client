@@ -44,6 +44,10 @@ class Login extends Component {
         }
     };
 
+    componentDidMount() { 
+        localStorage.clear();
+    }
+
     render() {
         return (
             <div className = "loginForm">
@@ -56,13 +60,14 @@ class Login extends Component {
                         <Form.Control type="password"  onKeyPress={this.handleKeyPress} placeholder="****" onChange={this.pwdChange}/>
                     </Form.Group>
                 </Form>
-                <Button className="in-login-Button" variant="primary" type="submit" onClick={this.onClickSubmit}>
-                            로그인
+                    
+                <Button className="lg-login-Button" variant="primary" type="submit" onClick={this.onClickSubmit}>
+                    로그인
                 </Button>
-                <Link to="/register" style={{ textDecoration: 'none' }}><Button className="in-login-Button" variant="primary" >
+                <Link to="/register" style={{ textDecoration: 'none' }}><Button className="lg-register-Button" variant="primary" >
                     회원가입
                 </Button></Link>
-                <Link to="/findIdPwd" style={{ textDecoration: 'none' }}><Button className="in-login-Button" variant="primary" >
+                <Link to="/findIdPwd" style={{ textDecoration: 'none' }}><Button className="lg-find-Button" variant="primary" >
                     Id/Pw 찾기
                 </Button></Link>
             </div>

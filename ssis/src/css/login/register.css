@@ -15,15 +15,17 @@
   color: black;
   width: 100%;
   background-color: #99c0ff;
+  border-color: #99c0ff;
 }
 
 .idCheck-Button {
   color: black;
   background-color: #99c0ff;
+  border-color: #99c0ff;
   float: right;
-  width: 20%;
-  height: auto;
-  font-size: 13px;
+  width: auto;
+  height: 37px;
+  font-size: 12px;
 }
 
 .idInput-form {

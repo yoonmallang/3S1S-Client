@@ -95,7 +95,7 @@ class Create extends Component {
         return (
             <div>
                 <Button className="add-todo-button" onClick={this.handleShow}>
-                    투두추가
+                    <img alt="" src="img/plus2.png" className="todo-add-img"></img>
                 </Button>
         
                 <Modal show={show} onHide={this.handleClose}>
@@ -115,12 +115,12 @@ class Create extends Component {
                     </Form.Group>
                 
                     <div>
-                        <Form.Group className="date-form" controlId="formGridPassword1">
+                        <Form.Group className="date1-form" controlId="formGridPassword1">
                             <Form.Label className="text">시작 일시</Form.Label>
                             <input type="date" className="form-control" onChange={this.startDateChange}/>
                         </Form.Group>
 
-                        <Form.Group className="date-form" controlId="formGridPassword1">
+                        <Form.Group className="date2-form" controlId="formGridPassword1">
                             <Form.Label className="text">종료 일시</Form.Label>
                             <input type="date" className="form-control"  onChange={this.endDateChange}/>
                         </Form.Group>
@@ -152,7 +152,7 @@ class Create extends Component {
                     <Button variant="secondary" onClick={this.handleClose}>
                         취소
                     </Button>
-                    <Button className="add-todo-Button" type="submit" onClick={this.onClickSubmit}>
+                    <Button className="create-Button" type="submit" onClick={this.onClickSubmit}>
                         생성
                     </Button>
                 </Modal.Footer>

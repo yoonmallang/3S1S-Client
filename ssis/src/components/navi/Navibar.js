@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown, Dropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/navi/Navibar.css';
 import Middlebar from './Middlebar'
@@ -69,12 +69,19 @@ class Navibar extends Component {
                             </Navbar.Brand>
                             <Nav className="nav-profile">
                                 <List/>
-                                <Navbar.Brand><img alt="" src={profile} className="img-person"/></Navbar.Brand>
-                                <NavDropdown title={username} className="user-name-dropdown" id="collasible-nav-dropdown">
-                                    <NavDropdown.Item href="/mypage/1">마이페이지</NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <NavDropdown.Item onClick={this.logout} href="/">로그아웃</NavDropdown.Item>
-                                </NavDropdown>
+                                <Dropdown className="user-name-dropdown">
+                                    <Dropdown.Toggle className="person-dropButoon">
+                                        <div className="navi-person">
+                                            <img alt="" src={profile} className="img-person"/>
+                                            <span className="text-person">{username}</span>
+                                        </div>
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item href="/mypage/1">마이페이지</Dropdown.Item>
+                                        <Dropdown.Divider />
+                                        <Dropdown.Item onClick={this.logout} href="/">로그아웃</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </Nav>
                         </Container>
                     </Navbar>

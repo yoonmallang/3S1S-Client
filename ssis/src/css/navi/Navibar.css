@@ -12,20 +12,23 @@
 }
 
 .img-person {
-  width: 33px;
-  height: 33px;
-  margin-top: 2px;
+  width: 30px;
+  height: 30px;
+  margin-right: 15%;
 }
 
 .img-alarm {
-  width: 33px;
-  height: 33px;
-  margin-top: 2px;
+  width: 30px;
+  height: 30px;
+  margin-top: 3px;
 }
 
 .user-name-dropdown {
-  margin-top: 3px;
   color: black;
+}
+
+.navi-person {
+  margin-top: 3px;
 }
 
 .nav-profile {
@@ -35,4 +38,25 @@
 
 .contanier {
   height: 50px;
+}
+
+.text-person {
+  color: black;
+}
+
+.person-dropButoon {
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.person-dropButoon:focus,
+.person-dropButoon:active {
+  padding: 0;
+}
+
+.person-dropButoon::after {
+  display: none;
 }
