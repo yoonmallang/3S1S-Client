@@ -43,7 +43,6 @@ class Read extends Component {
     };
 
     
-    
     render() {
         let t_list = [
             {
@@ -82,9 +81,9 @@ class Read extends Component {
 
         
         return (
-            <div className = "Read">
-                <div className = "LeftContent">
-                    <div className = "ProjectInfo">
+            <div className = "Read_pr">
+                <div className = "LeftContent_pr">
+                    <div className = "ProjectInfo_pr">
                         <div className = "P_Title">
                             프로젝트 제목
                         </div>
@@ -104,30 +103,30 @@ class Read extends Component {
                         <div className = "P_Subject">과목</div>
                         <div className = "P_Purpose">목적</div>
                     </div>
-                    <div className = "TeamList">
+                    <div className = "TeamList_pr">
                         <div className = "list">
                             팀원 리스트
                         </div>
                         {team_list}
                     </div>
                 </div>
-                <div className = "CenterContent">
-                    <div className = "Progress_bar">
+                <div className = "CenterContent_pr">
+                    <div className = "Progress_bar_pr">
                         hi
                     </div>
-                    <div className = "Contribution">
+                    <div className = "Contribution_pr">
                         hello
                     </div>
-                    <div className = "Memo">
+                    <div className = "Memo_pr">
                         buy
                     </div>
                 </div>
-                <div className = "RightContent">
+                <div className = "RightContent_pr">
                     <div className = "Alarm">
-
+                        hi
                     </div>
                     <div className = "MyToDo">
-
+                        hi
                     </div>
                 </div>
             </div>

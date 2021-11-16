@@ -54,7 +54,7 @@ class Create extends Component {
 
         return (
             <div>
-                <button type="button" className="btm_add" id="img_btn" variant="primary" onClick={this.handleShow}><img alt="" src="img/plus.png" className="btm_image" ></img></button>
+                <button type="button" className="btm_add_pc" id="img_btn" variant="primary" onClick={this.handleShow}><img alt="" src="img/plus.png" className="btm_image_pl" ></img></button>
                 
         
                 <Modal show={show} onHide={this.handleClose} className="modal">
@@ -63,9 +63,9 @@ class Create extends Component {
                 </Modal.Header>
                 <Modal.Body>
                 <Form>
-                    <div className = "ImageBox">
-                      <div className = "Image_c">
-                          <img src = "img/group.png" className = "Img_c" id= "image" alt = "img/group.png"></img>
+                    <div className = "ImageBox_pc">
+                      <div className = "Image_pc">
+                          <img src = "img/group.png" className = "Img_pc" id= "image" alt = "img/group.png"></img>
                       </div>
                       <div>
                         <input type='file' 
@@ -75,38 +75,38 @@ class Create extends Component {
                         </input>
                       </div>
                     </div>
-                    <Form.Group className="div-form1" controlId="formProject">
+                    <Form.Group className="div-form1_pc" controlId="formProject">
                         <Form.Label className="text">프로젝트 제목*</Form.Label>
-                        <Form.Control className="idInput-form" placeholder="프로젝트 제목을 입력하세요." onChange={this.titleChange}/>
+                        <Form.Control className="dataInput-form_pc" placeholder="프로젝트 제목을 입력하세요." onChange={this.titleChange}/>
                     </Form.Group>
                 
-                    <Form.Group className="div-form1" controlId="formTeam">
+                    <Form.Group className="div-form1_pc" controlId="formTeam">
                         <Form.Label className="text">팀명*</Form.Label>
-                        <Form.Control className="idInput-form" placeholder="팀 이름을 입력하세요." onChange={this.descriptionChange}/>
+                        <Form.Control className="dataInput-form_pc" placeholder="팀 이름을 입력하세요." onChange={this.descriptionChange}/>
                     </Form.Group>
                     
-                    <Form.Group className="div-form" controlId="formGridPassword1">
+                    <Form.Group className="div-form_pc" controlId="formGridPassword1">
                         <Form.Label className="text">프로젝트 개요*</Form.Label>
                         <Form.Control as="textarea" rows={3} placeholder="프로젝트 개요를 입력하세요." onChange={this.descriptionChange}/>
                     </Form.Group>
                 
-                    <Form.Group className="div-form_subject" controlId="formGridPassword1">
+                    <Form.Group className="div-form_subject_pc" controlId="formGridPassword1">
                         <Form.Label className="text">과목</Form.Label>
-                        <Form.Control className="idInput-form" placeholder="프로젝트 과목을 입력하세요." onChange={this.descriptionChange}/>
+                        <Form.Control className="subPurInput-form_pc" placeholder="프로젝트 과목을 입력하세요." onChange={this.descriptionChange}/>
                     </Form.Group>
 
-                    <Form.Group className="div-form_purpose" controlId="formGridPassword1">
+                    <Form.Group className="div-form_purpose_pc" controlId="formGridPassword1">
                         <Form.Label className="text">목적</Form.Label>
-                        <Form.Control className="idInput-form" placeholder="프로젝트 목적을 입력하세요." onChange={this.descriptionChange}/>
+                        <Form.Control className="subPurInput-form_pc" placeholder="프로젝트 목적을 입력하세요." onChange={this.descriptionChange}/>
                     </Form.Group>    
                 </Form>
                 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={this.handleClose}>
+                    <Button className="btn-secondary_pc" variant="secondary" onClick={this.handleClose}>
                       취소
                     </Button>
-                    <Button className="register-Button" variant="primary" type="submit" onClick={this.onClickSubmit}>
+                    <Button className="register-Button_pc" variant="primary" type="submit" onClick={this.onClickSubmit}>
                       생성
                 </Button>
                 </Modal.Footer>

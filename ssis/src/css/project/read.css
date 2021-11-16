@@ -1,10 +1,10 @@
-.Read {
-  height: 1100px;
+.Read_pr {
+  height: 100%;
   margin-left: 8%;
   margin-right: 8%;
 }
 
-.LeftContent {
+.LeftContent_pr {
   width: 39%;
   height: 95%;
   float: left;
@@ -14,7 +14,7 @@
   margin-bottom: 1%;
 }
 
-.CenterContent {
+.CenterContent_pr {
   width: 29%;
   height: 95%;
   float: left;
@@ -24,7 +24,7 @@
   margin-bottom: 1%;
 }
 
-.RightContent {
+.RightContent_pr {
   width: 28%;
   height: 95%;
   float: left;
@@ -34,35 +34,35 @@
   margin-bottom: 1%;
 }
 
-.ProjectInfo {
+.ProjectInfo_pr {
   width: 100%;
   height: 59%;
   border: 1px solid black;
   margin-bottom: 1%;
 }
 
-.TeamList {
+.TeamList_pr {
   width: 100%;
   height: 39%;
   border: 1px solid black;
   margin-bottom: 1%;
 }
 
-.Progress_bar {
+.Progress_bar_pr {
   width: 100%;
   height: 19%;
   border: 1px solid black;
   margin-bottom: 1%;
 }
 
-.Contribution {
+.Contribution_pr {
   width: 100%;
   height: 39%;
   border: 1px solid black;
   margin-bottom: 1%;
 }
 
-.Memo {
+.Memo_pr {
   width: 100%;
   height: 39%;
   border: 1px solid black;
@@ -88,7 +88,7 @@
   height: 10%;
   margin-left: 5%;
   margin-top: 5%;
-  font-size: 55px;
+  font-size: 2vw;
   float: left;
   text-align: left;
 }
@@ -143,7 +143,7 @@
 
 .P_Team {
   margin-bottom: 5%;
-  font-size: 50px;
+  font-size: 1.5vw;
   width: 100%;
   height: 90%;
   text-align: center;
