@@ -34,24 +34,36 @@ class List extends Component {
     
     render() { //계속 업데이트
         const projects = this.state.projects
+
+        function clickProject(id) {
+            console.log('You clicked project.');
+            window.location.href = "/project/" + id;
+        }
+
+        function deleteProject(id) {
+            console.log('You clicked delete.');
+            try { 
+                axios.delete("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/" + id);
+            } catch (e) 
+            { console.log(e); }
+        }
         
         let project_list = projects && projects.map(project =>
-        <button className = "ProjectBox_pl" id = {project.id}>
+        <button className = "ProjectBox_pl" id = {project.id} onClick={()=>clickProject(project.id)} key = {project.id}>
             <div className = "Title_pl">
                 {project.title}
             </div>
-            <button type="button" className="btm_pl" id="img_btn"><img src="img/pencil.png" alt ="" className="btm_image_pl" ></img></button>
-            <button type="button" className="btm_pl" id="img_btn"><img src="img/cancel.png" alt ="" className="btm_image_pl" ></img></button>
+            <button type="button" className="btm_pl" id="img_btn" onClick={()=>deleteProject(project.id)}><img src="/img/cancel.png" alt ="" className="btm_image_pl" ></img></button>
             <div className = "ImgTeam_pl">
                 <div className = "Image_pl">
-                    <img src = {project.img_url} className = "Img_pl" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="img/group.png"}}></img>
+                    <img src = {project.img_url} className = "Img_pl" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/group.png"}}></img>
                 </div>
                 <div className = "TeamBox_pl">
                     <div className = "Team_pl">
                         {project.team}
                     </div>
                     <div className="Progress_pl">
-                        <progress value="22" max="100" className="ProgressBar_pl"></progress>
+                        <progress value={project.progress_rate} max="100" className="ProgressBar_pl"></progress>
                     </div>
                 </div>
             </div>  

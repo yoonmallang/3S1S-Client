@@ -8,17 +8,25 @@ class Create extends Component {
         super();
         this.state = {
             show : false,
-            project: 1,
-            writer : localStorage.getItem("id"),
+            creator : localStorage.getItem("id"),
             title: "",
+            team: "",
             description: "",
+            subject: "",
+            purpose: "",
+            img_url: "",
         }
     }
 
     onClickSubmit = () => {
-        axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/", {
+        axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects", {
             title: this.state.title,
+            team: this.state.team,
             description: this.state.description,
+            subject: this.state.subject,
+            purpose: this.state.purpose,
+            img_url: this.state.img_url,
+            creator: this.state.creator,
         }).then((res) => {
             console.log(res.data);
             if (res.status === 201) {
@@ -33,7 +41,11 @@ class Create extends Component {
     }
 
     titleChange = (e) => {this.setState({title: e.target.value})};
+    teamChange = (e) => {this.setState({team: e.target.value})};
     descriptionChange = (e) => {this.setState({description: e.target.value})};
+    subjectChange = (e) => {this.setState({subject: e.target.value})};
+    purposeChange = (e) => {this.setState({purpose: e.target.value})};
+    img_urlChange = (e) => {this.setState({img_url: e.target.value})};
 
     handleClose = () => {
         this.setState({show: false});
@@ -54,7 +66,7 @@ class Create extends Component {
 
         return (
             <div>
-                <button type="button" className="btm_add_pc" id="img_btn" variant="primary" onClick={this.handleShow}><img alt="" src="img/plus.png" className="btm_image_pl" ></img></button>
+                <button type="button" className="btm_add_pc" id="img_btn" variant="primary" onClick={this.handleShow}><img alt="" src="/img/plus.png" className="btm_image_pl" ></img></button>
                 
         
                 <Modal show={show} onHide={this.handleClose} className="modal">
@@ -65,7 +77,7 @@ class Create extends Component {
                 <Form>
                     <div className = "ImageBox_pc">
                       <div className = "Image_pc">
-                          <img src = "img/group.png" className = "Img_pc" id= "image" alt = "img/group.png"></img>
+                          <img src = "/img/group.png" className = "Img_pc" id= "image" alt = "/img/group.png"></img>
                       </div>
                       <div>
                         <input type='file' 
@@ -82,7 +94,7 @@ class Create extends Component {
                 
                     <Form.Group className="div-form1_pc" controlId="formTeam">
                         <Form.Label className="text">팀명*</Form.Label>
-                        <Form.Control className="dataInput-form_pc" placeholder="팀 이름을 입력하세요." onChange={this.descriptionChange}/>
+                        <Form.Control className="dataInput-form_pc" placeholder="팀 이름을 입력하세요." onChange={this.teamChange}/>
                     </Form.Group>
                     
                     <Form.Group className="div-form_pc" controlId="formGridPassword1">
@@ -92,12 +104,12 @@ class Create extends Component {
                 
                     <Form.Group className="div-form_subject_pc" controlId="formGridPassword1">
                         <Form.Label className="text">과목</Form.Label>
-                        <Form.Control className="subPurInput-form_pc" placeholder="프로젝트 과목을 입력하세요." onChange={this.descriptionChange}/>
+                        <Form.Control className="subPurInput-form_pc" placeholder="프로젝트 과목을 입력하세요." onChange={this.subjectChange}/>
                     </Form.Group>
 
                     <Form.Group className="div-form_purpose_pc" controlId="formGridPassword1">
                         <Form.Label className="text">목적</Form.Label>
-                        <Form.Control className="subPurInput-form_pc" placeholder="프로젝트 목적을 입력하세요." onChange={this.descriptionChange}/>
+                        <Form.Control className="subPurInput-form_pc" placeholder="프로젝트 목적을 입력하세요." onChange={this.purposeChange}/>
                     </Form.Group>    
                 </Form>
                 
