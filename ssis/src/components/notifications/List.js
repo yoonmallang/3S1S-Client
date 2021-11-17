@@ -19,7 +19,7 @@ class List extends Component {
                     invitee : localStorage.getItem('id')
                 }
             });
-            this.setState({ alarms: res.data.data });
+            this.setState({ alarms: res.data.notifications });
             console.log(this.state.alarms)
         } catch (e) { 
             console.log(e); 

@@ -8,7 +8,7 @@ class Create extends Component {
         super();
         this.state = {
             show : false,
-            project: 1,
+            project: 4,
             writer : localStorage.getItem("id"),
             title: "",
             description: "",

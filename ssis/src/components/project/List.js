@@ -32,7 +32,6 @@ class List extends Component {
         loadingData();
     }
     
-    
     render() { //계속 업데이트
         const projects = this.state.projects
 
@@ -53,6 +52,7 @@ class List extends Component {
             console.log('You clicked delete.');
             try { 
                 axios.delete("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/" + id);
+                window.location.replace("/project")
             } catch (e) 
             { console.log(e); }
         }

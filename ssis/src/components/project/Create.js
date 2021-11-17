@@ -102,25 +102,25 @@ class Create extends Component {
                         <Form.Control as="textarea" rows={3} placeholder="프로젝트 개요를 입력하세요." onChange={this.descriptionChange}/>
                     </Form.Group>
                 
-                    <Form.Group className="div-form_subject_pc" controlId="formGridPassword1">
+                    <Form.Group className="div-form_pc" controlId="formGridPassword1">
                         <Form.Label className="text">과목</Form.Label>
-                        <Form.Control className="subPurInput-form_pc" placeholder="프로젝트 과목을 입력하세요." onChange={this.subjectChange}/>
+                        <Form.Control className="dataInput-form_pc" placeholder="프로젝트 과목을 입력하세요." onChange={this.subjectChange}/>
                     </Form.Group>
 
-                    <Form.Group className="div-form_purpose_pc" controlId="formGridPassword1">
+                    <Form.Group className="div-form_pc" controlId="formGridPassword1">
                         <Form.Label className="text">목적</Form.Label>
-                        <Form.Control className="subPurInput-form_pc" placeholder="프로젝트 목적을 입력하세요." onChange={this.purposeChange}/>
+                        <Form.Control className="dataInput-form_pc" placeholder="프로젝트 목적을 입력하세요." onChange={this.purposeChange}/>
                     </Form.Group>    
                 </Form>
                 
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className="btn-secondary_pc" variant="secondary" onClick={this.handleClose}>
-                      취소
+                    <Button variant="secondary" onClick={this.handleClose}>
+                        취소
                     </Button>
-                    <Button className="register-Button_pc" variant="primary" type="submit" onClick={this.onClickSubmit}>
-                      생성
-                </Button>
+                    <Button className="create-Button" type="submit" onClick={this.onClickSubmit}>
+                        생성
+                    </Button>
                 </Modal.Footer>
                 </Modal>
             </div>
