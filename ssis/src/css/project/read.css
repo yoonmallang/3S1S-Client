@@ -1,10 +1,18 @@
-.Read {
-  height: 1100px;
+.Outer_pr {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.Read_pr {
+  display: inline-block;
+  height: 800px;
+  width: 1000px;
   margin-left: 8%;
   margin-right: 8%;
 }
 
-.LeftContent {
+.LeftContent_pr {
   width: 39%;
   height: 95%;
   float: left;
@@ -14,7 +22,7 @@
   margin-bottom: 1%;
 }
 
-.CenterContent {
+.CenterContent_pr {
   width: 29%;
   height: 95%;
   float: left;
@@ -24,7 +32,7 @@
   margin-bottom: 1%;
 }
 
-.RightContent {
+.RightContent_pr {
   width: 28%;
   height: 95%;
   float: left;
@@ -34,70 +42,72 @@
   margin-bottom: 1%;
 }
 
-.ProjectInfo {
+.ProjectInfo_pr {
   width: 100%;
-  height: 59%;
-  border: 1px solid black;
+  height: 69%;
+  border: 1px solid #737880;
   margin-bottom: 1%;
 }
 
-.TeamList {
+.TeamList_pr {
+  width: 100%;
+  height: 29%;
+  border: 1px solid #737880;
+  margin-bottom: 1%;
+}
+
+.Progress_bar_pr {
+  width: 100%;
+  height: 14%;
+  border: 1px solid #737880;
+  margin-bottom: 1%;
+}
+
+.Contribution_pr {
   width: 100%;
   height: 39%;
-  border: 1px solid black;
+  border: 1px solid #737880;
   margin-bottom: 1%;
 }
 
-.Progress_bar {
+.Memo_pr {
   width: 100%;
-  height: 19%;
-  border: 1px solid black;
-  margin-bottom: 1%;
-}
-
-.Contribution {
-  width: 100%;
-  height: 39%;
-  border: 1px solid black;
-  margin-bottom: 1%;
-}
-
-.Memo {
-  width: 100%;
-  height: 39%;
-  border: 1px solid black;
+  height: 44%;
+  border: 1px solid #737880;
+  background-color: #e5efff;
   margin-bottom: 1%;
 }
 
 .Alarm {
   width: 100%;
   height: 44%;
-  border: 1px solid black;
+  border: 1px solid #737880;
   margin-bottom: 1%;
 }
 
 .MyToDo {
   width: 100%;
   height: 54%;
-  border: 1px solid black;
+  border: 1px solid #737880;
   margin-bottom: 1%;
 }
 
 .P_Title {
   width: 80%;
   height: 10%;
-  margin-left: 5%;
+  margin-left: 7%;
   margin-top: 5%;
-  font-size: 55px;
+  font-size: 2vw;
   float: left;
   text-align: left;
 }
 
 .P_btm {
-  margin-top: 5%;
-  margin-right: 3%;
-  width: 30px;
-  height: 30px;
+  margin-top: 2%;
+  margin-right: 2%;
+  float: right;
+  width: 1vw;
+  height: 1vw;
   padding: 0;
   border: none;
   background: none;
@@ -110,7 +120,7 @@
 
 .P_ImgTeam {
   width: 100%;
-  height: 40%;
+  height: 200px;
   vertical-align: middle;
 }
 
@@ -121,20 +131,19 @@
 }
 
 .P_Img {
-  margin-left: 20%;
+  margin-left: 7%;
   margin-top: 5%;
   border: 1px;
   border-radius: 60%;
-  width: 55%;
-  height: 55%;
+  width: 100px;
+  height: 100px;
   float: left;
-  vertical-align: middle;
 }
 
 .P_TeamBox {
   margin-top: 3%;
   margin-right: 5%;
-  width: 55%;
+  width: 50%;
   height: 60%;
   text-align: center;
   float: right;
@@ -143,23 +152,147 @@
 
 .P_Team {
   margin-bottom: 5%;
-  font-size: 50px;
+  font-size: 1.5vw;
   width: 100%;
   height: 90%;
   text-align: center;
 }
 
-.P_Abstract {
+.P_content {
   width: 100%;
+  height: 30px;
+  text-align: left;
+  margin-top: 2%;
+  margin-left: 7%;
+  margin-bottom: 1%;
+}
+
+.P_contentName {
+  width: 50%;
+  height: 30px;
+  text-align: left;
+  margin-top: 4%;
+  margin-left: 7%;
+  margin-bottom: 3%;
+  float: left;
+}
+
+.P_content1 {
+  width: 330px;
+  height: 100px;
+  text-align: left;
+  margin-left: 7%;
+  margin-top: 2%;
+}
+
+.P_content2 {
+  width: 330px;
+  height: 50px;
+  text-align: left;
+  margin-left: 7%;
+  margin-top: 2%;
+}
+
+.Big {
+  color: black;
+  border-bottom: 5px solid #96bcf8;
+}
+
+.P_contentBox {
+  width: 100%;
+  height: 130px;
+  float: left;
+}
+
+.P_contentBox1 {
+  width: 100%;
+  height: 80px;
+  float: left;
+}
+
+.P_teamName {
+  float: left;
+  width: 50%;
   height: 20%;
+  text-align: center;
+  margin-top: 8%;
+  margin-left: 10%;
+  font-size: 2vw;
 }
 
-.P_Subject {
-  width: 100%;
-  height: 10%;
+.Memberlist_pr {
+  border: 3px solid #dbdfe6;
+  background-color: white;
+  border-radius: 10px;
+  width: 46%;
+  height: 35px;
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  float: left;
+  text-align: left;
 }
 
-.P_Purpose {
-  width: 100%;
-  height: 10%;
+.MemberSpan {
+  display: inline-block;
+  margin-left: 7%;
+  height: 30px;
+}
+
+.ContributionSpan1 {
+  margin-left: 5%;
+  height: 30px;
+  float: left;
+}
+
+.ContributionSpan2 {
+  margin-right: 5%;
+  height: 30px;
+  float: right;
+}
+
+.LeaderCrown {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 1%;
+}
+
+.ProgressBar_pr {
+  width: 90%;
+  height: 30px;
+  margin-top: 3%;
+}
+
+.P_progressRate {
+  float: right;
+  margin-top: 4%;
+  margin-bottom: 1%;
+  margin-right: 7%;
+}
+
+.MemberContribution {
+  border: 3px solid #dbdfe6;
+  background-color: white;
+  border-radius: 10px;
+  width: 94%;
+  height: 35px;
+  margin-left: 3%;
+  margin-right: 3%;
+  margin-top: 3%;
+  margin-bottom: 1%;
+  float: left;
+  text-align: left;
+}
+
+.AlertNum {
+  float: right;
+  width: 30px;
+  margin-top: 4%;
+  margin-bottom: 1%;
+  margin-right: 6%;
+  color: white;
+  background-color: red;
+  border: 1px solid #dbdfe6;
+  border-radius: 30px;
 }

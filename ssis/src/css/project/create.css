@@ -1,44 +1,40 @@
-.modal {
-  width: 100%;
-}
-
-.div-form1 {
+.div-form1_pc {
   margin-top: 1%;
   width: 60%;
   float: right;
 }
 
-.div-form {
+.div-form_pc {
   margin-top: 1%;
   width: 100%;
   float: right;
 }
 
-.div-form_subject {
+.div-form_subject_pc {
   margin-top: 1%;
   width: 48%;
   float: left;
 }
 
-.div-form_purpose {
+.div-form_purpose_pc {
   margin-top: 1%;
   width: 48%;
   float: right;
 }
 
-.ImageBox {
+.ImageBox_pc {
   width: 40%;
   float: left;
   vertical-align: middle;
 }
 
-.Image_c {
+.Image_pc {
   width: 100%;
   margin-top: 5%;
   vertical-align: middle;
 }
 
-.Img_c {
+.Img_pc {
   margin-left: 20%;
   margin-top: 5%;
   border: 1px;
@@ -49,12 +45,40 @@
   vertical-align: middle;
 }
 
-.btm_add {
+.btm_add_pc {
   width: 20%;
   height: 20%;
-  margin-top: 21%;
+  margin-top: 18%;
   padding: 0;
   border: none;
   background: none;
   vertical-align: middle;
+}
+
+.dataInput-form_pc {
+  float: left;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+}
+
+.subPurInput-form_pc {
+  float: left;
+  width: 100%;
+  font-size: 1px;
+  padding: 0.375rem 0.75rem;
+}
+
+.btn-secondary_pc {
+  color: #fff;
+  width: 20%;
+  float: right;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.register-Button_pc {
+  color: black;
+  width: 20%;
+  float: right;
+  background-color: #99c0ff;
 }
