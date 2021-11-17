@@ -51,7 +51,7 @@ class Login extends Component {
     render() {
         return (
             <div className = "loginForm">
-                <img alt="" src="img/logo.png" className="login-img-logo"/>
+                <img alt="" src="/img/logo.png" className="login-img-logo"/>
                 <Form>
                     <Form.Group className="mb-3" controlId="formGroupEmail">
                         <Form.Control placeholder="user id" onChange={this.idChange}/>

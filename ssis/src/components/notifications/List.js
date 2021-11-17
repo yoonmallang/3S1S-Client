@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'; 
 import '../../css/notifications/list.css';
 
-
 class List extends Component {
     constructor() {
         super();
@@ -32,8 +31,7 @@ class List extends Component {
             accept: 1,
             project : proj_id,
             user: localStorage.getItem('id'),
-        }).then((res) => {  
-            console.log(res);
+        }).then((res) => {
             alert(res.data.message)
             this.loadingAlarms();
         }).catch((err) => {
@@ -64,7 +62,7 @@ class List extends Component {
             <div>
                 <Dropdown align="end" drop="down">
                     <Dropdown.Toggle className="nofi-dropButoon">
-                        <img alt="" src="img/alarm.png" className="img-alarm"/>
+                        <img alt="" src="/img/alarm.png" className="img-alarm"/>
                     </Dropdown.Toggle>
                     <Dropdown.Menu className="nofi-menu">
                     {this.state.alarms.map((item) => {
@@ -72,8 +70,8 @@ class List extends Component {
                             <div key={item.id}>
                                 <Dropdown.Item className="nofi-navDrop">
                                     <div className="nofi-text-area">
-                                        <b>{item.inviter_id}</b>님께서 회원님을<br/>
-                                        <b>{item.project_id}</b>에 초대했습니다.
+                                        <b>{item.inviter_name}</b>님께서 회원님을<br/>
+                                        <b>{item.project_title}</b>에 초대했습니다.
                                     </div>
                                     <div className="nofi-button-area">
                                         <Button className="nofi-accept-button" onClick={()=>this.selectAccept(item.project_id)}>
@@ -90,7 +88,6 @@ class List extends Component {
                     })}
                     </Dropdown.Menu>
                 </Dropdown>
-                
             </div>
         );
     }

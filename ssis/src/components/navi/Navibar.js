@@ -48,11 +48,11 @@ class Navibar extends Component {
         let middelbar;
         if (isLogin) {
             username = this.state.loginedName;
-            profile = "img/blank-person.png";
+            profile = "/img/blank-person.png";
         }
         else {
             username = "xxx";
-            profile = "img/blank-person.png";
+            profile = "/img/blank-person.png";
         }
 
         if(needMiddleBar) {
@@ -65,7 +65,7 @@ class Navibar extends Component {
                     <Navbar className="color-nav" variant="dark">
                         <Container className="contanier">
                             <Navbar.Brand href="/project">
-                                <img alt="" src="img/logo.png" className="img-logo"/>
+                                <img alt="" src="/img/logo.png" className="img-logo"/>
                             </Navbar.Brand>
                             <Nav className="nav-profile">
                                 <List/>
@@ -95,7 +95,7 @@ class Navibar extends Component {
                     <Navbar className="color-nav" variant="dark">
                         <Container>
                             <Navbar.Brand href="/">
-                                <img alt="" src="img/logo.png" className="img-logo"/>
+                                <img alt="" src="/img/logo.png" className="img-logo"/>
                             </Navbar.Brand>
                         </Container>
                     </Navbar>
