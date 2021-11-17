@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Navbar, Container, Nav, NavDropdown} from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown, Dropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/navi/Navibar.css';
 import Middlebar from './Middlebar'
+import List from '../notifications/List.js'
 
 class Navibar extends Component {
     constructor() {
@@ -47,11 +48,11 @@ class Navibar extends Component {
         let middelbar;
         if (isLogin) {
             username = this.state.loginedName;
-            profile = "img/blank-person.png";
+            profile = "/img/blank-person.png";
         }
         else {
             username = "xxx";
-            profile = "img/blank-person.png";
+            profile = "/img/blank-person.png";
         }
 
         if(needMiddleBar) {
@@ -64,17 +65,23 @@ class Navibar extends Component {
                     <Navbar className="color-nav" variant="dark">
                         <Container className="contanier">
                             <Navbar.Brand href="/project">
-                                <img alt="" src="img/logo.png" className="img-logo"/>
-                                <NavDropdown title="Link" id="navbarScrollingDropdown"></NavDropdown>
+                                <img alt="" src="/img/logo.png" className="img-logo"/>
                             </Navbar.Brand>
                             <Nav className="nav-profile">
-                                <Navbar.Brand><img alt="" src="img/alarm.png" className="img-alarm"/></Navbar.Brand>
-                                <Navbar.Brand><img alt="" src={profile} className="img-person"/></Navbar.Brand>
-                                <NavDropdown title={username} className="user-name-dropdown" id="collasible-nav-dropdown">
-                                    <NavDropdown.Item href="/mypage/1">마이페이지</NavDropdown.Item>
-                                    <NavDropdown.Divider />
-                                    <NavDropdown.Item onClick={this.logout} href="/">로그아웃</NavDropdown.Item>
-                                </NavDropdown>
+                                <List/>
+                                <Dropdown className="user-name-dropdown">
+                                    <Dropdown.Toggle className="person-dropButoon">
+                                        <div className="navi-person">
+                                            <img alt="" src={profile} className="img-person"/>
+                                            <span className="text-person">{username}</span>
+                                        </div>
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Item href="/mypage/1">마이페이지</Dropdown.Item>
+                                        <Dropdown.Divider />
+                                        <Dropdown.Item onClick={this.logout} href="/">로그아웃</Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </Nav>
                         </Container>
                     </Navbar>
@@ -88,7 +95,7 @@ class Navibar extends Component {
                     <Navbar className="color-nav" variant="dark">
                         <Container>
                             <Navbar.Brand href="/">
-                                <img alt="" src="img/logo.png" className="img-logo"/>
+                                <img alt="" src="/img/logo.png" className="img-logo"/>
                             </Navbar.Brand>
                         </Container>
                     </Navbar>

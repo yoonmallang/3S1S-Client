@@ -1,0 +1,58 @@
+.nofi-navDrop {
+  width: 350px;
+  margin-bottom: 50px;
+}
+
+.nofi-dropButoon {
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  padding: 0;
+  margin-right: 15px;
+}
+
+.nofi-dropButoon:focus,
+.nofi-dropButoon:active {
+  padding: 0;
+}
+
+.nofi-dropButoon::after {
+  display: none;
+}
+
+.nofi-menu {
+  background-color: #e5efff;
+}
+
+.nofi-text-area {
+  float: left;
+  width: 65%;
+  margin-right: 4%;
+}
+
+.nofi-button-area {
+  float: left;
+  width: 30%;
+  margin-top: 2%;
+}
+
+.nofi-accept-button {
+  float: left;
+  width: auto;
+  margin-right: 2%;
+  color: black;
+  background-color: #99c0ff;
+  border-radius: 7%;
+  font-size: 8px;
+  border-color: #99c0ff;
+}
+
+.nofi-reject-button {
+  float: left;
+  width: auto;
+  border-radius: 7%;
+  font-size: 8px;
+  background-color: #737880;
+  border-color: #737880;
+}

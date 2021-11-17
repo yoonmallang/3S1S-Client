@@ -1,5 +1,5 @@
 .loginForm {
-  margin: 5% 35% 0 35%;
+  margin: 5% 37% 0 37%;
   padding: 1% 3% 1%;
 }
 
@@ -15,4 +15,35 @@
   color: black;
   width: auto;
   background-color: #99c0ff;
+}
+
+.lg-login-Button {
+  float: left;
+  font-size: 10px;
+  width: auto;
+  color: black;
+  background-color: #99c0ff;
+  border-color: #99c0ff;
+  border-radius: 3%;
+}
+
+.lg-register-Button {
+  float: right;
+  font-size: 10px;
+  width: auto;
+  color: black;
+  background-color: #99c0ff;
+  border-color: #99c0ff;
+  border-radius: 3%;
+  margin-left: 3%;
+}
+
+.lg-find-Button {
+  float: right;
+  font-size: 10px;
+  width: auto;
+  color: black;
+  background-color: #99c0ff;
+  border-color: #99c0ff;
+  border-radius: 3%;
 }

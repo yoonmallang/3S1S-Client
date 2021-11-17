@@ -1,6 +1,12 @@
-.date-form {
+.date1-form {
   float: left;
-  width: 50%;
+  width: 48%;
+  margin-right: 4%;
+}
+
+.date2-form {
+  float: left;
+  width: 48%;
 }
 
 .participant-form {
@@ -26,10 +32,22 @@
   color: #ffffff;
 }
 
-.add-todo-Button {
+.create-Button {
   color: black;
   background-color: #99c0ff;
+  border-color: #99c0ff;
 }
 
 .add-todo-button {
+  width: auto;
+  height: auto;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+}
+
+.todo-add-img {
+  width: 20px;
+  height: 20px;
 }
