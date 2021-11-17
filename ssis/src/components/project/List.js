@@ -32,8 +32,17 @@ class List extends Component {
         loadingData();
     }
     
+    
     render() { //계속 업데이트
         const projects = this.state.projects
+
+        function confirmModal(id) {
+            if (window.confirm("프로젝트를 삭제하시겠습니까?")) {
+              deleteProject(id);
+            } else {
+              console.log("취소. 변화 없음");
+            }
+          }
 
         function clickProject(id) {
             console.log('You clicked project.');
@@ -53,7 +62,7 @@ class List extends Component {
             <div className = "Title_pl">
                 {project.title}
             </div>
-            <button type="button" className="btm_pl" id="img_btn" onClick={()=>deleteProject(project.id)}><img src="/img/cancel.png" alt ="" className="btm_image_pl" ></img></button>
+            <button type="button" className="btm_pl" id="img_btn" onClick={()=>confirmModal(project.id)}><img src="/img/cancel.png" alt ="" className="btm_image_pl" ></img></button>
             <div className = "ImgTeam_pl">
                 <div className = "Image_pl">
                     <img src = {project.img_url} className = "Img_pl" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/group.png"}}></img>

@@ -13,6 +13,8 @@ class Read extends Component {
           projectID: "",
           project:[],
           member:[],
+          notification_p:[],
+          notification_i:[],
         };
       }
 
@@ -54,9 +56,10 @@ class Read extends Component {
         { console.log(e); }
       };
 
+
     
     componentDidMount(){ //한번만 실행
-        const {loadingData,loadingMember} = this;
+        const {loadingData, loadingMember} = this;
         loadingData();
         loadingMember();
         console.log("진짜?")
@@ -64,22 +67,60 @@ class Read extends Component {
     }
 
     render() {
-        let t_list = [
-            {
-                "id": 1,
-                "title": "asdf",
-                "team": "!23",
-                "description": "!234",
-                "subject": "1234",
-                "purpose": "1234",
-                "progress_rate": null
-            }
-        ]
+        this.state.notification_p = [{
+            "name": "ProjectToDo1",
+            "Dday": "D-1"
+        },{
+            "name": "ProjectToDo2",
+            "Dday": "D-1"
+        },{
+            "name": "ProjectToDo3",
+            "Dday": "D-3"
+        },]
+
+        this.state.notification_i = [{
+            "name": "MyToDo1",
+            "Dday": "D-1"
+        },{
+            "name": "MyToDo2",
+            "Dday": "D-4"
+        },]
            
-        let member_list = this.state.member && this.state.member.map(member =>
-            <div className="Memberlist_pr">
-                {member.user_id}
+        let member_list = this.state.member && this.state.member.map(member =>{
+            if(member.leader === 1)
+            return <div className="Memberlist_pr">
+                    <span className = "MemberSpan">{member.user_id} <img src = "/img/crown.png" className = "LeaderCrown"></img></span>
+                </div>
+            else
+            return <div className="Memberlist_pr">
+                    <span className = "MemberSpan">{member.user_id}</span>
+                    
+                </div>
+                }   
+            ); 
+
+        let contribution_list = this.state.member && this.state.member.map(member =>{
+            return <div className="MemberContribution">
+                    <span className = "ContributionSpan1">{member.user_id}</span>
+                    <span className = "ContributionSpan2">{member.contribution_rate}%</span>
             </div>
+                }   
+            ); 
+
+        let notification_list_p = this.state.notification_p && this.state.notification_p.map(notification =>{
+            return <div className="MemberContribution">
+                    <span className = "ContributionSpan1">{notification.name}</span>
+                    <span className = "ContributionSpan2">{notification.Dday}</span>
+            </div>
+                }   
+            ); 
+
+        let notification_list_i = this.state.notification_i && this.state.notification_i.map(notification =>{
+            return <div className="MemberContribution">
+                    <span className = "ContributionSpan1">{notification.name}</span>
+                    <span className = "ContributionSpan2">{notification.Dday}</span>
+            </div>
+                }   
             ); 
 
 
@@ -93,7 +134,7 @@ class Read extends Component {
                             </div>
                             <button type="button" className="P_btm" id="img_btn"><img src="/img/pencil.png" className="P_btm_image" alt = ""></img></button>
                             <div className = "P_ImgTeam">
-                                <img src = "/img/group.png" className = "P_Img"></img>
+                                <img src = "/img/group.png" className = "P_Img" alt = "팀 사진"></img>
                                 <p className = "P_teamName">{this.state.project.team}</p>
                             </div>
                             <div className = "P_contentBox">
@@ -110,29 +151,34 @@ class Read extends Component {
                             </div>
                         </div>
                         <div className = "TeamList_pr">
-                            <div className = "TeamList_pr1">
-                                <span className="TeamList_pr2">팀원 리스트</span>
-                                {member_list}
-                            </div>
+                            <p className = "P_contentName"><b><big className="Big">팀원 리스트</big></b></p>
+                            {member_list}
                         </div>
                     </div>
                     <div className = "CenterContent_pr">
                         <div className = "Progress_bar_pr">
-                            hi
+                            <p className = "P_contentName"><b><big className="Big">진행률</big></b></p>
+                            <p className = "P_progressRate"><b><big>{this.state.project.progress_rate}%</big></b></p>
+                            <progress value={this.state.project.progress_rate} max="100" className="ProgressBar_pr"></progress>
                         </div>
                         <div className = "Contribution_pr">
-                            hello
+                            <p className = "P_contentName"><b><big className="Big">멤버별 기여</big></b></p>
+                            {contribution_list}
                         </div>
                         <div className = "Memo_pr">
-                            buy
+                            
                         </div>
                     </div>
                     <div className = "RightContent_pr">
                         <div className = "Alarm">
-                            hi
+                            <p className = "P_contentName"><b><big className="Big">프로젝트 알림</big></b></p>
+                            <p className = "AlertNum"><b><big>{this.state.notification_p.length}</big></b></p>
+                            {notification_list_p}
                         </div>
                         <div className = "MyToDo">
-                            hi
+                            <p className = "P_contentName"><b><big className="Big">내 할 일 보기</big></b></p>
+                            <p className = "AlertNum"><b><big>{this.state.notification_i.length}</big></b></p>
+                            {notification_list_i}
                         </div>
                     </div>
                 </div>
