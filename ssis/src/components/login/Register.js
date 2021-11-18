@@ -79,37 +79,37 @@ class Register extends Component {
         return (
                 <div className = "registerForm">
                         <Form>
-                        <Form.Group className="div-form" controlId="formGridId">
+                        <Form.Group className="div-id-form">
                             <Form.Label className="text">아이디</Form.Label>
-                            <Form.Control className="idInput-form" placeholder="Enter Id" onChange={this.idChange}/>
+                            <Form.Control className="idInput-form" placeholder="아이디" onChange={this.idChange}/>
                             <Button className="idCheck-Button" variant="primary" onClick={this.onClickCheckId}>
                             중복확인
                             </Button>
                         </Form.Group>
                     
-                        <Form.Group className="div-form" controlId="formGridPassword1">
+                        <Form.Group className="div-form">
                             <Form.Label className="text">비밀번호</Form.Label>
-                            <Form.Control type="password" placeholder="Enter Password" onChange={this.pwdChange}/>
+                            <Form.Control type="password" placeholder="비밀번호" onChange={this.pwdChange}/>
                         </Form.Group>
                         
-                        <Form.Group className="div-form" controlId="formGridPassword2">
+                        <Form.Group className="div-form">
                             <Form.Label className="text">비밀번호 재확인</Form.Label>
-                            <Form.Control type="password" placeholder="Enter Password" onChange={this.pwdCheckChange}/>
+                            <Form.Control type="password" placeholder="비밀번호 재확인" onChange={this.pwdCheckChange}/>
                         </Form.Group>
 
-                        <Form.Group className="div-form" controlId="formGridName">
+                        <Form.Group className="div-form">
                             <Form.Label className="text">이름</Form.Label>
-                            <Form.Control placeholder="Enter Name" onChange={this.nameChange}/>
+                            <Form.Control placeholder="이름" onChange={this.nameChange}/>
                         </Form.Group>
 
-                        <Form.Group className="div-form" controlId="formGridAddress">
+                        <Form.Group className="div-form">
                             <Form.Label className="text">이메일</Form.Label>
-                            <Form.Control placeholder="Enter Email" type="email" onChange={this.emailChange}/>
+                            <Form.Control placeholder="이메일" type="email" onChange={this.emailChange}/>
                         </Form.Group>
 
-                        <Form.Group className="div-form" controlId="formGridBelong">
+                        <Form.Group className="div-form">
                             <Form.Label className="text">소속</Form.Label>
-                            <Form.Control placeholder="Enter Belong"  onKeyPress={this.handleKeyPress} onChange={this.belongChange}/>
+                            <Form.Control placeholder="소속"  onKeyPress={this.handleKeyPress} onChange={this.belongChange}/>
                         </Form.Group>
                     </Form>
                     
