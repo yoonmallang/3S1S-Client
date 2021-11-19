@@ -87,27 +87,27 @@ class Register extends Component {
                             </Button>
                         </Form.Group>
                     
-                        <Form.Group className="div-form">
+                        <Form.Group className="rg-div-form">
                             <Form.Label className="text">비밀번호</Form.Label>
                             <Form.Control type="password" placeholder="비밀번호" onChange={this.pwdChange}/>
                         </Form.Group>
                         
-                        <Form.Group className="div-form">
+                        <Form.Group className="rg-div-form">
                             <Form.Label className="text">비밀번호 재확인</Form.Label>
                             <Form.Control type="password" placeholder="비밀번호 재확인" onChange={this.pwdCheckChange}/>
                         </Form.Group>
 
-                        <Form.Group className="div-form">
+                        <Form.Group className="rg-div-form">
                             <Form.Label className="text">이름</Form.Label>
                             <Form.Control placeholder="이름" onChange={this.nameChange}/>
                         </Form.Group>
 
-                        <Form.Group className="div-form">
+                        <Form.Group className="rg-div-form">
                             <Form.Label className="text">이메일</Form.Label>
                             <Form.Control placeholder="이메일" type="email" onChange={this.emailChange}/>
                         </Form.Group>
 
-                        <Form.Group className="div-form">
+                        <Form.Group className="rg-div-form">
                             <Form.Label className="text">소속</Form.Label>
                             <Form.Control placeholder="소속"  onKeyPress={this.handleKeyPress} onChange={this.belongChange}/>
                         </Form.Group>

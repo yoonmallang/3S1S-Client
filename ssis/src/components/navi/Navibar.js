@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Container, Nav, NavDropdown, Dropdown} from 'react-bootstrap';
+import { Navbar, Container, Nav, Dropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/navi/Navibar.css';
 import Middlebar from './Middlebar'
