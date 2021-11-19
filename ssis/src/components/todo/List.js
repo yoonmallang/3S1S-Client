@@ -66,7 +66,14 @@ class List extends Component {
 
         return (
             <div className = "todo-page">
-                <Create/>
+                <div style={{ width: '1100px', margin: '0px auto', marginTop:'30px'}}>
+                    <Create/>
+                    <div style={{ width: '500px',margin: '0px auto'}}>
+                    <p style={{ float: 'left', marginBottom:'0px'}}>진행률</p>
+                    <p style={{ float: 'right', marginBottom:'0px'}}>5%</p>
+                    <progress value = '5' max="100" className="todo-progress"></progress>
+                    </div>
+                </div>
                 <div className = "todoList">
                     <div className = "state left">
                         <span className="p1">시작전</span>
@@ -82,7 +89,7 @@ class List extends Component {
                                             {
                                                 item.participants.map((member)=> {
                                                     return (
-                                                        <Card.Text className ="participant">{member}</Card.Text>
+                                                        <Card.Text key={member} className ="participant">{member}</Card.Text>
                                                     )
                                                 })
                                             }
@@ -106,7 +113,7 @@ class List extends Component {
                                                 {
                                                     item.participants.map((member)=> {
                                                         return (
-                                                            <Card.Text className ="participant">{member}</Card.Text>
+                                                            <Card.Text key={member} className ="participant">{member}</Card.Text>
                                                         )
                                                     })
                                                 }
@@ -130,7 +137,7 @@ class List extends Component {
                                                 {
                                                     item.participants.map((member)=> {
                                                         return (
-                                                            <Card.Text className ="participant">{member}</Card.Text>
+                                                            <Card.Text key={member} className ="participant">{member}</Card.Text>
                                                         )
                                                     })
                                                 }
