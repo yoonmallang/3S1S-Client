@@ -4,15 +4,16 @@ import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Create from './Create.js'
+import Middlebar from '../navi/Middlebar'
 
 class List extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             todos_0 : [],
             todos_1 : [],
             todos_2 : [],
-            project_id : 1,
+            project_id : this.props.match.params.id,
         }
     }
 
@@ -66,7 +67,15 @@ class List extends Component {
 
         return (
             <div className = "todo-page">
-                <Create/>
+                <Middlebar id={this.props.match.params}/>
+                <div style={{ width: '1100px', margin: '0px auto', marginTop:'30px'}}>
+                    <Create id={this.props.match.params}/>
+                    <div style={{ width: '500px',margin: '0px auto'}}>
+                    <p style={{ float: 'left', marginBottom:'0px'}}>진행률</p>
+                    <p style={{ float: 'right', marginBottom:'0px'}}>5%</p>
+                    <progress value = '5' max="100" className="todo-progress"></progress>
+                    </div>
+                </div>
                 <div className = "todoList">
                     <div className = "state left">
                         <span className="p1">시작전</span>
@@ -82,7 +91,7 @@ class List extends Component {
                                             {
                                                 item.participants.map((member)=> {
                                                     return (
-                                                        <Card.Text className ="participant">{member}</Card.Text>
+                                                        <Card.Text key={member} className ="participant">{member}</Card.Text>
                                                     )
                                                 })
                                             }
@@ -106,7 +115,7 @@ class List extends Component {
                                                 {
                                                     item.participants.map((member)=> {
                                                         return (
-                                                            <Card.Text className ="participant">{member}</Card.Text>
+                                                            <Card.Text key={member} className ="participant">{member}</Card.Text>
                                                         )
                                                     })
                                                 }
@@ -130,7 +139,7 @@ class List extends Component {
                                                 {
                                                     item.participants.map((member)=> {
                                                         return (
-                                                            <Card.Text className ="participant">{member}</Card.Text>
+                                                            <Card.Text key={member} className ="participant">{member}</Card.Text>
                                                         )
                                                     })
                                                 }

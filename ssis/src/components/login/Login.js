@@ -26,9 +26,9 @@ class Login extends Component {
             console.log(res.data);
             if (res.status === 200) {
                 document.location.href = "/project";
-                localStorage.setItem("isLogin", true)
-                localStorage.setItem("id", res.data.id)
-                localStorage.setItem("name", res.data.name)
+                sessionStorage.setItem("isLogin", true)
+                sessionStorage.setItem("id", res.data.id)
+                sessionStorage.setItem("name", res.data.name)
             }
             else if (res.status === 210) {
                 alert(res.data.message);
@@ -45,19 +45,47 @@ class Login extends Component {
     };
 
     componentDidMount() { 
-        localStorage.clear();
+        sessionStorage.clear();
     }
 
     render() {
+        const idStyle = {
+            backgroundImage:'url("/img/human.png")',
+            backgroundPosition:'5px center',
+            backgroundSize: '30px',
+            backgroundRepeat: 'no-repeat',
+            paddingLeft:'50px',
+            border:'1px solid black',
+            width:'100%',
+            height:'40px',
+            boxSizing:'border-box',
+            outline:'none',
+            borderRadius:'3px',
+        }
+
+        const pwStyle = {
+            backgroundImage:'url("/img/key.png")',
+            backgroundPosition:'5px center',
+            backgroundSize: '30px',
+            backgroundRepeat: 'no-repeat',
+            paddingLeft:'50px',
+            border:'1px solid black',
+            width:'100%',
+            height:'40px',
+            boxSizing:'border-box',
+            outline:'none',
+            borderRadius:'3px',
+        }
+
         return (
             <div className = "loginForm">
                 <img alt="" src="/img/logo.png" className="login-img-logo"/>
                 <Form>
-                    <Form.Group className="mb-3" controlId="formGroupEmail">
-                        <Form.Control placeholder="user id" onChange={this.idChange}/>
+                    <Form.Group className="lg-input">
+                        <Form.Control style={idStyle} placeholder="아이디" onChange={this.idChange}/>
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formGroupPassword">
-                        <Form.Control type="password"  onKeyPress={this.handleKeyPress} placeholder="****" onChange={this.pwdChange}/>
+                    <Form.Group className="lg-input">
+                        <Form.Control style={pwStyle} type="password" onKeyPress={this.handleKeyPress} placeholder="비밀번호" onChange={this.pwdChange}/>
                     </Form.Group>
                 </Form>
                     

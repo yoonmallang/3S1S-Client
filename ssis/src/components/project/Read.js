@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'; 
 import Update from "./Update.js"
 import Search from "./Search.js"
+import Middlebar from '../navi/Middlebar'
 
 class Read extends Component {
     constructor(props) {
@@ -44,7 +45,6 @@ class Read extends Component {
       loadingMember = async () => { 
         try { 
             const id = this.props.match.params;
-            console.log(id.id) 
             const response = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/members", {
                 params:{
                     project : id.id,
@@ -139,6 +139,7 @@ class Read extends Component {
 
         return (
             <div className= "Outer_pr">
+                <Middlebar id={this.props.match.params}/>
                 <div className = "Read_pr">
                     <div className = "LeftContent_pr">
                         <div className = "ProjectInfo_pr">

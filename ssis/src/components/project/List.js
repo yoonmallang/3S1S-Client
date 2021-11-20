@@ -16,7 +16,7 @@ class List extends Component {
         try { 
             const response = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects", {
                 params:{
-                    id : localStorage.getItem("id"),
+                    id : sessionStorage.getItem("id"),
                 }
             });
             this.setState({projects: response.data.project_list})

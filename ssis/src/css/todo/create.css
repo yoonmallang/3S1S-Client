@@ -14,7 +14,7 @@
   width: 45%;
   margin-top: 5%;
   margin-right: 4%;
-  margin-bottom: 8%;
+  margin-bottom: 4%;
 }
 
 .img-cancel {
@@ -45,9 +45,24 @@
   background-image: none !important;
   border-color: transparent;
   border: none;
+  margin-right: 10%;
 }
 
 .todo-add-img {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
+}
+
+.todo-create {
+  float: right;
+}
+
+.td-div-form {
+  margin-bottom: 20px;
+  height: 70px;
+}
+
+.tdd-div-form {
+  margin-bottom: 20px;
+  height: auto;
 }

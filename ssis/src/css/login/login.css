@@ -10,40 +10,37 @@
   margin-bottom: 10%;
 }
 
-.in-login-Button {
-  display: inline;
-  color: black;
-  width: auto;
-  background-color: #99c0ff;
-}
-
 .lg-login-Button {
-  float: left;
-  font-size: 10px;
+  float: right;
+  font-size: 11px;
   width: auto;
   color: black;
   background-color: #99c0ff;
   border-color: #99c0ff;
-  border-radius: 3%;
+  border-radius: 8%;
 }
 
 .lg-register-Button {
-  float: right;
-  font-size: 10px;
+  float: left;
+  font-size: 11px;
   width: auto;
   color: black;
   background-color: #99c0ff;
   border-color: #99c0ff;
-  border-radius: 3%;
-  margin-left: 3%;
+  border-radius: 8%;
+  margin-right: 3%;
 }
 
 .lg-find-Button {
-  float: right;
-  font-size: 10px;
+  float: left;
+  font-size: 11px;
   width: auto;
   color: black;
   background-color: #99c0ff;
   border-color: #99c0ff;
-  border-radius: 3%;
+  border-radius: 8%;
+}
+
+.lg-input {
+  margin-bottom: 10px;
 }

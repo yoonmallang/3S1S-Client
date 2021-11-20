@@ -19,7 +19,7 @@
 }
 
 .idCheck-Button {
-  color: black;
+  color: rgb(48, 42, 42);
   background-color: #99c0ff;
   border-color: #99c0ff;
   float: right;
@@ -34,6 +34,12 @@
   padding: 0.375rem 0.75rem;
 }
 
-.div-form {
-  margin-bottom: 4%;
+.rg-div-form {
+  margin-bottom: 66px;
+  height: 20px;
+}
+
+.div-id-form {
+  margin-bottom: 66px;
+  height: 20px;
 }
