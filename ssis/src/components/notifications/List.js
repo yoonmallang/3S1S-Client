@@ -16,7 +16,7 @@ class List extends Component {
         try { 
             const res = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/notifications	", {
                 params: {
-                    invitee : localStorage.getItem('id')
+                    invitee : sessionStorage.getItem('id')
                 }
             });
             this.setState({ alarms: res.data.notifications });
@@ -30,7 +30,7 @@ class List extends Component {
         axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/notifications/response", {
             accept: 1,
             project : proj_id,
-            user: localStorage.getItem('id'),
+            user: sessionStorage.getItem('id'),
         }).then((res) => {
             alert(res.data.message)
             this.loadingAlarms();
@@ -51,7 +51,7 @@ class List extends Component {
         axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/notifications/response", {
             accept: 0,
             project : proj_id,
-            user: localStorage.getItem('id'),
+            user: sessionStorage.getItem('id'),
         }).then((res) => {  
             alert(res.data.message)
             this.loadingAlarms();

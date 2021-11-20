@@ -26,9 +26,9 @@ class Login extends Component {
             console.log(res.data);
             if (res.status === 200) {
                 document.location.href = "/project";
-                localStorage.setItem("isLogin", true)
-                localStorage.setItem("id", res.data.id)
-                localStorage.setItem("name", res.data.name)
+                sessionStorage.setItem("isLogin", true)
+                sessionStorage.setItem("id", res.data.id)
+                sessionStorage.setItem("name", res.data.name)
             }
             else if (res.status === 210) {
                 alert(res.data.message);
@@ -45,7 +45,7 @@ class Login extends Component {
     };
 
     componentDidMount() { 
-        localStorage.clear();
+        sessionStorage.clear();
     }
 
     render() {

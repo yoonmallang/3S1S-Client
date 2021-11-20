@@ -15,14 +15,14 @@ class Navibar extends Component {
     }
 
     checkLogin = () => {
-        if (localStorage.getItem('isLogin')) {
+        if (sessionStorage.getItem('isLogin')) {
             this.setState({isLogin: true});
-            this.setState({loginedName: localStorage.getItem("name")});
+            this.setState({loginedName: sessionStorage.getItem("name")});
         }
     }
 
     checkMiddleBar = () => {
-        if(localStorage.getItem('needMiddlebar')) {
+        if(sessionStorage.getItem('needMiddlebar')) {
             this.setState({needMiddleBar: true})
         }
     }
@@ -34,8 +34,8 @@ class Navibar extends Component {
     }
 
     logout() {
-        localStorage.removeItem("isLogin")
-        localStorage.removeItem("id")
+        sessionStorage.removeItem("isLogin")
+        sessionStorage.removeItem("id")
         console.log("로그아웃")
     }
     

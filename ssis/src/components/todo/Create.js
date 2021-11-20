@@ -9,7 +9,7 @@ class Create extends Component {
         this.state = {
             show : false,
             project: this.props.id.id,
-            writer : localStorage.getItem("id"),
+            writer : sessionStorage.getItem("id"),
             title: "",
             description: "",
             start_date: "",
