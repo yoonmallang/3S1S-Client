@@ -74,7 +74,7 @@ class List extends Component {
                             <img alt="" src="/img/alarm.png" className="img-alarm"/>
                         </Dropdown.Toggle>
                         <Dropdown.Menu className="nofi-menu">
-                            <Dropdown.Item className="nofi-navDrop">
+                            <Dropdown.Item style={{width: '350px', height: 'auto', fontSize:'13px'}}>
                                 초대알람이 없습니다.
                             </Dropdown.Item>
                         </Dropdown.Menu>
@@ -87,7 +87,7 @@ class List extends Component {
                 <div>
                     <Dropdown align="end" drop="down">
                         <Dropdown.Toggle className="nofi-dropButoon">
-                            <img alt="" src="/img/alarm.png" className="img-alarm"/>
+                            <img alt="" src="/img/alarm1.png" className="img-alarm"/>
                         </Dropdown.Toggle>
                         <Dropdown.Menu className="nofi-menu">
                         {this.state.alarms.map((item) => {

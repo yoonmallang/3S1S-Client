@@ -1,5 +1,7 @@
 .nofi-navDrop {
-  width: 350px;
+  width: 345px;
+  height: 100%;
+  margin-bottom: 19%;
 }
 
 .nofi-dropButoon {
@@ -29,12 +31,13 @@
   width: 65%;
   margin-right: 4%;
   font-size: 14px;
+  white-space: normal;
 }
 
 .nofi-button-area {
   float: left;
   width: 30%;
-  margin-top: 2%;
+  margin-top: 3%;
 }
 
 .nofi-accept-button {
@@ -58,5 +61,4 @@
 }
 
 .nofi-divider {
-  margin-top: 50px;
 }

@@ -14,6 +14,7 @@ class List extends Component {
             todos_1 : [],
             todos_2 : [],
             project_id : this.props.match.params.id,
+            progressValue : 0
         }
     }
 
@@ -53,6 +54,13 @@ class List extends Component {
         } catch (e) { 
             console.log(e); 
         }
+        
+        try {
+            const res = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${this.state.project_id}/progress_rate`);
+            this.setState({ progressValue : res.item})
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     componentDidMount() { 
@@ -73,7 +81,7 @@ class List extends Component {
                     <div style={{ width: '500px',margin: '0px auto'}}>
                     <p style={{ float: 'left', marginBottom:'0px'}}>진행률</p>
                     <p style={{ float: 'right', marginBottom:'0px'}}>5%</p>
-                    <progress value = '5' max="100" className="todo-progress"></progress>
+                    <progress value = {this.state.progressValue} max="100" className="todo-progress"></progress>
                     </div>
                 </div>
                 <div className = "todoList">
