@@ -71,7 +71,7 @@ class Navibar extends Component {
                                         </div>
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item href="/mypage/1">마이페이지</Dropdown.Item>
+                                        <Dropdown.Item href={`/mypage/${sessionStorage.getItem('id')}`}>마이페이지</Dropdown.Item>
                                         <Dropdown.Divider />
                                         <Dropdown.Item onClick={this.logout} href="/">로그아웃</Dropdown.Item>
                                     </Dropdown.Menu>

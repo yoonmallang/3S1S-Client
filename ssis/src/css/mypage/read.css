@@ -1,0 +1,39 @@
+.mypage-page {
+  margin-top: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  height: auto;
+  border: 1px black;
+}
+
+.mp-profile-img {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+.mp-text {
+  text-align: left;
+}
+
+.mp-update-Button {
+  float: left;
+  font-size: 8px;
+  width: auto;
+  color: black;
+  background-color: #99c0ff;
+  border-color: #99c0ff;
+  border-radius: 8%;
+  margin-right: 3%;
+}
+
+.mp-pwChange-Button {
+  float: right;
+  font-size: 8px;
+  width: auto;
+  color: black;
+  background-color: #99c0ff;
+  border-color: #99c0ff;
+  border-radius: 8%;
+}
