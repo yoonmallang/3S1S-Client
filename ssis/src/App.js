@@ -34,13 +34,13 @@ class  App extends Component {
               <Route exact path="/mypage/update/:id?" component={mypageUpdate}/>
               <Route exact path="/mypage/pwdUpdate/:id?" component={pwdUpdate}/>
               
-              <Route exact path="/calendar" component={calendarList}/>
+              <Route exact path="/project/:id?/calendar" component={calendarList}/>
               <Route exact path="/project" component={projectList}/>
               <Route exact path="/project/:id?" component={projectRead}/>
-              <Route exact path="/todo" component={todoList}/>
-              <Route exact path="/todo/:id?" component={todoRead}/>
-              <Route exact path="/document" component={documentList}/>
-              <Route exact path="/document/:id?" component={documentRead}/>
+              <Route exact path="/project/:id?/todo" component={todoList}/>
+              <Route exact path="/project/:id?/todo/:tid?" component={todoRead}/>
+              <Route exact path="/project/:id?/document" component={documentList}/>
+              <Route exact path="/project/:id?/document/:did?" component={documentRead}/>
             </Switch>
         </div>
       </BrowserRouter>

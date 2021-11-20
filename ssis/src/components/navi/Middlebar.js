@@ -3,33 +3,39 @@ import { Link } from 'react-router-dom';
 import '../../css/navi/Middlebar.css';
 
 class Middlebar extends Component {
-    render() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            projId : this.props.id.id
+        }
+    }
+    render() { 
         const menu = [
             {   
                 id : 1,
                 title: '프로젝트이름',
-                url: '/project/:id?',
+                url: `/project/${this.state.projId}`,
                 cName: 'menu-link'
             },
             
             {
                 id : 2,
                 title: '캘린더',
-                url: '/calendar',
+                url: `/project/${this.state.projId}/calendar/`,
                 cName: 'menu-link'
             },
         
             {
                 id : 3,
                 title: 'ToDo',
-                url: '/todo',
+                url: `/project/${this.state.projId}/todo`,
                 cName: 'menu-link'
             },
         
             {
                 id : 4,
                 title: '자료실',
-                url: '/document',
+                url: `/project/${this.state.projId}/document`,
                 cName: 'menu-link'
             }
         ]
