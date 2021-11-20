@@ -7,20 +7,20 @@
   width: 100px;
   height: 40px;
   margin-top: 5px;
-  margin-left: 3%;
+  margin-left: 72px;
   float: left;
 }
 
 .img-person {
   width: 30px;
   height: 30px;
-  margin-right: 15%;
+  margin-right: 10px;
 }
 
 .img-alarm {
-  width: 30px;
-  height: 30px;
-  margin-top: 3px;
+  width: 28px;
+  height: 28px;
+  margin-top: 5px;
 }
 
 .user-name-dropdown {
@@ -33,7 +33,7 @@
 
 .nav-profile {
   float: right;
-  margin-right: 3%;
+  margin-right: 72px;
 }
 
 .contanier {
