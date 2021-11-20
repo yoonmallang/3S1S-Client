@@ -3,30 +3,49 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import '../../css/project/create.css';
 
-class Create extends Component {
-    constructor() {
-        super();
+class Update extends Component {
+    constructor(props) {
+        super(props);
         this.state = {
             show : false,
-            creator : sessionStorage.getItem("id"),
+            creator : localStorage.getItem("id"),
             title: "",
             team: "",
             description: "",
             subject: "",
             purpose: "",
             img_url: "",
+            project:[],
         }
     }
 
+    loadingData = async () => { 
+        try { 
+            console.log(this.props.id.id)
+            const id = this.props.id.id;
+            const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${id}`);            
+            this.setState({project: response.data.project_content})
+            this.setState({title: this.state.project.title})
+            this.setState({team: this.state.project.team})
+            this.setState({description: this.state.project.description})
+            this.setState({subject: this.state.project.subject})
+            this.setState({purpose: this.state.project.purpose})
+            this.setState({img_url: this.state.project.img_url})
+        } catch (e) 
+        { console.log(e); }
+      };
+
+
     onClickSubmit = () => {
-        axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects", {
+        const id = this.props.id.id;
+        console.log(id);
+        axios.put(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${id}`, {
             title: this.state.title,
             team: this.state.team,
             description: this.state.description,
             subject: this.state.subject,
             purpose: this.state.purpose,
             img_url: this.state.img_url,
-            creator: this.state.creator,
         }).then((res) => {
             console.log(res.data);
             if (res.status === 201) {
@@ -55,10 +74,20 @@ class Create extends Component {
         this.setState({show: true});
     };
 
+    componentDidMount(){ //한번만 실행
+        const {loadingData} = this;
+        loadingData();
+        // console.log("진짜?")
+        // console.log(window.localStorage.getItem("id"))
+        // console.log(this.state.member)
+        // console.log("??????")
+        // console.log(this.state.project.title)
+    }
+
     render() {
         const show = this.state.show
 
-        const onChange = (e) => {
+        const onChange2 = (e) => {
           const img = e.target.files[0];
           const formData = new FormData();
           formData.append('file', img);
@@ -66,11 +95,11 @@ class Create extends Component {
 
         return (
             <div>
-                <button type="button" className="btm_add_pc" id="img_btn" variant="primary" onClick={this.handleShow}><img alt="" src="/img/plus.png" className="btm_image_pl" ></img></button>
+                <button type="button" className="P_btm" id="img_btn" onClick={this.handleShow}><img src="/img/pencil.png" className="P_btm_image" alt = ""></img></button>                
         
                 <Modal show={show} onHide={this.handleClose} className="modal">
                 <Modal.Header closeButton>
-                    <Modal.Title>프로젝트 생성</Modal.Title>
+                    <Modal.Title>프로젝트 정보 수정</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 <Form>
@@ -82,33 +111,33 @@ class Create extends Component {
                         <input type='file' 
                             accept='image/jpg,impge/png,image/jpeg,image/gif' 
                             name='profile_img' 
-                            onChange={onChange}>
+                            onChange={onChange2}>
                         </input>
                       </div>
                     </div>
                     <Form.Group className="div-form1_pc" controlId="formProject">
                         <Form.Label className="text">프로젝트 제목<span className="spanRed">*</span></Form.Label>
-                        <Form.Control className="dataInput-form_pc" placeholder="프로젝트 제목을 입력하세요." onChange={this.titleChange}/>
+                        <Form.Control className="dataInput-form_pc" onChange={this.titleChange} defaultValue={this.state.project.title} placeholder="프로젝트 제목을 입력하세요."/>
                     </Form.Group>
                 
                     <Form.Group className="div-form1_pc" controlId="formTeam">
                         <Form.Label className="text">팀명<span className="spanRed">*</span></Form.Label>
-                        <Form.Control className="dataInput-form_pc" placeholder="팀 이름을 입력하세요." onChange={this.teamChange}/>
+                        <Form.Control className="dataInput-form_pc" onChange={this.teamChange} defaultValue={this.state.project.team} placeholder="팀 이름을 입력하세요."/>
                     </Form.Group>
                     
                     <Form.Group className="div-form_pc" controlId="formGridPassword1">
                         <Form.Label className="text">프로젝트 개요<span className="spanRed">*</span></Form.Label>
-                        <Form.Control as="textarea" rows={3} placeholder="프로젝트 개요를 입력하세요." onChange={this.descriptionChange}/>
+                        <Form.Control as="textarea" rows={3} onChange={this.descriptionChange} defaultValue={this.state.project.description} placeholder="프로젝트 개요를 입력하세요."/>
                     </Form.Group>
                 
                     <Form.Group className="div-form_pc" controlId="formGridPassword1">
                         <Form.Label className="text">과목</Form.Label>
-                        <Form.Control className="dataInput-form_pc" placeholder="프로젝트 과목을 입력하세요." onChange={this.subjectChange}/>
+                        <Form.Control className="dataInput-form_pc" onChange={this.subjectChange} defaultValue={this.state.project.subject} placeholder="프로젝트 과목을 입력하세요."/>
                     </Form.Group>
 
                     <Form.Group className="div-form_pc" controlId="formGridPassword1">
                         <Form.Label className="text">목적</Form.Label>
-                        <Form.Control className="dataInput-form_pc" placeholder="프로젝트 목적을 입력하세요." onChange={this.purposeChange}/>
+                        <Form.Control className="dataInput-form_pc" onChange={this.purposeChange} defaultValue={this.state.project.purpose} placeholder="프로젝트 목적을 입력하세요."/>
                     </Form.Group>    
                 </Form>
                 
@@ -117,8 +146,8 @@ class Create extends Component {
                     <Button variant="secondary" onClick={this.handleClose}>
                         취소
                     </Button>
-                    <Button className="create-Button" type="submit" onClick={this.onClickSubmit}>
-                        생성
+                    <Button className="create-Button" type="submit" onClick={()=>{this.onClickSubmit()}}>
+                        수정
                     </Button>
                 </Modal.Footer>
                 </Modal>
@@ -127,4 +156,4 @@ class Create extends Component {
     }
 }
   
-export default Create;
+export default Update;

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import '../../css/project/read.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'; 
+import Update from "./Update.js"
+import Search from "./Search.js"
 import Middlebar from '../navi/Middlebar'
 
 class Read extends Component {
@@ -16,6 +18,7 @@ class Read extends Component {
           member:[],
           notification_p:[],
           notification_i:[],
+          leader: "",
         };
       }
 
@@ -42,50 +45,60 @@ class Read extends Component {
       loadingMember = async () => { 
         try { 
             const id = this.props.match.params;
-            
-            console.log(id) 
             const response = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/members", {
                 params:{
                     project : id.id,
                 }
-            });       
-            console.log("hi")  
-            console.log(id.id)   
-            this.setState({member: response.data.data})
+            });         
+            this.setState({member: response.data.members})
             console.log(this.state.member)
         } catch (e) 
         { console.log(e); }
       };
 
+      loadingNotification_p = async () => { 
+        try { 
+            const id = this.props.match.params;
+            console.log(id.id) 
+            const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${id.id}/indeadline`);
+            console.log(response)
+            this.setState({notification_p: response.data.todo_list})
+            console.log(this.state.member)
+        } catch (e) 
+        { console.log(e); }
+      };
 
+      loadingNotification_i = async () => { 
+        try { 
+            const id = this.props.match.params;
+            console.log(id.id) 
+            const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${id.id}/mytodos`, {
+                params:{
+                    user : window.localStorage.getItem("id"),
+                }
+            });
+            console.log(response)
+            this.setState({notification_i: response.data.todo_list})
+            console.log(this.state.member)
+        } catch (e) 
+        { console.log(e); }
+      };
     
     componentDidMount(){ //한번만 실행
-        const {loadingData, loadingMember} = this;
+        const {loadingData, loadingMember, loadingNotification_p, loadingNotification_i} = this;
         loadingData();
         loadingMember();
+        loadingNotification_p();
+        loadingNotification_i();
         console.log("진짜?")
+        console.log(window.localStorage.getItem("id"))
         console.log(this.state.member)
     }
 
     render() {
-        this.state.notification_p = [{
-            "name": "ProjectToDo1",
-            "Dday": "D-1"
-        },{
-            "name": "ProjectToDo2",
-            "Dday": "D-1"
-        },{
-            "name": "ProjectToDo3",
-            "Dday": "D-3"
-        },]
-
-        this.state.notification_i = [{
-            "name": "MyToDo1",
-            "Dday": "D-1"
-        },{
-            "name": "MyToDo2",
-            "Dday": "D-4"
-        },]
+        localStorage.setItem("description", this.state.project.description)
+        let description = localStorage.getItem("description")
+        localStorage.removeItem("description")
            
         let member_list = this.state.member && this.state.member.map(member =>{
             if(member.leader === 1)
@@ -110,20 +123,19 @@ class Read extends Component {
 
         let notification_list_p = this.state.notification_p && this.state.notification_p.map(notification =>{
             return <div className="MemberContribution">
-                    <span className = "ContributionSpan1">{notification.name}</span>
-                    <span className = "ContributionSpan2">{notification.Dday}</span>
+                    <span className = "ContributionSpan1">{notification.title}</span>
+                    <span className = "ContributionSpan2">{notification.d_day}</span>
             </div>
                 }   
             ); 
 
         let notification_list_i = this.state.notification_i && this.state.notification_i.map(notification =>{
             return <div className="MemberContribution">
-                    <span className = "ContributionSpan1">{notification.name}</span>
-                    <span className = "ContributionSpan2">{notification.Dday}</span>
+                    <span className = "ContributionSpan1">{notification.title}</span>
+                    <span className = "ContributionSpan2">{notification.d_day}</span>
             </div>
                 }   
             ); 
-
 
         return (
             <div className= "Outer_pr">
@@ -134,14 +146,20 @@ class Read extends Component {
                             <div className = "P_Title">
                                 {this.state.project.title}
                             </div>
-                            <button type="button" className="P_btm" id="img_btn"><img src="/img/pencil.png" className="P_btm_image" alt = ""></img></button>
+                            <Update id={this.props.match.params}/>
                             <div className = "P_ImgTeam">
                                 <img src = "/img/group.png" className = "P_Img" alt = "팀 사진"></img>
                                 <p className = "P_teamName">{this.state.project.team}</p>
                             </div>
                             <div className = "P_contentBox">
                                 <p className = "P_content"><b><big className="Big">프로젝트 개요</big></b></p>
-                                <p className = "P_content1">{this.state.project.description}</p>
+                                <p className = "P_content1">
+                                    {
+                                description.split("\n").map(line => {
+                                    return (<span>{line}<br/></span>)
+                                })
+                                }
+                                </p>
                             </div>
                             <div className = "P_contentBox1">
                                 <p className = "P_content"><b><big className="Big">과목</big></b></p>
@@ -154,6 +172,7 @@ class Read extends Component {
                         </div>
                         <div className = "TeamList_pr">
                             <p className = "P_contentName"><b><big className="Big">팀원 리스트</big></b></p>
+                            <Search/>
                             {member_list}
                         </div>
                     </div>
