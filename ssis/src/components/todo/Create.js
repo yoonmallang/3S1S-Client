@@ -4,11 +4,11 @@ import '../../css/todo/create.css';
 import axios from 'axios';
 
 class Create extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             show : false,
-            project: 4,
+            project: this.props.id.id,
             writer : localStorage.getItem("id"),
             title: "",
             description: "",
@@ -21,7 +21,7 @@ class Create extends Component {
 
     onClickSubmit = () => {
         axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/todos", {
-            project: 4,
+            project: this.state.project,
             writer : this.state.writer,
             title: this.state.title,
             description: this.state.description,
@@ -31,7 +31,7 @@ class Create extends Component {
         }).then((res) => {
             console.log(res.data);
             if (res.status === 201) {
-                document.location.href = "/todo";
+                document.location.href = `/project/${this.state.project}/todo`;
             }
             else if (res.status === 210) {
                 alert(res.data.message);

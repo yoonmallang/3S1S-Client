@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Navbar, Container, Nav, Dropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/navi/Navibar.css';
-import Middlebar from './Middlebar'
 import List from '../notifications/List.js'
 
 class Navibar extends Component {
@@ -42,10 +41,9 @@ class Navibar extends Component {
     
     render() {
         const isLogin = this.state.isLogin;
-        const needMiddleBar = this.state.needMiddleBar;
         let username;
         let profile;
-        let middelbar;
+
         if (isLogin) {
             username = this.state.loginedName;
             profile = "/img/blank-person.png";
@@ -53,10 +51,6 @@ class Navibar extends Component {
         else {
             username = "xxx";
             profile = "/img/blank-person.png";
-        }
-
-        if(needMiddleBar) {
-            middelbar = <Middlebar/>
         }
 
         if (isLogin) {
@@ -85,7 +79,6 @@ class Navibar extends Component {
                             </Nav>
                         </Container>
                     </Navbar>
-                    {middelbar}
               </div>
             );
         }
