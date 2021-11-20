@@ -58,25 +58,27 @@ class List extends Component {
         }
         
         let project_list = projects && projects.map(project =>
-        <button className = "ProjectBox_pl" id = {project.id} onClick={()=>clickProject(project.id)} key = {project.id}>
-            <div className = "Title_pl">
-                {project.title}
-            </div>
+        <div className = "ProjectBox_pl" id = {project.id}  key = {project.id}>
             <button type="button" className="btm_pl" id="img_btn" onClick={()=>confirmModal(project.id)}><img src="/img/cancel.png" alt ="" className="btm_image_pl" ></img></button>
-            <div className = "ImgTeam_pl">
-                <div className = "Image_pl">
-                    <img src = {project.img_url} className = "Img_pl" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/group.png"}}></img>
+            <button onClick={()=>clickProject(project.id)} className= "ProjectButton">
+                <div className = "Title_pl">
+                    {project.title}
                 </div>
-                <div className = "TeamBox_pl">
-                    <div className = "Team_pl">
-                        {project.team}
+                <div className = "ImgTeam_pl">
+                    <div className = "Image_pl">
+                        <img src = {project.img_url} className = "Img_pl" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/group.png"}}></img>
                     </div>
-                    <div className="Progress_pl">
-                        <progress value={project.progress_rate} max="100" className="ProgressBar_pl"></progress>
+                    <div className = "TeamBox_pl">
+                        <div className = "Team_pl">
+                            {project.team}
+                        </div>
+                        <div className="Progress_pl">
+                            <progress value={project.progress_rate} max="100" className="ProgressBar_pl"></progress>
+                        </div>
                     </div>
                 </div>
-            </div>  
-        </button>
+            </button>  
+        </div>
         ); 
 
         

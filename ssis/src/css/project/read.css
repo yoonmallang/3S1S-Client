@@ -104,10 +104,21 @@
 
 .P_btm {
   margin-top: 2%;
-  margin-right: 2%;
+  margin-right: 3%;
   float: right;
-  width: 1vw;
-  height: 1vw;
+  width: 17px;
+  height: 17px;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.P_btm2 {
+  margin-top: 4%;
+  margin-right: 5%;
+  float: right;
+  width: 25px;
+  height: 25px;
   padding: 0;
   border: none;
   background: none;
@@ -179,10 +190,16 @@
 
 .P_content1 {
   width: 330px;
-  height: 100px;
+  height: 90px;
   text-align: left;
   margin-left: 7%;
   margin-top: 2%;
+  overflow-x: hidden;
+}
+
+.P_content1::-webkit-scrollbar {
+  width: 10px;
+  background-color: none;
 }
 
 .P_content2 {

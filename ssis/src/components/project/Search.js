@@ -3,7 +3,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import '../../css/project/create.css';
 
-class Create extends Component {
+class Search extends Component {
     constructor() {
         super();
         this.state = {
@@ -19,14 +19,10 @@ class Create extends Component {
     }
 
     onClickSubmit = () => {
-        axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects", {
-            title: this.state.title,
-            team: this.state.team,
-            description: this.state.description,
-            subject: this.state.subject,
-            purpose: this.state.purpose,
-            img_url: this.state.img_url,
-            creator: this.state.creator,
+        axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/notifications", {
+            project: this.state.project,
+            invitee: this.state.invitee,
+            inviter: this.state.inviter,
         }).then((res) => {
             console.log(res.data);
             if (res.status === 201) {
@@ -40,12 +36,7 @@ class Create extends Component {
         })
     }
 
-    titleChange = (e) => {this.setState({title: e.target.value})};
-    teamChange = (e) => {this.setState({team: e.target.value})};
-    descriptionChange = (e) => {this.setState({description: e.target.value})};
-    subjectChange = (e) => {this.setState({subject: e.target.value})};
-    purposeChange = (e) => {this.setState({purpose: e.target.value})};
-    img_urlChange = (e) => {this.setState({img_url: e.target.value})};
+    userChange = (e) => {this.setState({user: e.target.value})};
 
     handleClose = () => {
         this.setState({show: false});
@@ -66,11 +57,11 @@ class Create extends Component {
 
         return (
             <div>
-                <button type="button" className="btm_add_pc" id="img_btn" variant="primary" onClick={this.handleShow}><img alt="" src="/img/plus.png" className="btm_image_pl" ></img></button>
-        
+                <button type="button" className="P_btm2" id="img_btn" onClick={this.handleShow}><img src="/img/plus2.png" className="P_btm_image" alt = ""></img></button>
+                            
                 <Modal show={show} onHide={this.handleClose} className="modal">
                 <Modal.Header closeButton>
-                    <Modal.Title>프로젝트 생성</Modal.Title>
+                    <Modal.Title>팀원 추가</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 <Form>
@@ -118,7 +109,7 @@ class Create extends Component {
                         취소
                     </Button>
                     <Button className="create-Button" type="submit" onClick={this.onClickSubmit}>
-                        생성
+                        추가
                     </Button>
                 </Modal.Footer>
                 </Modal>
@@ -127,4 +118,4 @@ class Create extends Component {
     }
 }
   
-export default Create;
+export default Search;
