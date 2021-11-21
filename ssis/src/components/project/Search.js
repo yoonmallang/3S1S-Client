@@ -9,12 +9,9 @@ class Search extends Component {
         this.state = {
             show : false,
             creator : localStorage.getItem("id"),
-            title: "",
-            team: "",
-            description: "",
-            subject: "",
-            purpose: "",
-            img_url: "",
+            search_name: "kds",
+            search_list:[],
+            selectedParticipants:[],
         }
     }
 
@@ -45,6 +42,49 @@ class Search extends Component {
     handleShow = () => {    
         this.setState({show: true});
     };
+
+    loadingParticipants = async () => { 
+        try { 
+            const res = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/user/search", {
+                params: {
+                    user: this.state.search_name,
+                }
+            });
+            console.log("팀원 초대")
+            let user = this.state.search_name
+            console.log(user)
+            console.log(res.data)
+
+            console.log(res.data.search_list)
+
+
+
+            this.setState({ search_list: res.data.user });
+            console.log(this.state.search_list)
+        } catch (e) { 
+            console.log(e); 
+        }
+    }
+
+    handleSelect = (e) => {
+        if (!this.state.seletedParticipants.includes(e.target.value)) {
+            this.setState({
+                seletedParticipants : [...this.state.seletedParticipants, e.target.value]
+            })
+        }
+    }
+
+    removeSelect = (id) => {
+        const newArr = this.state.seletedParticipants.filter(info => info !== id);
+        this.setState({
+            seletedParticipants : newArr
+        })
+    }
+
+    componentDidMount() { 
+        const { loadingParticipants } = this; 
+        loadingParticipants(); 
+    }
 
     render() {
         const show = this.state.show
@@ -92,15 +132,26 @@ class Search extends Component {
                         <Form.Control as="textarea" rows={3} placeholder="프로젝트 개요를 입력하세요." onChange={this.descriptionChange}/>
                     </Form.Group>
                 
-                    <Form.Group className="div-form_pc" controlId="formGridPassword1">
-                        <Form.Label className="text">과목</Form.Label>
-                        <Form.Control className="dataInput-form_pc" placeholder="프로젝트 과목을 입력하세요." onChange={this.subjectChange}/>
-                    </Form.Group>
-
-                    <Form.Group className="div-form_pc" controlId="formGridPassword1">
-                        <Form.Label className="text">목적</Form.Label>
-                        <Form.Control className="dataInput-form_pc" placeholder="프로젝트 목적을 입력하세요." onChange={this.purposeChange}/>
-                    </Form.Group>    
+                    <div>
+                        <Form.Select className="participant-form" onChange={this.handleSelect}>
+                            <option value="none" hidden>참여자를 선택하세요.</option>
+                            {this.state.search_list.map((item)=> {
+                                return (
+                                    <option key={item.id} value={item.user_id}>{item.user_id}</option>
+                                )
+                            })}
+                        </Form.Select>
+                        <div className="participant-form">
+                            {this.state.selectedParticipants.map((item)=> {
+                                return (
+                                    <div key={item}>
+                                        <span>{item}</span>
+                                        <button onClick={()=>this.removeSelect(item)} className="cancel-button"><img alt="" src="/img/cancel.png" className="img-cancel"/></button>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>  
                 </Form>
                 
                 </Modal.Body>

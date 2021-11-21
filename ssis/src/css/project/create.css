@@ -92,3 +92,11 @@
 .spanRed {
   color: red;
 }
+
+.participant-form {
+  float: left;
+  width: 45%;
+  margin-top: 5%;
+  margin-right: 4%;
+  margin-bottom: 4%;
+}
