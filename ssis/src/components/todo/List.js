@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Create from './Create.js'
 import Middlebar from '../navi/Middlebar'
+import Dnd from './Dnd'
 
 class List extends Component {
     constructor(props) {
@@ -57,7 +58,7 @@ class List extends Component {
         
         try {
             const res = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${this.state.project_id}/progress_rate`);
-            this.setState({ progressValue : res.item})
+            this.setState({ progressValue : res.data.item})
         } catch (e) {
             console.log(e);
         }
@@ -67,7 +68,6 @@ class List extends Component {
         const { loadingTodos } = this; 
         loadingTodos(); 
     }
-
     render() {
         const todos_0 = this.state.todos_0
         const todos_1 = this.state.todos_1
@@ -76,15 +76,18 @@ class List extends Component {
         return (
             <div className = "todo-page">
                 <Middlebar id={this.props.match.params}/>
-                <div style={{ width: '1100px', margin: '0px auto', marginTop:'30px'}}>
+                    <div style={{ width: '1100px', margin: '0px auto', marginTop:'30px'}}>
                     <Create id={this.props.match.params}/>
                     <div style={{ width: '500px',margin: '0px auto'}}>
                     <p style={{ float: 'left', marginBottom:'0px'}}>진행률</p>
                     <p style={{ float: 'right', marginBottom:'0px'}}>5%</p>
-                    <progress value = {this.state.progressValue} max="100" className="todo-progress"></progress>
+                    <progress value = '5' max="100" className="todo-progress"></progress>
                     </div>
                 </div>
-                <div className = "todoList">
+                <div>
+                <Dnd state0={todos_0} state1={todos_1} state2={todos_2}/>
+                </div>
+                {/* <div className = "todoList">
                     <div className = "state left">
                         <span className="p1">시작전</span>
                         {todos_0.map((item)=> {
@@ -157,10 +160,11 @@ class List extends Component {
                                 )
                             })}
                     </div>
-                </div>    
+                </div>     */}
             </div>
         );
     }
 }
+    
 
 export default List;
