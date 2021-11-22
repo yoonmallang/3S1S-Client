@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Create from './Create.js'
 import Middlebar from '../navi/Middlebar'
-import Dnd from './Dnd'
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { Card } from 'react-bootstrap';
 
 class List extends Component {
     constructor(props) {
@@ -14,7 +15,8 @@ class List extends Component {
             todos_1 : [],
             todos_2 : [],
             project_id : this.props.match.params.id,
-            progressValue : 0
+            progressValue : 0,
+            columns : []
         }
     }
 
@@ -61,7 +63,72 @@ class List extends Component {
         } catch (e) {
             console.log(e);
         }
+
+        this.setState({columns : {
+            "0": {
+              name: "시작2전",
+              items: this.state.todos_0,
+              state : 0
+            },
+            "1": {
+              name: "진행중",
+              items: this.state.todos_1,
+              state : 1
+            },
+            "2": {
+              name: "완료",
+              items: this.state.todos_2,
+              state : 2
+            }
+          }})
     };
+
+    onDragEnd = (result, columns) => {
+        if (!result.destination) return;
+        const { source, destination } = result;
+      
+        if (source.droppableId !== destination.droppableId) {
+          const sourceColumn = columns[source.droppableId];
+          const destColumn = columns[destination.droppableId];
+          const sourceItems = [...sourceColumn.items];
+          const destItems = [...destColumn.items];
+          const [removed] = sourceItems.splice(source.index, 1);
+    
+          axios.post('http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/todos/change',{
+            'todo' : [removed][0]['id'],
+            'state' : destColumn['state']
+          })
+    
+          destItems.splice(destination.index, 0, removed);
+          this.setState({
+            columns : {
+            ...columns,
+            [source.droppableId]: {
+              ...sourceColumn,
+              items: sourceItems
+            },
+            [destination.droppableId]: {
+              ...destColumn,
+              items: destItems
+            }
+            }
+        });
+        } 
+        else {
+          const column = columns[source.droppableId];
+          const copiedItems = [...column.items];
+          const [removed] = copiedItems.splice(source.index, 1);
+          copiedItems.splice(destination.index, 0, removed);
+          this.setState({
+            columns : {
+            ...columns,
+            [source.droppableId]: {
+              ...column,
+              items: copiedItems
+            }}
+          });
+        }
+      };
 
     componentDidMount() { 
         const { loadingTodos } = this; 
@@ -69,10 +136,9 @@ class List extends Component {
         
     }
     render() {
-        const todos_0 = this.state.todos_0
-        const todos_1 = this.state.todos_1
-        const todos_2 = this.state.todos_2
-        
+
+        const titleClassName = ['p1', 'p2', 'p3']
+
         return (
             <div className = "todo-page">
                 <Middlebar id={this.props.match.params}/>
@@ -84,9 +150,69 @@ class List extends Component {
                         <progress value = '5' max="100" className="todo-progress"></progress>
                     </div>
                 </div>
-                <div>
-                <Dnd state0={todos_0} state1={todos_1} state2={todos_2}/>
-                </div>
+                <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
+      <DragDropContext onDragEnd={result => this.onDragEnd(result, this.state.columns)}>
+        {Object.entries(this.state.columns).map(([columnId, column], index) => {
+          return (
+            <div  style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center"
+            }} key={columnId}>
+              <span className={titleClassName[index]}>{column.name}</span>
+              <div style={{ marginLeft : 70, marginRight :70, marginTop:30}}>
+                <Droppable droppableId={columnId} key={columnId}>
+                  {(provided, snapshot) => {
+                    return (
+                      <div style={{
+                        padding: 4,
+                        width: 280,
+                      }}{...provided.droppableProps} ref={provided.innerRef}> 
+                        {column.items.map((item, index) => {
+                          return (
+                            <Draggable key={item.id} draggableId={item.id} index={index}>
+                              {(provided, snapshot) => {
+                                return (
+                                  <Card ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}  
+                                  style={{
+                                    userSelect: "none",
+                                    padding: 2,
+                                    margin: "0 0 12px 0",
+                                    minHeight: "130px",  
+                                    ...provided.draggableProps.style
+                                  }}>
+                                    <Card.Body>
+                                        <div className ="one-line">
+                                            <Card.Title className = "todo-title">{item.title}</Card.Title>
+                                            <span className = "todo-dday">{item.d_day}</span>
+                                        </div>
+                                        <div className ="participants">
+                                            {
+                                                item.participants.map((member)=> {
+                                                    return (
+                                                        <Card.Text key={member} className ="participant">{member}</Card.Text>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                    </Card.Body>
+                                  </Card>
+                                );
+                              }}
+                            </Draggable>
+                          );
+                        })}
+                        {provided.placeholder}
+                      </div>
+                    );
+                  }}
+                </Droppable>
+              </div>
+            </div>
+          );
+        })}
+      </DragDropContext>
+    </div>
             </div>
         );
     }
