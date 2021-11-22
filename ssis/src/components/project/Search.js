@@ -9,17 +9,33 @@ class Search extends Component {
         this.state = {
             show : false,
             creator : localStorage.getItem("id"),
-            search_name: "kds",
+            project_id : this.props.match.params,
+            search_name: "",
             search_list:[],
+            member:[],
             selectedParticipants:[],
+            results:[],
         }
     }
 
+    loadingMember = async () => { 
+        try { 
+            const id = this.props.match.params;
+            const response = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/members", {
+                params:{
+                    project : id.id,
+                }
+            });         
+            this.setState({member: response.data.members})
+        } catch (e) 
+        { console.log(e); }
+      };
+
     onClickSubmit = () => {
         axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/notifications", {
-            project: this.state.project,
-            invitee: this.state.invitee,
-            inviter: this.state.inviter,
+            project: this.state.project_id,
+            invitee: this.state.selectedParticipants,
+            inviter: this.state.creator,
         }).then((res) => {
             console.log(res.data);
             if (res.status === 201) {
@@ -33,10 +49,9 @@ class Search extends Component {
         })
     }
 
-    userChange = (e) => {
-        this.setState({search_name: e.target.value})
-        const { loadingParticipants } = this; 
-        loadingParticipants(); 
+    userChange = async(e) => {
+        let a = await this.setState({search_name: e.target.value})
+        this.loadingParticipants();         
     };
 
     handleClose = () => {
@@ -54,15 +69,6 @@ class Search extends Component {
                     user: this.state.search_name,
                 }
             });
-            console.log("팀원 초대")
-            let user = this.state.search_name
-            console.log(user)
-            console.log(res.data)
-
-            console.log(res.data.search_list)
-
-
-
             this.setState({ search_list: res.data.search_list });
             console.log(this.state.search_list)
         } catch (e) { 
@@ -71,9 +77,9 @@ class Search extends Component {
     }
 
     handleSelect = (e) => {
-        if (!this.state.seletedParticipants.includes(e.target.value)) {
+        if (this.state.selectedParticipants && !this.state.selectedParticipants.includes(e.target.value)) {
             this.setState({
-                seletedParticipants : [...this.state.seletedParticipants, e.target.value]
+                selectedParticipants : [...this.state.selectedParticipants, e.target.value]
             })
         }
     }
@@ -85,9 +91,14 @@ class Search extends Component {
         })
     }
 
+    cancelSearch = () => {
+        this.setState({search_name : ""})
+    };
+
     componentDidMount() { 
-        const { loadingParticipants } = this; 
+        const { loadingParticipants, loadingMember } = this; 
         loadingParticipants(); 
+        loadingMember();
     }
 
     render() {
@@ -96,10 +107,10 @@ class Search extends Component {
       
       if (this.state.selectedParticipants.length!==0)
       {
-        select_list2 = this.state.selectedParticipants.map(item=> {
-        return <div key={item}>
-                <span>{item}</span>
-                <button onClick={()=>this.removeSelect(item)} className="cancel-button"><img alt="" src="/img/cancel.png" className="img-cancel"/></button>
+        select_list2 = this.state.selectedParticipants && this.state.selectedParticipants.map(item=> {
+        return <div key={item} className = "Searched_list_div">
+                <span className = "Searched_list_span">{item}</span>
+                <button onClick={()=>this.removeSelect(item)}  className="Searched_list_button"><img className = "Searched_list_img" alt="" src="/img/cancel.png"/></button>
             </div>
         }
         );
@@ -109,7 +120,24 @@ class Search extends Component {
         select_list2 = <div></div>
       }
 
-        return (
+      console.log("길이")
+      console.log(this.state.search_name.length)
+      console.log("선택리스트 길이")
+      console.log(select_list2)
+      console.log(this.select_list2)
+      console.log("배열")
+      console.log(this.state.seletedParticipants)
+      console.log(localStorage.getItem("id"))
+      
+//{`${this.state.search_name.length > 0 ? "visible" : "hidden" }`}
+/* <Form.Select className="participant-form_s" onChange={this.handleSelect}>
+{this.state.search_list.map((item)=> {
+    return (
+        <option className="SearchOption" key={item.id} value={item.id}>{item.id}</option>
+    )
+})} */
+//</Form.Select>
+    return (
             <div>
                 <button type="button" className="P_btm2" id="img_btn" onClick={this.handleShow}><img src="/img/plus2.png" className="P_btm_image" alt = ""></img></button>
                             
@@ -118,28 +146,31 @@ class Search extends Component {
                     <Modal.Title>팀원 추가</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <Form>
-                    <Form.Group className="div-form_ps" controlId="formProject">
+                    {/* <Form.Group className="div-form_ps" controlId="formProject">
                         <Form.Label className="text">팀원 초대<span className="spanRed">*</span></Form.Label>
                         <Form.Control className="dataInput-form_pc" placeholder="초대할 팀원의 아이디를 입력하세요." onChange={this.userChange}/>
-                    </Form.Group>
+                        <button onClick={() => this.cancelSearch()}> x </button>
+                    </Form.Group> */}
+                    <div className="div-form_ps_s">
+                        <input className="dataInput-form_pc_s" placeholder="초대할 팀원의 아이디를 입력하세요." onChange={this.userChange} value={this.state.search_name}/>
+                    </div>
 
-                
-                    <div>
-                        <Form.Select className="participant-form" onChange={this.handleSelect}>
-                            <option value="none" hidden>참여자를 선택하세요.</option>
-                            {this.state.search_list.map((item)=> {
-                                return (
-                                    <option key={item.id} value={item.id}>{item.id}</option>
-                                )
-                            })}
-                        </Form.Select>
-                        <div className="participant-form">
-                            {select_list2}
-                        </div>
-                    </div>  
-                </Form>
-                
+                    <div className="participant-form_s">
+                        {console.log("enter")}
+                        {console.log(this.state.search_name)}
+                        {console.log(this.state.search_list)}
+                        {this.state.search_list.map((item)=> {
+                            return (
+                                <button className="SearchOption" key={item.id} value={item.id} onClick={this.handleSelect}>{item.id}</button>
+                            )
+                        })}
+                    </div>
+  
+                    <div className="participantList-form">
+                        <p className="text_s"><b>초대할 팀원 리스트</b></p>
+                        {select_list2}
+                    </div>
+   
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={this.handleClose}>

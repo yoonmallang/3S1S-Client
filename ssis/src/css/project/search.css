@@ -1,6 +1,9 @@
-.div-form_ps {
-  width: 95%;
+.div-form_ps_s {
+  width: 100%;
+  height: 25px;
   margin-top: 1%;
+  margin-bottom: 7%;
+  padding: 0.375rem 0.75rem;
 }
 
 .div-form1_pc {
@@ -60,10 +63,9 @@
   vertical-align: middle;
 }
 
-.dataInput-form_pc {
-  float: left;
+.dataInput-form_pc_s {
   width: 100%;
-  padding: 0.375rem 0.75rem;
+  height: 33px;
 }
 
 .subPurInput-form_pc {
@@ -98,10 +100,69 @@
   color: red;
 }
 
-.participant-form {
+.participant-form_s {
+  width: 100%;
+  padding-top: 0px;
+  padding-bottom: 0.375rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  overflow: hidden;
+  height: auto;
+}
+
+.participantList-form {
+  width: 100%;
+  overflow: hidden;
+  height: auto;
+}
+
+.SearchOption {
+  border: 1px solid #99c0ff;
+  height: 27px;
+  width: 100%;
+  background-color: none;
+  background: transparent;
+  outline: none;
+}
+
+.text_s {
+  width: 100%;
   float: left;
-  width: 45%;
-  margin-top: 5%;
-  margin-right: 4%;
-  margin-bottom: 4%;
+  text-align: left;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+}
+
+.Searched_list_div {
+  width: 44%;
+  height: 27px;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  margin-top: 1%;
+  float: left;
+  border: 1px solid #6c757d;
+  border-radius: 7px;
+}
+
+.Searched_list_span {
+  width: 87%;
+  float: left;
+  margin-left: 3%;
+}
+
+.Searched_list_button {
+  width: 10%;
+  height: 25px;
+  padding: 0px;
+  float: left;
+  margin-bottom: 1%;
+  background-color: none;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.Searched_list_img {
+  width: 9px;
+  height: 9px;
 }
