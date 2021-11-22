@@ -175,7 +175,7 @@ class Read extends Component {
                             </div>
                             <Update id={this.props.match.params}/>
                             <div className = "P_ImgTeam">
-                                <img src = "/img/group.png" className = "P_Img" alt = "팀 사진"></img>
+                                <img src = {this.state.project.img_url} className = "P_Img" alt = "팀 사진" onError={(e)=>{e.target.onerror = null; e.target.src="/img/teamwork.png"}}></img>
                                 <p className = "P_teamName">{this.state.project.team}</p>
                             </div>
                             <div className = "P_contentBox">

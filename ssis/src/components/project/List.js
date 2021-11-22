@@ -66,7 +66,7 @@ class List extends Component {
                 </div>
                 <div className = "ImgTeam_pl">
                     <div className = "Image_pl">
-                        <img src = {project.img_url} className = "Img_pl" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/group.png"}}></img>
+                        <img src = {project.img_url} className = "Img_pl" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/teamwork.png"}}></img>
                     </div>
                     <div className = "TeamBox_pl">
                         <div className = "Team_pl">
