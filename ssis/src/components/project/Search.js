@@ -9,7 +9,7 @@ class Search extends Component {
         this.state = {
             show : false,
             creator : localStorage.getItem("id"),
-            project_id : this.props.match.params,
+            project_id : "",
             search_name: "",
             search_list:[],
             member:[],

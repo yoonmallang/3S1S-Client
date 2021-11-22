@@ -51,7 +51,7 @@
 
 .TeamList_pr {
   width: 100%;
-  height: 29%;
+  height: 28.8%;
   border: 1px solid #737880;
   margin-bottom: 1%;
 }
@@ -72,7 +72,7 @@
 
 .Memo_pr {
   width: 100%;
-  height: 44%;
+  height: 44.5%;
   border: 1px solid #737880;
   background-color: #e5efff;
   margin-bottom: 1%;
@@ -110,6 +110,12 @@
   border: none;
   background: transparent;
   outline: none;
+  overflow-x: hidden;
+}
+
+.MemoPage::-webkit-scrollbar {
+  width: 5px;
+  background-color: none;
 }
 
 .Alarm {
@@ -232,7 +238,7 @@
 }
 
 .P_content1::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
   background-color: none;
 }
 
@@ -346,4 +352,48 @@
   background-color: red;
   border: 1px solid #dbdfe6;
   border-radius: 30px;
+}
+
+.TeamScroll {
+  width: 100%;
+  margin-top: 55px;
+  height: 162px;
+}
+
+.TeamScroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: none;
+}
+
+.ContributionScroll {
+  width: 100%;
+  margin-top: 55px;
+  height: 240px;
+}
+
+.ContributionScroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: none;
+}
+
+.AlarmScroll {
+  width: 100%;
+  margin-top: 55px;
+  height: 275px;
+}
+
+.AlarmScroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: none;
+}
+
+.MyToDoScroll {
+  width: 100%;
+  margin-top: 55px;
+  height: 350px;
+}
+
+.MyToDoScroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: none;
 }

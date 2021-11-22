@@ -200,7 +200,9 @@ class Read extends Component {
                         <div className = "TeamList_pr">
                             <p className = "P_contentName"><b><big className="Big">팀원 리스트</big></b></p>
                             <Search/>
-                            {member_list}
+                            <div className = "TeamScroll">
+                                {member_list}
+                            </div>
                         </div>
                     </div>
                     <div className = "CenterContent_pr">
@@ -211,7 +213,9 @@ class Read extends Component {
                         </div>
                         <div className = "Contribution_pr">
                             <p className = "P_contentName"><b><big className="Big">멤버별 기여</big></b></p>
-                            {contribution_list}
+                            <div className = "ContributionScroll">
+                                {contribution_list}
+                            </div>
                         </div>
                         <div className = "Memo_pr">
                             <p className = "P_contentName"><b><big className="Big">프로젝트 메모장</big></b></p>
@@ -223,12 +227,16 @@ class Read extends Component {
                         <div className = "Alarm">
                             <p className = "P_contentName"><b><big className="Big">프로젝트 알림</big></b></p>
                             <p className = "AlertNum"><b><big>{this.state.notification_p.length}</big></b></p>
-                            {notification_list_p}
+                            <div className="AlarmScroll">
+                                {notification_list_p}
+                            </div>
                         </div>
                         <div className = "MyToDo">
                             <p className = "P_contentName"><b><big className="Big">내 할 일 보기</big></b></p>
                             <p className = "AlertNum"><b><big>{this.state.notification_i.length}</big></b></p>
-                            {notification_list_i}
+                            <div className="MyToDoScroll">
+                                {notification_list_i}
+                            </div>
                         </div>
                     </div>
                 </div>
