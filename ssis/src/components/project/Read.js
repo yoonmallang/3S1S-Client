@@ -19,13 +19,12 @@ class Read extends Component {
           notification_p:[],
           notification_i:[],
           leader: "",
+          memo: "",
         };
       }
 
       openModal = () => {
         this.setState({ setShow: true , show: true});
-        console.log(this.setShow);
-        console.log(this.show);
         
       };
     
@@ -51,7 +50,6 @@ class Read extends Component {
                 }
             });         
             this.setState({member: response.data.members})
-            console.log(this.state.member)
         } catch (e) 
         { console.log(e); }
       };
@@ -59,11 +57,8 @@ class Read extends Component {
       loadingNotification_p = async () => { 
         try { 
             const id = this.props.match.params;
-            console.log(id.id) 
             const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${id.id}/indeadline`);
-            console.log(response)
             this.setState({notification_p: response.data.todo_list})
-            console.log(this.state.member)
         } catch (e) 
         { console.log(e); }
       };
@@ -71,34 +66,66 @@ class Read extends Component {
       loadingNotification_i = async () => { 
         try { 
             const id = this.props.match.params;
-            console.log(id.id) 
             const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${id.id}/mytodos`, {
                 params:{
                     user : window.localStorage.getItem("id"),
                 }
             });
-            console.log(response)
             this.setState({notification_i: response.data.todo_list})
-            console.log(this.state.member)
+        } catch (e) 
+        { console.log(e); }
+      };
+
+      memoChange = (e) => {this.setState({memo: e.target.value})};
+
+      onClickMemoSubmit = () => {
+        const id = this.props.match.params.id;
+        console.log("memo")
+        console.log(`${id}`)
+        axios.put(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${id}`, {
+            memo: this.state.memo,
+        }).then((res) => {
+            console.log(res.data);
+            if (res.status === 201) {
+                document.location.href = "/project";
+            }
+            else if (res.status === 210) {
+                alert(res.data.message);
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+      }
+
+      getmemo = async () => { 
+        try { 
+            const id = this.props.match.params.id;
+            const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${id}/memo`);         
+            this.setState({memo: response.data.item})
+            console.log("memo내용");
+            console.log(response.data);
+            console.log(this.state.memo);
         } catch (e) 
         { console.log(e); }
       };
     
     componentDidMount(){ //한번만 실행
-        const {loadingData, loadingMember, loadingNotification_p, loadingNotification_i} = this;
+        const {loadingData, loadingMember, loadingNotification_p, loadingNotification_i, getmemo} = this;
         loadingData();
         loadingMember();
         loadingNotification_p();
         loadingNotification_i();
-        console.log("진짜?")
+        getmemo();
         console.log(window.localStorage.getItem("id"))
-        console.log(this.state.member)
     }
 
     render() {
         localStorage.setItem("description", this.state.project.description)
         let description = localStorage.getItem("description")
         localStorage.removeItem("description")
+
+        console.log("ssis")
+        console.log(this.state.memo)
            
         let member_list = this.state.member && this.state.member.map(member =>{
             if(member.leader === 1)
@@ -187,7 +214,9 @@ class Read extends Component {
                             {contribution_list}
                         </div>
                         <div className = "Memo_pr">
-                            
+                            <p className = "P_contentName"><b><big className="Big">프로젝트 메모장</big></b></p>
+                            <button className="Memobutton" id="img_btn" onClick={this.onClickMemoSubmit}><img src="/img/check.png" className="P_btm_image_memo" alt = ""></img></button>
+                            <textarea type = "text" className = "MemoPage" defaultValue={this.state.memo} onChange={this.memoChange} />
                         </div>
                     </div>
                     <div className = "RightContent_pr">

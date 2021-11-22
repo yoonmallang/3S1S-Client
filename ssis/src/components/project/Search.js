@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
-import '../../css/project/create.css';
+import '../../css/project/search.css';
 
 class Search extends Component {
     constructor() {
@@ -33,7 +33,11 @@ class Search extends Component {
         })
     }
 
-    userChange = (e) => {this.setState({user: e.target.value})};
+    userChange = (e) => {
+        this.setState({search_name: e.target.value})
+        const { loadingParticipants } = this; 
+        loadingParticipants(); 
+    };
 
     handleClose = () => {
         this.setState({show: false});
@@ -59,7 +63,7 @@ class Search extends Component {
 
 
 
-            this.setState({ search_list: res.data.user });
+            this.setState({ search_list: res.data.search_list });
             console.log(this.state.search_list)
         } catch (e) { 
             console.log(e); 
@@ -88,11 +92,21 @@ class Search extends Component {
 
     render() {
         const show = this.state.show
-
-        const onChange = (e) => {
-          const img = e.target.files[0];
-          const formData = new FormData();
-          formData.append('file', img);
+        let select_list2 = ""
+      
+      if (this.state.selectedParticipants.length!==0)
+      {
+        select_list2 = this.state.selectedParticipants.map(item=> {
+        return <div key={item}>
+                <span>{item}</span>
+                <button onClick={()=>this.removeSelect(item)} className="cancel-button"><img alt="" src="/img/cancel.png" className="img-cancel"/></button>
+            </div>
+        }
+        );
+      }
+      else
+      {
+        select_list2 = <div></div>
       }
 
         return (
@@ -105,51 +119,23 @@ class Search extends Component {
                 </Modal.Header>
                 <Modal.Body>
                 <Form>
-                    <div className = "ImageBox_pc">
-                      <div className = "Image_pc">
-                          <img src = "/img/group.png" className = "Img_pc" id= "image" alt = "/img/group.png"></img>
-                      </div>
-                      <div>
-                        <input type='file' 
-                            accept='image/jpg,impge/png,image/jpeg,image/gif' 
-                            name='profile_img' 
-                            onChange={onChange}>
-                        </input>
-                      </div>
-                    </div>
-                    <Form.Group className="div-form1_pc" controlId="formProject">
-                        <Form.Label className="text">프로젝트 제목<span className="spanRed">*</span></Form.Label>
-                        <Form.Control className="dataInput-form_pc" placeholder="프로젝트 제목을 입력하세요." onChange={this.titleChange}/>
+                    <Form.Group className="div-form_ps" controlId="formProject">
+                        <Form.Label className="text">팀원 초대<span className="spanRed">*</span></Form.Label>
+                        <Form.Control className="dataInput-form_pc" placeholder="초대할 팀원의 아이디를 입력하세요." onChange={this.userChange}/>
                     </Form.Group>
-                
-                    <Form.Group className="div-form1_pc" controlId="formTeam">
-                        <Form.Label className="text">팀명<span className="spanRed">*</span></Form.Label>
-                        <Form.Control className="dataInput-form_pc" placeholder="팀 이름을 입력하세요." onChange={this.teamChange}/>
-                    </Form.Group>
-                    
-                    <Form.Group className="div-form_pc" controlId="formGridPassword1">
-                        <Form.Label className="text">프로젝트 개요<span className="spanRed">*</span></Form.Label>
-                        <Form.Control as="textarea" rows={3} placeholder="프로젝트 개요를 입력하세요." onChange={this.descriptionChange}/>
-                    </Form.Group>
+
                 
                     <div>
                         <Form.Select className="participant-form" onChange={this.handleSelect}>
                             <option value="none" hidden>참여자를 선택하세요.</option>
                             {this.state.search_list.map((item)=> {
                                 return (
-                                    <option key={item.id} value={item.user_id}>{item.user_id}</option>
+                                    <option key={item.id} value={item.id}>{item.id}</option>
                                 )
                             })}
                         </Form.Select>
                         <div className="participant-form">
-                            {this.state.selectedParticipants.map((item)=> {
-                                return (
-                                    <div key={item}>
-                                        <span>{item}</span>
-                                        <button onClick={()=>this.removeSelect(item)} className="cancel-button"><img alt="" src="/img/cancel.png" className="img-cancel"/></button>
-                                    </div>
-                                )
-                            })}
+                            {select_list2}
                         </div>
                     </div>  
                 </Form>
