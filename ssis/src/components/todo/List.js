@@ -56,17 +56,10 @@ class List extends Component {
         } catch (e) { 
             console.log(e); 
         }
-        
-        try {
-            const res = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${this.state.project_id}/progress_rate`);
-            this.setState({ progressValue : res.data.item})
-        } catch (e) {
-            console.log(e);
-        }
 
         this.setState({columns : {
             "0": {
-              name: "시작2전",
+              name: "시작전",
               items: this.state.todos_0,
               state : 0
             },
@@ -83,6 +76,15 @@ class List extends Component {
           }})
     };
 
+    loadingProgress = async () => { 
+        try {
+            const res = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${this.state.project_id}/progress_rate`);
+            this.setState({ progressValue : res.data.item})
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     onDragEnd = (result, columns) => {
         if (!result.destination) return;
         const { source, destination } = result;
@@ -98,7 +100,8 @@ class List extends Component {
             'todo' : [removed][0]['id'],
             'state' : destColumn['state']
           })
-    
+          
+          this.loadingProgress()
           destItems.splice(destination.index, 0, removed);
           this.setState({
             columns : {
@@ -131,13 +134,14 @@ class List extends Component {
       };
 
     componentDidMount() { 
-        const { loadingTodos } = this; 
+        const { loadingTodos, loadingProgress } = this; 
         loadingTodos(); 
-        
+        loadingProgress();
     }
-    render() {
 
+    render() {
         const titleClassName = ['p1', 'p2', 'p3']
+        let pgValues = this.state.progressValue
 
         return (
             <div className = "todo-page">
@@ -146,8 +150,8 @@ class List extends Component {
                         <Create id={this.props.match.params}/>
                         <div style={{ width: '500px',margin: '0px auto'}}>
                         <p style={{ float: 'left', marginBottom:'0px'}}>진행률</p>
-                        <p style={{ float: 'right', marginBottom:'0px'}}>5%</p>
-                        <progress value = '5' max="100" className="todo-progress"></progress>
+                        <p style={{ float: 'right', marginBottom:'0px'}}>{pgValues}%</p>
+                        <progress value = {pgValues} max="100" className="todo-progress"></progress>
                     </div>
                 </div>
                 <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
@@ -167,6 +171,7 @@ class List extends Component {
                       <div style={{
                         padding: 4,
                         width: 280,
+                        minHeight:'300px'
                       }}{...provided.droppableProps} ref={provided.innerRef}> 
                         {column.items.map((item, index) => {
                           return (
