@@ -147,6 +147,7 @@
 
 .Searched_list_span {
   width: 87%;
+  height: 25px;
   float: left;
   margin-left: 3%;
 }
@@ -166,4 +167,5 @@
 .Searched_list_img {
   width: 9px;
   height: 9px;
+  margin-bottom: 1%;
 }

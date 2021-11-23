@@ -85,6 +85,7 @@ class List extends Component {
         return (
             <div className = "Project_pl">
                 <div className = "ProjectContent_pl">
+                    <p className = "P_contentName_Title"><b><big className="Big">내 프로젝트</big></b></p>       
                     {project_list}   
                     <div className = "AddProject_pl">
                     <Create/>

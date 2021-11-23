@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import Middlebar from '../navi/Middlebar'
+import '../../css/calendar/list.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios'; 
 
 class List extends Component {
     render() {
         return (
-        <div>
+        <div className="Outer_cl">
             <Middlebar id={this.props.match.params}/>
-            <p>
-                calender list
-            </p>
+            <div className = "Calendar_cl">
+                <div className="LeftContent_cl">
+                </div>
+                <div className="RightContent_cl">
+                </div>
+            </div>
         </div>
         );
     }

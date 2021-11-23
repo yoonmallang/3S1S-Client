@@ -12,29 +12,22 @@ class Search extends Component {
             project_id : "",
             search_name: "",
             search_list:[],
+            check_name:"",
+            validity:[],
             member:[],
             selectedParticipants:[],
             results:[],
         }
     }
 
-    loadingMember = async () => { 
-        try { 
-            const id = this.props.match.params;
-            const response = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/members", {
-                params:{
-                    project : id.id,
-                }
-            });         
-            this.setState({member: response.data.members})
-        } catch (e) 
-        { console.log(e); }
-      };
-
-    onClickSubmit = () => {
+    onClickSubmit = async () => {
+        console.log("추가")
+        console.log(this.props.p_id.id)
+        console.log(this.state.selectedParticipants)
+        console.log(this.state.creator)
         axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/notifications", {
-            project: this.state.project_id,
-            invitee: this.state.selectedParticipants,
+            project: this.props.p_id.id,
+            invitees: this.state.selectedParticipants,
             inviter: this.state.creator,
         }).then((res) => {
             console.log(res.data);
@@ -44,6 +37,7 @@ class Search extends Component {
             else if (res.status === 210) {
                 alert(res.data.message);
             }
+            this.handleClose()
         }).catch((err) => {
             console.log(err);
         })
@@ -56,6 +50,9 @@ class Search extends Component {
 
     handleClose = () => {
         this.setState({show: false});
+        this.setState({selectedParticipants: []});
+        this.setState({search_name: ""});
+        this.setState({search_list: []});
     };
 
     handleShow = () => {    
@@ -64,30 +61,63 @@ class Search extends Component {
 
     loadingParticipants = async () => { 
         try { 
-            const res = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/user/search", {
+            const res = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/users/search", {
                 params: {
                     user: this.state.search_name,
                 }
             });
             this.setState({ search_list: res.data.search_list });
-            console.log(this.state.search_list)
         } catch (e) { 
             console.log(e); 
         }
     }
 
-    handleSelect = (e) => {
-        if (this.state.selectedParticipants && !this.state.selectedParticipants.includes(e.target.value)) {
-            this.setState({
-                selectedParticipants : [...this.state.selectedParticipants, e.target.value]
-            })
+    checkValidity = async () => { 
+        try { 
+            const id = this.props.p_id.id;
+            
+            const res = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/members/validcheck", {
+                params: {
+                    project: id, 
+                    user: this.state.check_name,
+                }
+            });
+            this.setState({ validity: res.data });
+        } catch (e) { 
+            console.log(e); 
         }
     }
 
-    removeSelect = (id) => {
-        const newArr = this.state.seletedParticipants.filter(info => info !== id);
+    handleSelect = async(e) => {
+        let b = await this.setState({ check_name: e.target.value });
+        let c = await this.checkValidity();
+        if (this.state.validity.is_valid === true)
+        {
+            if (this.state.selectedParticipants && this.state.selectedParticipants.includes(e.target.value)){
+                window.alert("이미 초대할 팀원 리스트에 존재합니다.");
+            }
+            else if (this.state.selectedParticipants && !this.state.selectedParticipants.includes(e.target.value)){
+                this.setState({
+                    selectedParticipants : [...this.state.selectedParticipants, e.target.value]
+                })
+            }
+        }
+        else
+        {
+            if (this.state.selectedParticipants && this.state.selectedParticipants.includes(e.target.value)){
+                window.alert("이미 초대할 팀원 리스트에 존재합니다.");
+            }
+            else{
+            console.log("출력 결과")
+            window.alert(this.state.validity.message)
+            }
+        }
+    }
+
+    removeSelect = async (id) => {
+        const newArr = await this.state.selectedParticipants.filter(info => info !== id);
         this.setState({
-            seletedParticipants : newArr
+            selectedParticipants : newArr
         })
     }
 
@@ -96,9 +126,8 @@ class Search extends Component {
     };
 
     componentDidMount() { 
-        const { loadingParticipants, loadingMember } = this; 
+        const { loadingParticipants } = this; 
         loadingParticipants(); 
-        loadingMember();
     }
 
     render() {
@@ -119,15 +148,6 @@ class Search extends Component {
       {
         select_list2 = <div></div>
       }
-
-      console.log("길이")
-      console.log(this.state.search_name.length)
-      console.log("선택리스트 길이")
-      console.log(select_list2)
-      console.log(this.select_list2)
-      console.log("배열")
-      console.log(this.state.seletedParticipants)
-      console.log(localStorage.getItem("id"))
       
 //{`${this.state.search_name.length > 0 ? "visible" : "hidden" }`}
 /* <Form.Select className="participant-form_s" onChange={this.handleSelect}>
@@ -156,9 +176,6 @@ class Search extends Component {
                     </div>
 
                     <div className="participant-form_s">
-                        {console.log("enter")}
-                        {console.log(this.state.search_name)}
-                        {console.log(this.state.search_list)}
                         {this.state.search_list.map((item)=> {
                             return (
                                 <button className="SearchOption" key={item.id} value={item.id} onClick={this.handleSelect}>{item.id}</button>

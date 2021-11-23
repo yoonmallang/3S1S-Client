@@ -13,7 +13,7 @@ class Read extends Component {
           isModalOpen: false,
           show: false,
           setShow: false,
-          projectID: "",
+          projectID: this.props.match.params,
           project:[],
           member:[],
           notification_p:[],
@@ -199,7 +199,7 @@ class Read extends Component {
                         </div>
                         <div className = "TeamList_pr">
                             <p className = "P_contentName"><b><big className="Big">팀원 리스트</big></b></p>
-                            <Search/>
+                            <Search p_id={this.state.projectID}/>
                             <div className = "TeamScroll">
                                 {member_list}
                             </div>
