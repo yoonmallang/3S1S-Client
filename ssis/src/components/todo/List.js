@@ -3,6 +3,7 @@ import '../../css/todo/list.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Create from './Create.js'
+import Read from './Read.js'
 import Middlebar from '../navi/Middlebar'
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Card } from 'react-bootstrap';
@@ -16,8 +17,10 @@ class List extends Component {
             todos_2 : [],
             project_id : this.props.match.params.id,
             progressValue : 0,
-            columns : []
+            columns : [],
+            showDetail : false
         }
+        this.showDetail= this.showDetail.bind(this)
     }
 
     loadingTodos = async () => { 
@@ -85,6 +88,12 @@ class List extends Component {
         }
     }
 
+    showDetail() {
+      this.setState({
+          showDetail: true,
+      });
+    }
+
     onDragEnd = (result, columns) => {
         if (!result.destination) return;
         const { source, destination } = result;
@@ -142,7 +151,7 @@ class List extends Component {
     render() {
         const titleClassName = ['p1', 'p2', 'p3']
         let pgValues = this.state.progressValue
-
+        console.log(this.state.showDetail)
         return (
             <div className = "todo-page">
                 <Middlebar id={this.props.match.params}/>
@@ -185,7 +194,8 @@ class List extends Component {
                                     margin: "0 0 12px 0",
                                     minHeight: "130px",  
                                     ...provided.draggableProps.style
-                                  }}>
+                                  }}
+                                  onClick={this.showDetail}>
                                     <Card.Body>
                                         <div className ="one-line">
                                             <Card.Title className = "todo-title">{item.title}</Card.Title>
@@ -217,8 +227,8 @@ class List extends Component {
           );
         })}
       </DragDropContext>
+    </div>  
     </div>
-            </div>
         );
     }
 }
