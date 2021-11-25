@@ -72,6 +72,13 @@ class List extends Component {
                 />
                 </div>
                 <div className="RightContent_cl">
+                  <div className = "RightButton_cl">
+                    <span className = "C_content"><b><big><big className="Big">일정 목록</big></big></b></span>
+                    <button type="button" className="C_btm" id="img_btn" onClick={this.handleShow}><img src="/img/plus_black.png" className="C_btm_image" alt = ""></img></button>
+                  </div>
+                  <div className="CalendarList">
+                    
+                  </div>
                 </div>
             </div>
         </div>
