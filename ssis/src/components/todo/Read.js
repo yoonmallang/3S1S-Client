@@ -45,7 +45,7 @@ class Read extends Component {
                             <br/>
                             {this.state.todoDetail.participants.map((item)=> {
                                     return (
-                                        <span className="td-Info-participants" key={item}>{item}</span>
+                                        <span className="td-Info-participants" key={item.name}>{item.name}</span>
                                     )
                                 })}
                         </div>
