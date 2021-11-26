@@ -27,6 +27,7 @@ class List extends Component {
       try { 
         let a = await this.setState({projectID: this.props.match.params.id})
           console.log("뭐지")
+          console.log(this.props.match.params.id)
           console.log(this.state.projectID)
           const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/schedules`,{
             params:{
@@ -37,6 +38,27 @@ class List extends Component {
           this.setState({events: response.data.schedule_list})
       } catch (e) 
       { console.log(e); }
+    };
+
+    confirmModal(id) {
+      if (window.confirm("프로젝트를 삭제하시겠습니까?")) {
+        this.deleteProject(id);
+      } else {
+        console.log("취소. 변화 없음");
+      }
+    }
+
+    deleteProject(id) {
+      console.log('You clicked delete.');
+      try { 
+          axios.delete("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/schedules/" + id);
+          window.location.replace(`/project/${this.state.projectID}/calendar`)
+      } catch (e) 
+      { console.log(e); }
+  }
+
+    closeInfo = () => {
+      this.setState({flag: [0]})
     };
 
     componentDidMount() {
@@ -94,7 +116,11 @@ class List extends Component {
                     <span className="EventInfoTitle">종료 일자</span>
                     <span className="EventInfoContent">{Moment(event.end).format('YYYY/MM/D')}</span>
                     <span className="EventInfoTitle2">내용</span>
-                    <span className="EventInfoContent2">{event.description}</span>
+                    <span className="EventInfoContent2">
+                          {event.description.split("\n").map(line => {
+                                    return (<span>{line}<br/></span>)
+                              })
+                          }</span>
                     </p>
                   }
               }
@@ -113,7 +139,8 @@ class List extends Component {
             else{
               return <div className = "RightButton_cl">
                     <span className = "C_content"><b><big><big className="Big" id="event_title_right">일정 세부 내용</big></big></b></span>
-                    <Create p_id={this.state.projectID}/>
+                    <button type="button" className="P_btm" id="img_btn" onClick={this.closeInfo}><img src="/img/cancel.png" className="P_btm_image" alt = ""></img></button>
+                    <button type="button" className="P_btm" id="img_btn" onClick={()=>this.confirmModal(this.state.eventID)}><img src="/img/delete.png" className="C_btm_image" alt = ""></img></button>
                   </div>
             }
           })
