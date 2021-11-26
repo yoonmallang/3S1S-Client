@@ -46,6 +46,7 @@ class Create extends Component {
             const res = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/members", {
                 params: {
                     project: this.state.project,
+                    showname : true
                 }
             });
             this.setState({ participants: res.data.members });
