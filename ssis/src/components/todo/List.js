@@ -3,6 +3,7 @@ import '../../css/todo/list.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import Create from './Create.js'
+import Read from './Read.js'
 import Middlebar from '../navi/Middlebar'
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Card } from 'react-bootstrap';
@@ -16,8 +17,11 @@ class List extends Component {
             todos_2 : [],
             project_id : this.props.match.params.id,
             progressValue : 0,
-            columns : []
+            columns : [],
+            todoDetail : [],
+            showTodoDetail : false 
         }
+        this.showDetail= this.showDetail.bind(this)
     }
 
     loadingTodos = async () => { 
@@ -85,11 +89,27 @@ class List extends Component {
         }
     }
 
+    showDetail = async (todoId) => {
+      try {
+        console.log(todoId)
+        const res = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/todos/${todoId}`);
+        this.setState({todoDetail : res.data.todo_content, showTodoDetail : true})
+    } catch (e) {
+        console.log(e);
+      }
+    }
+
+    
+    modalClose = () => {
+      this.setState({todoDetail : [], showTodoDetail : false})
+      console.log(this.state.showTodoDetail)
+    }
+
     onDragEnd = (result, columns) => {
         if (!result.destination) return;
         const { source, destination } = result;
       
-        if (source.droppableId !== destination.droppableId) {
+        if (source.droppableId !== destination.droppableId) { 
           const sourceColumn = columns[source.droppableId];
           const destColumn = columns[destination.droppableId];
           const sourceItems = [...sourceColumn.items];
@@ -140,8 +160,8 @@ class List extends Component {
     }
 
     render() {
-        const titleClassName = ['p1', 'p2', 'p3']
-        let pgValues = this.state.progressValue
+        const titleClassName = ['p1', 'p2', 'p3'];
+        let pgValues = this.state.progressValue;
 
         return (
             <div className = "todo-page">
@@ -185,7 +205,8 @@ class List extends Component {
                                     margin: "0 0 12px 0",
                                     minHeight: "130px",  
                                     ...provided.draggableProps.style
-                                  }}>
+                                  }}
+                                  onClick={() => this.showDetail(item.id)}>
                                     <Card.Body>
                                         <div className ="one-line">
                                             <Card.Title className = "todo-title">{item.title}</Card.Title>
@@ -217,8 +238,12 @@ class List extends Component {
           );
         })}
       </DragDropContext>
+    </div>  
+      { this.state.showTodoDetail === true
+        ? <Read detail={this.state.todoDetail} handleClose={this.modalClose}/> 
+        : null
+      }
     </div>
-            </div>
         );
     }
 }

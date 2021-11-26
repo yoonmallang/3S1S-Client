@@ -46,6 +46,7 @@ class Create extends Component {
             const res = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/members", {
                 params: {
                     project: this.state.project,
+                    showname : true
                 }
             });
             this.setState({ participants: res.data.members });
@@ -67,6 +68,10 @@ class Create extends Component {
 
     handleShow = () => {    
         this.setState({show: true});
+        var curr = new Date();
+        curr.setDate(curr.getDate());
+        var date = curr.toISOString().substr(0,10);
+        this.setState({start_date :date, end_date : date})
     };
 
     handleSelect = (e) => {
@@ -95,6 +100,10 @@ class Create extends Component {
         const participants = this.state.participants
         const selectedParticipants = this.state.seletedParticipants
 
+        var curr = new Date();
+        curr.setDate(curr.getDate());
+        var date = curr.toISOString().substr(0,10);
+
         return (
             <span className="todo-create">
                 <Button className="add-todo-button" onClick={this.handleShow}>
@@ -120,12 +129,12 @@ class Create extends Component {
                     <div>
                         <Form.Group className="date1-form">
                             <Form.Label className="text">시작 일시</Form.Label>
-                            <input type="date" className="form-control" onChange={this.startDateChange}/>
+                            <input type="date" className="form-control" onChange={()=> this.startDateChange} defaultValue={date}/>
                         </Form.Group>
 
                         <Form.Group className="date2-form">
                             <Form.Label className="text">종료 일시</Form.Label>
-                            <input type="date" className="form-control"  onChange={this.endDateChange}/>
+                            <input type="date" className="form-control"  onChange={()=> this.endDateChange} defaultValue={date}/>
                         </Form.Group>
                     </div>
                     
