@@ -1,0 +1,41 @@
+.div-form1_cc {
+  margin-top: 3%;
+  width: 100%;
+}
+
+.div-form_cc {
+  margin-top: 20px;
+  width: 100%;
+  float: left;
+}
+
+.date_cc {
+  margin-top: 3%;
+}
+
+.date1-form_cc {
+  margin-top: 10px;
+  float: left;
+  width: 48%;
+  margin-right: 4%;
+}
+
+.date2-form_cc {
+  margin-top: 41px;
+  float: right;
+  width: 48%;
+}
+
+.color_button {
+  width: 40px;
+  height: 40px;
+  margin-left: 3%;
+  margin-right: 5%;
+  border-radius: 30px;
+  border: none;
+}
+
+.form_color {
+  margin-top: 20px;
+  width: 100%;
+}

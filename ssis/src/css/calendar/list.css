@@ -13,7 +13,7 @@
 }
 
 .LeftContent_cl {
-  width: 63.5%;
+  width: 62%;
   height: 95%;
   float: left;
   margin-left: 1%;
@@ -24,7 +24,7 @@
 }
 
 .RightContent_cl {
-  width: 33.5%;
+  width: 35%;
   height: 95%;
   float: left;
   margin-left: 0.5%;
@@ -155,7 +155,122 @@
 }
 
 .CalendarList {
-  width: 100%;
+  width: 96%;
+  margin-left: 2%;
+  margin-right: 2%;
   height: 90%;
-  border: 1px solid #737880;
+  border-top: 1px solid #d0d4db;
+  overflow-x: hidden;
+}
+
+.CalendarList::-webkit-scrollbar {
+  width: 5px;
+  background-color: none;
+}
+
+.fc .fc-scroller-harness-liquid {
+  height: 100%;
+}
+
+.fc .fc-scroller-harness {
+  position: relative;
+  overflow: hidden;
+  direction: ltr;
+}
+
+.fc .fc-scroller-liquid-absolute {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.fc ::-webkit-scrollbar {
+  width: 5px;
+  background-color: none;
+}
+
+.fc {
+  height: 700px;
+}
+
+.fc .fc-daygrid-day-events {
+  margin-top: 1px;
+}
+
+.CalendarEvent {
+  width: 100%;
+  height: 70px;
+  margin-top: 5%;
+  float: left;
+}
+
+.EventSpan1_1 {
+  color: black;
+  margin-left: 3%;
+  padding-left: 2%;
+  padding-right: 2%;
+  background-color: #e5efff;
+  border-radius: 10px;
+  float: left;
+  margin-bottom: 0px;
+}
+
+.EventSpan1_2 {
+  color: black;
+  margin-left: 3%;
+  background-color: #e5efff;
+  padding-left: 2%;
+  padding-right: 2%;
+  border-radius: 10px;
+  float: left;
+  margin-bottom: 0px;
+}
+
+.EventSpan2 {
+  width: 85%;
+  float: left;
+  margin-top: 1.5%;
+  margin-left: 15%;
+  text-align: left;
+}
+
+.EventSpecific {
+  margin-top: 3%;
+  height: 30px;
+}
+
+.EventInfoTitle {
+  width: 30%;
+  margin-left: 10%;
+  margin-right: 0px;
+  margin-top: 3%;
+  text-align: left;
+  float: left;
+}
+
+.EventInfoTitle2 {
+  width: 30%;
+  margin-left: 10%;
+  margin-right: 0px;
+  margin-top: 5%;
+  text-align: left;
+  float: left;
+}
+
+.EventInfoContent {
+  width: 60%;
+  margin-left: 0px;
+  margin-top: 3%;
+  text-align: left;
+  float: right;
+}
+
+.EventInfoContent2 {
+  width: 60%;
+  margin-left: 0px;
+  margin-top: 5%;
+  text-align: left;
+  float: right;
 }
