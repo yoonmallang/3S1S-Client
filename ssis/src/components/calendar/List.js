@@ -7,6 +7,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import '../../css/calendar/list.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Moment from 'moment';
+import Update from "./Update.js"
 import Create from "./Create.js"
 import axios from 'axios'; 
 
@@ -124,11 +125,9 @@ class List extends Component {
                     </p>
                   }
               }
-          
               }   
           ); 
 
-          
           let content_title = this.state.flag.map(flag =>{
             if(this.state.flag[0] === 0){
               return <div className = "RightButton_cl">
@@ -141,6 +140,7 @@ class List extends Component {
                     <span className = "C_content"><b><big><big className="Big" id="event_title_right">일정 세부 내용</big></big></b></span>
                     <button type="button" className="P_btm" id="img_btn" onClick={this.closeInfo}><img src="/img/cancel.png" className="P_btm_image" alt = ""></img></button>
                     <button type="button" className="P_btm" id="img_btn" onClick={()=>this.confirmModal(this.state.eventID)}><img src="/img/delete.png" className="C_btm_image" alt = ""></img></button>
+                    <Update id={this.state.eventID}/>
                   </div>
             }
           })
