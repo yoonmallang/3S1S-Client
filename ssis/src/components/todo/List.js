@@ -18,7 +18,8 @@ class List extends Component {
             project_id : this.props.match.params.id,
             progressValue : 0,
             columns : [],
-            showDetail : false
+            todoDetail : [],
+            showTodoDetail : false 
         }
         this.showDetail= this.showDetail.bind(this)
     }
@@ -88,17 +89,27 @@ class List extends Component {
         }
     }
 
-    showDetail() {
-      this.setState({
-          showDetail: true,
-      });
+    showDetail = async (todoId) => {
+      try {
+        console.log(todoId)
+        const res = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/todos/${todoId}`);
+        this.setState({todoDetail : res.data.todo_content, showTodoDetail : true})
+    } catch (e) {
+        console.log(e);
+      }
+    }
+
+    
+    modalClose = () => {
+      this.setState({todoDetail : [], showTodoDetail : false})
+      console.log(this.state.showTodoDetail)
     }
 
     onDragEnd = (result, columns) => {
         if (!result.destination) return;
         const { source, destination } = result;
       
-        if (source.droppableId !== destination.droppableId) {
+        if (source.droppableId !== destination.droppableId) { 
           const sourceColumn = columns[source.droppableId];
           const destColumn = columns[destination.droppableId];
           const sourceItems = [...sourceColumn.items];
@@ -149,9 +160,9 @@ class List extends Component {
     }
 
     render() {
-        const titleClassName = ['p1', 'p2', 'p3']
-        let pgValues = this.state.progressValue
-        console.log(this.state.showDetail)
+        const titleClassName = ['p1', 'p2', 'p3'];
+        let pgValues = this.state.progressValue;
+
         return (
             <div className = "todo-page">
                 <Middlebar id={this.props.match.params}/>
@@ -195,7 +206,7 @@ class List extends Component {
                                     minHeight: "130px",  
                                     ...provided.draggableProps.style
                                   }}
-                                  onClick={this.showDetail}>
+                                  onClick={() => this.showDetail(item.id)}>
                                     <Card.Body>
                                         <div className ="one-line">
                                             <Card.Title className = "todo-title">{item.title}</Card.Title>
@@ -228,6 +239,10 @@ class List extends Component {
         })}
       </DragDropContext>
     </div>  
+      { this.state.showTodoDetail === true
+        ? <Read detail={this.state.todoDetail} handleClose={this.modalClose}/> 
+        : null
+      }
     </div>
         );
     }
