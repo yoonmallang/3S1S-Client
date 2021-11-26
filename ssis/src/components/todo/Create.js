@@ -143,7 +143,7 @@ class Create extends Component {
                             <option value="none" hidden>참여자를 선택하세요.</option>
                             {participants.map((item)=> {
                                 return (
-                                    <option key={item.id} value={item.user_id}>{item.user_id}</option>
+                                    <option key={item.id} value={item.name}>{item.name}</option>
                                 )
                             })}
                         </Form.Select>

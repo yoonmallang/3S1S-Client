@@ -216,7 +216,7 @@ class List extends Component {
                                             {
                                                 item.participants.map((member)=> {
                                                     return (
-                                                        <Card.Text key={member} className ="participant">{member}</Card.Text>
+                                                        <Card.Text key={member.name} className ="participant">{member.name}</Card.Text>
                                                     )
                                                 })
                                             }
