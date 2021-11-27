@@ -1,0 +1,55 @@
+.docu-infomations {
+  width: 100%;
+  height: auto;
+  padding: 0;
+}
+.docu-infomations .left {
+  width: 18%;
+  padding-left: 1px;
+  float: left;
+}
+
+.docu-infomations .right {
+  width: 82%;
+  float: right;
+}
+.docu-kinds {
+  margin-bottom: 20px;
+  color: gray;
+}
+.docu-Info {
+  margin-bottom: 20px;
+}
+
+.document-delete-button {
+  width: auto;
+  height: auto;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  margin-right: 20px;
+  float: right;
+  padding: 0;
+}
+
+.document-modify-button {
+  width: auto;
+  height: auto;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  float: right;
+  padding: 0;
+}
+
+.document-delete-img {
+  width: 20px;
+  height: 20px;
+}
+
+.document-modify-img {
+  width: 20px;
+  height: 20px;
+}

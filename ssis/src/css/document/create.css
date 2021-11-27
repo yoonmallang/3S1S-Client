@@ -1,0 +1,30 @@
+.document-create {
+  float: right;
+}
+
+.add-document-button {
+  width: auto;
+  height: auto;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  margin-right: 10%;
+  text-align: right;
+  padding: 0;
+}
+
+.document-add-img {
+  width: 30px;
+  height: 30px;
+}
+
+.docu-div-form {
+  margin-bottom: 20px;
+  height: 70px;
+}
+
+.docuu-div-form {
+  margin-bottom: 20px;
+  height: auto;
+}

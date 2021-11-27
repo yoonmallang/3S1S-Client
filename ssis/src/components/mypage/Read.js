@@ -16,11 +16,7 @@ class Read extends Component {
     loadingUser = async () => { 
         let userId = sessionStorage.getItem('id')
         try {   
-            const res = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/mypage`, {
-                params: {
-                    user : userId
-                }
-            });
+            const res = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/mypage/${userId}`);
             this.setState({ user: res.data.information });
             console.log(this.state.user)
         } catch (e) { 

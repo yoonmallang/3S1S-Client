@@ -20,7 +20,6 @@ class List extends Component {
                 }
             });
             this.setState({ alarms: res.data.notifications });
-            console.log(this.state.alarms)
         } catch (e) { 
             console.log(e); 
         }
