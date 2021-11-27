@@ -9,7 +9,8 @@ class List extends Component {
         super(props);
         this.state = {
             comments : [],
-            content : ""
+            content : "",
+            modifiedComment: "수정"
         }
     }
 
@@ -40,6 +41,27 @@ class List extends Component {
         })
     }
 
+    modifyComment = (commentId) => {
+        axios.put(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/comments/${commentId}`, {
+            content : this.state.modifiedComment
+        }).then((res) => {
+            console.log(res)
+            this.loadingComments(); 
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    deleteComment = (commentId) => {
+        axios.delete(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/comments/${commentId}`)
+        .then((res) => {
+            console.log(res)
+            this.loadingComments(); 
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
     commentChange = (e) => {this.setState({content: e.target.value})};
 
     componentDidMount() { 
@@ -62,10 +84,10 @@ class List extends Component {
                                 <div className="comments">
                                     <div>
                                         <p className="cm-left">{item.writer_name}</p>
-                                        <button type="button" className="cm-cancel-button">
+                                        <button type="button" className="cm-cancel-button" onClick={()=>this.deleteComment(item.id)}>
                                             <img alt="" src="/img/cancel.png" className="img-cancel"/>
                                         </button>
-                                        <button style={{marginRight:'15px'}}type="button" className="cm-cancel-button">
+                                        <button style={{marginRight:'15px'}} type="button" onClick={()=>this.modifyComment(item.id)} className="cm-cancel-button">
                                             <img alt="" src="/img/pencil.png" className="img-cancel"/>
                                         </button>
                                         <p className="cm-right">{item.create_at}</p>
