@@ -3,7 +3,7 @@ import Middlebar from '../navi/Middlebar'
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 // import timeGridPlugin from '@fullcalendar/timegrid';
-// import interactionPlugin from '@fullcalendar/interaction';
+import interactionPlugin from '@fullcalendar/interaction';
 import '../../css/calendar/list.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Moment from 'moment';
@@ -21,13 +21,15 @@ class List extends Component {
             events : [],
             flag : [0],
             eventID : "",
+            eventInfo: [],
+            year: "",
+            month:"",
         }
     }
 
     loadingData = async () => { 
       try { 
         let a = await this.setState({projectID: this.props.match.params.id})
-          console.log("뭐지")
           console.log(this.props.match.params.id)
           console.log(this.state.projectID)
           const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/schedules`,{
@@ -37,6 +39,15 @@ class List extends Component {
           });            
           console.log(response.data.schedule_list)
           this.setState({events: response.data.schedule_list})
+      } catch (e) 
+      { console.log(e); }
+    };
+
+    loadingEvent = async () => { 
+      try { 
+          const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/schedules/${this.state.eventID}`);           
+          console.log(response.data.schedule_content) 
+          this.setState({eventInfo: response.data.schedule_content})
       } catch (e) 
       { console.log(e); }
     };
@@ -65,11 +76,16 @@ class List extends Component {
     componentDidMount() {
       const {loadingData} = this;
         loadingData();
+      let now = new Date();
+      this.setState({month: now.getMonth()+1})
+      this.setState({year: now.getFullYear})
       }
 
     render() {
       console.log("강민")
       console.log(this.state.events)
+
+      console.log("받아올 수 있나요")
         // this.state.events = [
         //     {
         //       id: 1,
@@ -86,7 +102,7 @@ class List extends Component {
         //     { id: 3, title: 'event 3', start: '2021-11-17', end: '2021-11-21' },
         //     { id: 4, title: 'event 3', start: '2021-11-16', end: '2021-11-18' },
         //   ];
-
+        
         let calendar_list = this.state.events && this.state.events.map(event =>{
               if(this.state.flag[0] === 0){
                 if(event.start===event.end){
@@ -140,20 +156,18 @@ class List extends Component {
                     <span className = "C_content"><b><big><big className="Big" id="event_title_right">일정 세부 내용</big></big></b></span>
                     <button type="button" className="P_btm" id="img_btn" onClick={this.closeInfo}><img src="/img/cancel.png" className="P_btm_image" alt = ""></img></button>
                     <button type="button" className="P_btm" id="img_btn" onClick={()=>this.confirmModal(this.state.eventID)}><img src="/img/delete.png" className="C_btm_image" alt = ""></img></button>
-                    <Update id={this.state.eventID}/>
+                    <Update id={this.state.eventID} p_id={this.state.projectID}/>
                   </div>
             }
           })
           
-        
-
         return (
         <div className="Outer_cl">
             <Middlebar id={this.props.match.params}/>
             <div className = "Calendar_cl">
                 <div className="LeftContent_cl">
                 <FullCalendar
-                    plugins={[dayGridPlugin]} //, timeGridPlugin, interactionPlugin
+                    plugins={[dayGridPlugin, interactionPlugin]} //, timeGridPlugin, interactionPlugin
                     initialView="dayGridMonth"
                       events={this.state.events}
                       eventColor="#7a9acc"
@@ -166,7 +180,20 @@ class List extends Component {
                         this.setState({eventID: e.event.id})
                       }}
                 />
+                
                 </div>
+                {
+                                        sessionStorage.getItem("id") === 1
+                                        ?   <>
+                                                <button style={{marginLeft:'10px'}} type="button" className="cm-cancel-button" onClick={()=>this.deleteComment()}>
+                                                    <img alt="" src="/img/cancel.png" className="img-cancel"/>
+                                                </button>
+                                                <button style={{marginLeft:'5px'}} type="button" onClick={()=>this.modifyButton()} className="cm-cancel-button">
+                                                    <img alt="" src="/img/pencil.png" className="img-cancel"/>
+                                                </button>
+                                            </>
+                                        : null
+                                    }\
                 <div className="RightContent_cl">
                   {content_title}
                   <div className="CalendarList">

@@ -279,3 +279,9 @@
   width: 95%;
   height: 95%;
 }
+
+.ButtonLeft {
+  border: 1px solid black;
+  width: 30px;
+  height: 30px;
+}
