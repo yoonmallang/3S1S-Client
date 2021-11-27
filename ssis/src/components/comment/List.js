@@ -97,35 +97,41 @@ class List extends Component {
                     if(this.state.modifyCommentId === item.id) {
                             return (
                                 <div className="comments">
-                                    <span className="cm-left">{item.writer_name}</span>
-                                    <div className="cm-right">
-                                        <button style={{marginLeft:'10px'}} type="button" onClick={()=>this.modifyComment(item.id)} className="cm-cancel-button">
-                                            <img alt="" src="/img/pencil.png" className="img-cancel"/>
-                                        </button>
-                                        <span>{item.create_at}</span>
+                                    <div>
+                                        <span className="cm-left">{item.writer_name}</span>
+                                        <span className="cm-right">{item.create_at}</span>
                                     </div>
                                     <br/>
                                     <Form>
                                         <Form.Control id="cm-textarea" style={{fontSize:"12px"}}as="textarea" rows={3} defaultValue={item.content} onChange={this.modifiedCommentChange}/>
                                     </Form>
+                                    
+                                    <button  style={{display:'inline-block'}} type="submit" className="comment-add-button"onClick={()=>this.modifyComment(item.id)}>
+                                        댓글 수정
+                                    </button>
                                 </div>
                             )
                         }
                     else {
                         return (
                             <div className="comments">
-                                <div style={{display:'inline'}}>
-                                <span className="cm-left">{item.writer_name}</span>
-                                    <div className="cm-right">
-                                        <span>{item.create_at}</span>
-                                        <button style={{marginLeft:'10px'}} type="button" className="cm-cancel-button" onClick={()=>this.deleteComment(item.id)}>
-                                        <img alt="" src="/img/cancel.png" className="img-cancel"/>
-                                        </button>
-                                        <button style={{marginLeft:'5px'}} type="button" onClick={()=>this.modifyButton(item.id)} className="cm-cancel-button">
-                                            <img alt="" src="/img/pencil.png" className="img-cancel"/>
-                                        </button>
-                                    </div>
-                                        
+                                
+                                <div className="cm-left">{item.writer_name}</div>
+                                <div className="cm-right">
+                                    <span>{item.create_at}</span>
+                                    {
+                                        sessionStorage.getItem("id") === item.writer_id
+                                        ?   <>
+                                                <button style={{marginLeft:'10px'}} type="button" className="cm-cancel-button" onClick={()=>this.deleteComment(item.id)}>
+                                                    <img alt="" src="/img/cancel.png" className="img-cancel"/>
+                                                </button>
+                                                <button style={{marginLeft:'5px'}} type="button" onClick={()=>this.modifyButton(item.id)} className="cm-cancel-button">
+                                                    <img alt="" src="/img/pencil.png" className="img-cancel"/>
+                                                </button>
+                                            </>
+                                        : null
+                                    }
+                                           
                                 </div>
                                 <br/>
                             
