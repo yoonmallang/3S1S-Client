@@ -5,13 +5,16 @@ import Create from './Create.js'
 import '../../css/document/list.css';
 import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Read from './Read.js'
 
 class List extends Component {
         constructor(props) {
             super(props);
             this.state = {
                 project_id : this.props.match.params.id,
-                file : []
+                fileDetail : [],
+                file : [],
+                showFileDetail : false 
             }
         }
     
@@ -26,6 +29,16 @@ class List extends Component {
                 console.log(this.state.file)
             } catch (e) { 
                 console.log(e); 
+            }
+        }
+
+        showDetail = async (fileId) => {
+            try {
+                console.log(fileId)
+                const res = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/files/${fileId}`);
+                this.setState({fileDetail : res.data.file, showFileDetail : true})
+        } catch (e) {
+            console.log(e);
             }
         }
 
@@ -50,6 +63,10 @@ class List extends Component {
             }
         }
 
+        modalClose = () => {
+            this.setState({fileDetail : [], showFileDetail : false})
+        }
+
         componentDidMount() { 
             const { loadingFiles } = this; 
             loadingFiles(); 
@@ -64,18 +81,22 @@ class List extends Component {
                     <br/>
                     <br/>   
                     {this.state.file.map((item) => {
-                            
                             return (
-                                <Card className="fileCard">
-                                    <Card.Body>
-                                    <img alt="" src={this.distinguishFiles(item.file_name)} className="document-img"></img>
-                                    <Card.Title style={{fontSize:'14px'}}>{item.title}</Card.Title>
-                                    
-                                    </Card.Body>
-                                </Card>
+                                <div onClick={() => this.showDetail(item.id)}>
+                                    <Card className="fileCard">
+                                        <Card.Body>
+                                        <img alt="" src={this.distinguishFiles(item.file_name)} className="document-img"></img>
+                                        <Card.Title style={{fontSize:'14px'}}>{item.title}</Card.Title>
+                                        </Card.Body>
+                                    </Card>
+                                </div>
                             )
                         })}
                 </div>
+                { this.state.showFileDetail === true
+                    ? <Read detail={this.state.fileDetail} handleClose={this.modalClose} handleLoding={this.loadingFiles}/> 
+                    : null
+                }
                 </>
             );
     }

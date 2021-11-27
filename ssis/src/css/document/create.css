@@ -1,6 +1,7 @@
-.todo-create {
-  display: inline-block;
+.document-create {
+  float: right;
 }
+
 .add-document-button {
   width: auto;
   height: auto;
