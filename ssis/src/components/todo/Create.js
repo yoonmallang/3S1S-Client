@@ -118,7 +118,7 @@ class Create extends Component {
                 <Form>
                     <Form.Group className="td-div-form">
                         <Form.Label className="text">제목</Form.Label>
-                        <Form.Control className="idInput-form" placeholder="생성할 ToDo의 제목을 입력하세요," onChange={this.titleChange}/>
+                        <Form.Control placeholder="생성할 ToDo의 제목을 입력하세요," onChange={this.titleChange}/>
                     </Form.Group>
                 
                     <Form.Group className="tdd-div-form">

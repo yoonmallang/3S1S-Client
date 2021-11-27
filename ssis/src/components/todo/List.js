@@ -164,6 +164,7 @@ class List extends Component {
         let pgValues = this.state.progressValue;
 
         return (
+           
             <div className = "todo-page">
                 <Middlebar id={this.props.match.params}/>
                     <div style={{ width: '1100px', margin: '0px auto', marginTop:'30px'}}>
