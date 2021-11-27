@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import '../../css/todo/read.css';
+import List from '../comment/List'
 
 class Read extends Component {
     constructor(props) {
@@ -25,8 +26,9 @@ class Read extends Component {
     };
 
     render() {
+        
         return (
-            <Modal show={this.state.show} onHide={this.handleClose}>
+            <Modal  show={this.state.show} onHide={this.handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title><b>{this.state.todoDetail.title} </b></Modal.Title>
                 </Modal.Header>
@@ -45,13 +47,13 @@ class Read extends Component {
                             <br/>
                             {this.state.todoDetail.participants.map((item)=> {
                                     return (
-                                        <span className="td-Info-participants" key={item.name}>{item.name}</span>
+                                        <span className="td-Info-participants" key={item.user_id}>{item.name}</span>
                                     )
                                 })}
                         </div>
                     </div>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer style={{paddingLeft:'6px', paddingRight:'15px'}}>
                 <div className="td-infomations">
                     <div className= "left">
                         <p className="td-kinds">세부내용</p>
@@ -65,13 +67,13 @@ class Read extends Component {
                     </div>
                 </div>
                 </Modal.Footer>
-                <Modal.Footer>
+                <Modal.Footer style={{paddingLeft:'6px', paddingRight:'15px'}}>
                     <div className="td-infomations">
                         <div className= "left">
                             <p className="td-kinds">댓글</p>
                         </div>
                         <div className= "right">
-                            {/* 댓글 */}
+                            <List todoId={this.state.todoDetail.id}/>
                         </div>
                     </div>
                 </Modal.Footer>
