@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import { Form, Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../css/comment/list.css';
 
@@ -10,7 +10,8 @@ class List extends Component {
         this.state = {
             comments : [],
             content : "",
-            modifiedComment: "수정"
+            modifiedComment: "",
+            modifyCommentId : ""
         }
     }
 
@@ -35,10 +36,20 @@ class List extends Component {
             content: this.state.content,
         }).then((res) => {
             console.log(res)
-            this.loadingComments(); 
+            this.loadingComments();
+            this.setState({ content : ""})
+            document.getElementById("cm-textarea").value ='';
         }).catch((err) => {
             console.log(err);
         })
+    }
+
+    modifyButton = (commentId) => {
+        this.setState({ modifyCommentId: commentId });
+    }
+
+    modfiedIdClear = () => {
+        this.setState({ modifiedComment: "", modifyCommentId: ""});
     }
 
     modifyComment = (commentId) => {
@@ -46,6 +57,7 @@ class List extends Component {
             content : this.state.modifiedComment
         }).then((res) => {
             console.log(res)
+            this.modfiedIdClear();
             this.loadingComments(); 
         }).catch((err) => {
             console.log(err);
@@ -63,16 +75,18 @@ class List extends Component {
     }
 
     commentChange = (e) => {this.setState({content: e.target.value})};
+    modifiedCommentChange = (e) => {this.setState({modifiedComment : e.target.value})};
 
     componentDidMount() { 
         const { loadingComments } = this; 
         loadingComments(); 
     }
+
     render() {
         return (
             <div>
                 <Form>
-                    <Form.Control style={{fontSize:"12px"}}as="textarea" rows={3} placeholder="댓글을 입력하세요." onChange={this.commentChange}/>
+                    <Form.Control id="cm-textarea" style={{fontSize:"12px"}}as="textarea" rows={3} placeholder="댓글을 입력하세요." onChange={this.commentChange}/>
                 </Form>
                 <button type="submit" className="comment-add-button" onClick={this.writeComment}>
                     댓글 작성
@@ -80,30 +94,52 @@ class List extends Component {
                 <br/>
                 <br/>
                 {this.state.comments.map((item) => {
+                    if(this.state.modifyCommentId === item.id) {
                             return (
                                 <div className="comments">
-                                    <div>
-                                        <p className="cm-left">{item.writer_name}</p>
-                                        <button type="button" className="cm-cancel-button" onClick={()=>this.deleteComment(item.id)}>
-                                            <img alt="" src="/img/cancel.png" className="img-cancel"/>
-                                        </button>
-                                        <button style={{marginRight:'15px'}} type="button" onClick={()=>this.modifyComment(item.id)} className="cm-cancel-button">
+                                    <span className="cm-left">{item.writer_name}</span>
+                                    <div className="cm-right">
+                                        <button style={{marginLeft:'10px'}} type="button" onClick={()=>this.modifyComment(item.id)} className="cm-cancel-button">
                                             <img alt="" src="/img/pencil.png" className="img-cancel"/>
                                         </button>
-                                        <p className="cm-right">{item.create_at}</p>
+                                        <span>{item.create_at}</span>
                                     </div>
                                     <br/>
-                                
-                                    <div>
-                                        {
-                                            item.content.split("\n").map(line => {
-                                                return (<span className="cm-content">{line}<br/></span>)
-                                            })
-                                        }
-                                    </div>
+                                    <Form>
+                                        <Form.Control id="cm-textarea" style={{fontSize:"12px"}}as="textarea" rows={3} defaultValue={item.content} onChange={this.modifiedCommentChange}/>
+                                    </Form>
                                 </div>
                             )
-                        })}
+                        }
+                    else {
+                        return (
+                            <div className="comments">
+                                <div style={{display:'inline'}}>
+                                <span className="cm-left">{item.writer_name}</span>
+                                    <div className="cm-right">
+                                        <span>{item.create_at}</span>
+                                        <button style={{marginLeft:'10px'}} type="button" className="cm-cancel-button" onClick={()=>this.deleteComment(item.id)}>
+                                        <img alt="" src="/img/cancel.png" className="img-cancel"/>
+                                        </button>
+                                        <button style={{marginLeft:'5px'}} type="button" onClick={()=>this.modifyButton(item.id)} className="cm-cancel-button">
+                                            <img alt="" src="/img/pencil.png" className="img-cancel"/>
+                                        </button>
+                                    </div>
+                                        
+                                </div>
+                                <br/>
+                            
+                                <div style={{marginTop:'5px'}}>
+                                    {
+                                        item.content.split("\n").map(line => {
+                                            return (<span className="cm-content">{line}<br/></span>)
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        )
+                    }
+                    })}
             </div>
         );
     }

@@ -9,15 +9,17 @@
 
 .cm-left {
   float: left;
-  font-size: 12px;
-  margin-bottom: 6px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  width: 30%;
 }
 
 .cm-right {
-  float: right;
-  font-size: 12px;
-  margin-bottom: 6px;
-  margin-right: 7px;
+  float: left;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: right;
+  width: 70%;
 }
 
 .comment-add-button {
@@ -35,7 +37,7 @@
 }
 
 .cm-content {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .cm-cancel-button {

@@ -28,7 +28,7 @@ class Read extends Component {
     render() {
         
         return (
-            <Modal size="lg" show={this.state.show} onHide={this.handleClose}>
+            <Modal  show={this.state.show} onHide={this.handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title><b>{this.state.todoDetail.title} </b></Modal.Title>
                 </Modal.Header>
@@ -53,7 +53,7 @@ class Read extends Component {
                         </div>
                     </div>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer style={{paddingLeft:'6px', paddingRight:'15px'}}>
                 <div className="td-infomations">
                     <div className= "left">
                         <p className="td-kinds">세부내용</p>
@@ -67,7 +67,7 @@ class Read extends Component {
                     </div>
                 </div>
                 </Modal.Footer>
-                <Modal.Footer>
+                <Modal.Footer style={{paddingLeft:'6px', paddingRight:'15px'}}>
                     <div className="td-infomations">
                         <div className= "left">
                             <p className="td-kinds">댓글</p>
