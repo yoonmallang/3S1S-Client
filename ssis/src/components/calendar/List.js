@@ -16,7 +16,7 @@ class List extends Component {
         super();
         this.state = {
             show : false,
-            creator : localStorage.getItem("id"),
+            creator : sessionStorage.getItem("id"),
             projectID: "",
             events : [],
             flag : [0],
@@ -24,6 +24,7 @@ class List extends Component {
             eventInfo: [],
             year: "",
             month:"",
+            isWriter: "",
         }
     }
 
@@ -46,7 +47,6 @@ class List extends Component {
     loadingEvent = async () => { 
       try { 
           const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/schedules/${this.state.eventID}`);           
-          console.log(response.data.schedule_content) 
           this.setState({eventInfo: response.data.schedule_content})
       } catch (e) 
       { console.log(e); }
@@ -82,10 +82,6 @@ class List extends Component {
       }
 
     render() {
-      console.log("강민")
-      console.log(this.state.events)
-
-      console.log("받아올 수 있나요")
         // this.state.events = [
         //     {
         //       id: 1,
@@ -119,12 +115,7 @@ class List extends Component {
                 }
               }
               else{
-                  console.log("1111111")
-                  console.log(event)
-                  console.log(this.state.eventID)
-                  console.log(event.id)
                   if(this.state.eventID == event.id){
-                    console.log("들어옴")
                     return <p className="EventSpecific">
                     <span className="EventInfoTitle">제목</span>
                     <span className="EventInfoContent">{event.title}</span>
@@ -152,12 +143,25 @@ class List extends Component {
                   </div>
                   }
             else{
-              return <div className = "RightButton_cl">
+              this.loadingEvent().then(
+
+              )
+              if(this.state.creator == this.state.eventInfo.writer){
+                return <div className = "RightButton_cl">
+                <span className = "C_content"><b><big><big className="Big" id="event_title_right">일정 세부 내용</big></big></b></span>
+                <button type="button" className="P_btm" id="img_btn" onClick={this.closeInfo}><img src="/img/cancel.png" className="P_btm_image" alt = ""></img></button>
+                <button type="button" className="P_btm" id="img_btn" onClick={()=>this.confirmModal(this.state.eventID)}><img src="/img/delete.png" className="C_btm_image" alt = ""></img></button>
+                <Update id={this.state.eventID} p_id={this.state.projectID}/>
+                </div>
+              }
+              else{
+                return <div className = "RightButton_cl">
                     <span className = "C_content"><b><big><big className="Big" id="event_title_right">일정 세부 내용</big></big></b></span>
                     <button type="button" className="P_btm" id="img_btn" onClick={this.closeInfo}><img src="/img/cancel.png" className="P_btm_image" alt = ""></img></button>
-                    <button type="button" className="P_btm" id="img_btn" onClick={()=>this.confirmModal(this.state.eventID)}><img src="/img/delete.png" className="C_btm_image" alt = ""></img></button>
-                    <Update id={this.state.eventID} p_id={this.state.projectID}/>
-                  </div>
+                    </div>
+              }
+              
+              
             }
           })
           
@@ -174,26 +178,12 @@ class List extends Component {
                       nowIndicator
                       dateClick={(e) => console.log(e.dateStr)}
                       eventClick={(e) => {
-                        console.log("777777777")
-                        console.log(e.event.id); 
                         this.setState({flag: [1]})
                         this.setState({eventID: e.event.id})
                       }}
                 />
                 
                 </div>
-                {
-                                        sessionStorage.getItem("id") === 1
-                                        ?   <>
-                                                <button style={{marginLeft:'10px'}} type="button" className="cm-cancel-button" onClick={()=>this.deleteComment()}>
-                                                    <img alt="" src="/img/cancel.png" className="img-cancel"/>
-                                                </button>
-                                                <button style={{marginLeft:'5px'}} type="button" onClick={()=>this.modifyButton()} className="cm-cancel-button">
-                                                    <img alt="" src="/img/pencil.png" className="img-cancel"/>
-                                                </button>
-                                            </>
-                                        : null
-                                    }\
                 <div className="RightContent_cl">
                   {content_title}
                   <div className="CalendarList">
