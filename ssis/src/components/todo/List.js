@@ -241,7 +241,7 @@ class List extends Component {
       </DragDropContext>
     </div>  
       { this.state.showTodoDetail === true
-        ? <Read detail={this.state.todoDetail} handleClose={this.modalClose}/> 
+        ? <Read detail={this.state.todoDetail} handleClose={this.modalClose} handleLoding={this.loadingTodos}/> 
         : null
       }
     </div>
