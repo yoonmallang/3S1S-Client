@@ -11,9 +11,9 @@ class Read extends Component {
             documentDetail : this.props.detail,
 
             modifydocument : false,
-            modifiedTitle : "",
-            modifiedDesription : "",
-            modifiedFileName : ""
+            modifiedTitle : this.props.detail.title,
+            modifiedDesription : this.props.detail.description,
+            modifiedFileName : this.props.detail.description.file_name
         }
     }
 
@@ -29,6 +29,7 @@ class Read extends Component {
 
     modifyButton = () => {
         this.setState({ modifydocument: true });
+        console.log(this.state.modifiedTitle)
     }
 
     modfiedIdClear = () => {
@@ -65,15 +66,19 @@ class Read extends Component {
             return (
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
+                        <div style={{width:"100%"}}>
                         <Modal.Title>
-                            <b>{this.state.documentDetail.title} </b>
-                            <Button className="document-modify-button" onClick={()=>this.modifyButton()}>
-                                <img alt="" src="/img/pencil.png" className="document-modify-img"></img>
-                            </Button>
-                            <Button className="document-delete-button" onClick={()=>this.deleteComment(this.state.documentDetail.id)}>
-                                <img alt="" src="/img/delete.png" className="document-delete-img"></img>
-                            </Button>
+                            <b style={{float:'left'}}>{this.state.documentDetail.title} </b>
+                            <div className="document-buttons">
+                                <Button className="document-modify-button" onClick={()=>this.modifyButton()}>
+                                    <img alt="" src="/img/pencil.png" className="document-modify-img"></img>
+                                </Button>
+                                <Button className="document-delete-button" onClick={()=>this.deleteComment(this.state.documentDetail.id)}>
+                                    <img alt="" src="/img/delete.png" className="document-delete-img"></img>
+                                </Button>
+                            </div>
                         </Modal.Title>
+                        </div>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="docu-infomations">
@@ -94,7 +99,7 @@ class Read extends Component {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        
+                        {this.state.documentDetail.file_name}
                     </Modal.Footer>
                 </Modal>
             );

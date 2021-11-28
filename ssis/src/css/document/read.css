@@ -29,8 +29,9 @@
   border-color: transparent;
   border: none;
   margin-right: 20px;
-  float: right;
+  margin-top: 5px;
   padding: 0;
+  float: right;
 }
 
 .document-modify-button {
@@ -40,8 +41,10 @@
   background-image: none !important;
   border-color: transparent;
   border: none;
-  float: right;
   padding: 0;
+  margin-top: 5px;
+  margin-right: 20px;
+  float: right;
 }
 
 .document-delete-img {
@@ -52,4 +55,8 @@
 .document-modify-img {
   width: 20px;
   height: 20px;
+}
+
+.document-buttons {
+  float: right;
 }
