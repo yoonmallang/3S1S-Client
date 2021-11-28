@@ -13,7 +13,7 @@
 }
 
 .LeftContent_cl {
-  width: 58.5%;
+  width: 62%;
   height: 95%;
   float: left;
   margin-left: 1%;
@@ -24,7 +24,7 @@
 }
 
 .RightContent_cl {
-  width: 38.5%;
+  width: 35%;
   height: 95%;
   float: left;
   margin-left: 0.5%;
@@ -32,4 +32,256 @@
   margin-top: 1%;
   margin-bottom: 1%;
   border: 1px solid #737880;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 25px;
+  margin-left: 10px;
+  margin-top: 7px;
+  font-weight: bold;
+}
+
+.fc .fc-button {
+  display: inline-block;
+  font-weight: bold;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  user-select: none;
+  background-color: #737880;
+  border: 1px solid transparent;
+  padding: 0.4em 0.65em;
+  margin-top: 10px;
+  margin-right: 3px;
+  font-size: 0.7em;
+  line-height: 1.5;
+  border-radius: 0.25em;
+  outline: 0;
+}
+
+.fc .fc-button-group {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.fc-today-button {
+  width: 50px;
+}
+
+.fc .fc-button-primary:disabled {
+  font-weight: bold;
+  color: black;
+  color: var(--fc-button-text-color, black);
+  background-color: #99c0ff;
+  background-color: var(--fc-button-bg-color, #99c0ff);
+  border-color: #99c0ff;
+  border-color: var(--fc-button-border-color, #99c0ff);
+  outline: 0;
+}
+
+.fc .fc-button-primary {
+  font-weight: bold;
+  color: black;
+  color: var(--fc-button-text-color, black);
+  background-color: #99c0ff;
+  background-color: var(--fc-button-bg-color, #99c0ff);
+  border-color: #99c0ff;
+  border-color: var(--fc-button-border-color, #99c0ff);
+  outline: 0;
+}
+
+.a {
+  color: #0d6efd;
+  text-decoration: underline;
+}
+
+/* .fc-scrollgrid-sync-inner {
+  background-color: #e5efff;
+}
+
+.fc .fc-daygrid-day-frame {
+  background-color: white;
+  position: relative;
+  min-height: 100%;
+} */
+
+.fc-col-header-cell-cushion {
+  color: #7a9acc;
+}
+
+.fc .fc-daygrid-day-number {
+  position: relative;
+  z-index: 4;
+  padding: 4px;
+  color: black;
+  text-decoration: none;
+}
+
+.fc .fc-daygrid-day .fc-day-today {
+  background-color: rgba(255, 220, 40, 0.15);
+  background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));
+}
+
+.RightButton_cl {
+  width: 100%;
+  margin-top: 3%;
+  height: 7%;
+}
+
+.C_btm {
+  float: right;
+  width: 30px;
+  height: 30px;
+  margin-top: 1%;
+  margin-right: 2%;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.C_btm_image {
+  width: 100%;
+  height: 100%;
+}
+
+.C_content {
+  width: 70%;
+  height: 30px;
+  text-align: left;
+  margin-left: 4%;
+  float: left;
+}
+
+.CalendarList {
+  width: 96%;
+  margin-left: 2%;
+  margin-right: 2%;
+  height: 90%;
+  border-top: 1px solid #d0d4db;
+  overflow-x: hidden;
+}
+
+.CalendarList::-webkit-scrollbar {
+  width: 5px;
+  background-color: none;
+}
+
+.fc .fc-scroller-harness-liquid {
+  height: 100%;
+}
+
+.fc .fc-scroller-harness {
+  position: relative;
+  overflow: hidden;
+  direction: ltr;
+}
+
+.fc .fc-scroller-liquid-absolute {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.fc ::-webkit-scrollbar {
+  width: 5px;
+  background-color: none;
+}
+
+.fc {
+  height: 700px;
+}
+
+.fc .fc-daygrid-day-events {
+  margin-top: 1px;
+}
+
+.CalendarEvent {
+  width: 100%;
+  height: 70px;
+  margin-top: 5%;
+  float: left;
+}
+
+.EventSpan1_1 {
+  color: black;
+  margin-left: 3%;
+  padding-left: 2%;
+  padding-right: 2%;
+  background-color: #e5efff;
+  border-radius: 10px;
+  float: left;
+  margin-bottom: 0px;
+}
+
+.EventSpan1_2 {
+  color: black;
+  margin-left: 3%;
+  background-color: #e5efff;
+  padding-left: 2%;
+  padding-right: 2%;
+  border-radius: 10px;
+  float: left;
+  margin-bottom: 0px;
+}
+
+.EventSpan2 {
+  width: 85%;
+  float: left;
+  margin-top: 1.5%;
+  margin-left: 15%;
+  text-align: left;
+}
+
+.EventSpecific {
+  margin-top: 3%;
+  height: 30px;
+}
+
+.EventInfoTitle {
+  width: 30%;
+  margin-left: 10%;
+  margin-right: 0px;
+  margin-top: 3%;
+  text-align: left;
+  float: left;
+}
+
+.EventInfoTitle2 {
+  width: 30%;
+  margin-left: 10%;
+  margin-right: 0px;
+  margin-top: 5%;
+  text-align: left;
+  float: left;
+}
+
+.EventInfoContent {
+  width: 60%;
+  margin-left: 0px;
+  margin-top: 3%;
+  text-align: left;
+  float: right;
+}
+
+.EventInfoContent2 {
+  width: 60%;
+  margin-left: 0px;
+  margin-top: 5%;
+  text-align: left;
+  float: right;
+}
+
+.C_btm_image {
+  width: 95%;
+  height: 95%;
+}
+
+.ButtonLeft {
+  border: 1px solid black;
+  width: 30px;
+  height: 30px;
 }
