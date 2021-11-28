@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Modal,Button  } from 'react-bootstrap';
 import '../../css/todo/read.css';
 import List from '../comment/List'
 
@@ -30,7 +30,19 @@ class Read extends Component {
         return (
             <Modal  show={this.state.show} onHide={this.handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title><b>{this.state.todoDetail.title} </b></Modal.Title>
+                    <div style={{width:"100%"}}>
+                    <Modal.Title>
+                        <b style={{float:'left'}}>{this.state.todoDetail.title} </b>
+                            <div className="td-buttons">
+                                <Button className="td-modify-button" onClick={()=>this.modifyButton()}>
+                                    <img alt="" src="/img/pencil.png" className="td-modify-img"></img>
+                                </Button>
+                                <Button className="td-delete-button" onClick={()=>this.deleteComment()}>
+                                    <img alt="" src="/img/delete.png" className="td-delete-img"></img>
+                                </Button>
+                        </div>
+                    </Modal.Title>
+                    </div>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="td-infomations">

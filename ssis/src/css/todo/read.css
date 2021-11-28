@@ -51,3 +51,43 @@
   border-radius: 3px;
   margin-bottom: 8px;
 }
+
+.td-delete-button {
+  width: auto;
+  height: auto;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  margin-right: 20px;
+  margin-top: 5px;
+  padding: 0;
+  float: right;
+}
+
+.td-modify-button {
+  width: auto;
+  height: auto;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  padding: 0;
+  margin-top: 5px;
+  margin-right: 20px;
+  float: right;
+}
+
+.td-delete-img {
+  width: 20px;
+  height: 20px;
+}
+
+.td-modify-img {
+  width: 20px;
+  height: 20px;
+}
+
+.td-buttons {
+  float: right;
+}
