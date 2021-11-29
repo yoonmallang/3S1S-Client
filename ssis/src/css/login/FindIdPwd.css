@@ -1,0 +1,90 @@
+.container--layout {
+  width: 100%;
+  height: 100%;
+  margin-top: 20%;
+}
+
+.container__find {
+  display: inline-block;
+  height: 300px;
+  width: 1000px;
+  margin-left: 8%;
+  margin-right: 8%;
+}
+
+.container__find--id {
+  width: 32.5%;
+  height: 95%;
+  float: left;
+  margin-left: 10%;
+  margin-right: 7.5%;
+
+  margin-bottom: 1%;
+  border: 1px solid #737880;
+}
+
+.container__find--pw {
+  width: 32.5%;
+  height: 95%;
+  float: right;
+  margin-left: 7.5%;
+  margin-right: 10%;
+  margin-bottom: 1%;
+  border: 1px solid #737880;
+}
+
+.title__find--id {
+  width: 100%;
+  text-align: left;
+  float: left;
+  font-weight: 700;
+  font-size: 25px;
+  padding-left: 15px;
+  margin-bottom: 50px;
+}
+
+.title__find--pw {
+  width: 100%;
+  text-align: left;
+  float: left;
+  font-weight: 700;
+  font-size: 25px;
+  padding-left: 15px;
+  margin-bottom: 30px;
+}
+
+.form__findId {
+  margin-top: 30px;
+}
+
+.div__content {
+  width: 100%;
+  margin-bottom: 10%;
+}
+.span__content {
+  width: 30%;
+  float: left;
+}
+.input__find {
+  width: 60%;
+  float: left;
+  margin-right: 10%;
+  margin-bottom: 30px;
+}
+
+.btn__find--id {
+  width: 60px;
+  height: 30px;
+  float: right;
+  margin-right: 10%;
+  margin-top: 12.5%;
+  margin-bottom: 10%;
+}
+
+.btn__find--pw {
+  width: 60px;
+  height: 30px;
+  float: right;
+  margin-right: 10%;
+  margin-bottom: 10%;
+}
