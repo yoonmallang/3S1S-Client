@@ -32,9 +32,9 @@ class Read extends Component {
         console.log(this.state.modifiedTitle)
     }
 
-    modfiedIdClear = () => {
-        this.setState({ modifydocument: false, modifiedTitle: "", modifiedDesription: "", modifiedFileName: ""});
-    }
+    // modfiedIdClear = () => {
+    //     this.setState({ modifydocument: false, modifiedTitle: "", modifiedDesription: "", modifiedFileName: ""});
+    // }
 
     modifyComment = (fileId) => {
         axios.put(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/files/${fileId}`, {
@@ -44,7 +44,6 @@ class Read extends Component {
             file_url : "newUrl",
         }).then((res) => {
             console.log(res)
-            this.modfiedIdClear();
             this.handleClose();
         }).catch((err) => {
             console.log(err);

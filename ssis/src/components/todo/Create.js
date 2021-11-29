@@ -50,7 +50,6 @@ class Create extends Component {
                 }
             });
             this.setState({ participants: res.data.members });
-            console.log(this.state.participants)
         } catch (e) { 
             console.log(e); 
         }
@@ -99,11 +98,6 @@ class Create extends Component {
         const show = this.state.show
         const participants = this.state.participants
         const selectedParticipants = this.state.seletedParticipants
-
-        var curr = new Date();
-        curr.setDate(curr.getDate());
-        var date = curr.toISOString().substr(0,10);
-
         return (
             <span className="todo-create">
                 <Button className="add-todo-button" onClick={this.handleShow}>
@@ -129,12 +123,12 @@ class Create extends Component {
                     <div>
                         <Form.Group className="date1-form">
                             <Form.Label className="text">시작 일시</Form.Label>
-                            <input type="date" className="form-control" onChange={()=> this.startDateChange} defaultValue={date}/>
+                            <input type="date" className="form-control" onChange={this.startDateChange} defaultValue={this.state.start_date}/>
                         </Form.Group>
 
                         <Form.Group className="date2-form">
                             <Form.Label className="text">종료 일시</Form.Label>
-                            <input type="date" className="form-control"  onChange={()=> this.endDateChange} defaultValue={date}/>
+                            <input type="date" className="form-control"  onChange={this.endDateChange} defaultValue={this.state.end_date}/>
                         </Form.Group>
                     </div>
                     
