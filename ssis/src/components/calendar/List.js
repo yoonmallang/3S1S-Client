@@ -21,6 +21,7 @@ class List extends Component {
             events : [],
             flag : [0],
             eventID : "",
+            eventWriter : "",
             eventInfo: [],
             year: "",
             month:"",
@@ -82,23 +83,7 @@ class List extends Component {
       }
 
     render() {
-        // this.state.events = [
-        //     {
-        //       id: 1,
-        //       title: 'event 1',
-        //       start: '2021-11-14',
-        //       end: '2021-11-14',
-        //     },
-        //     {
-        //       id: 2,
-        //       title: 'event 2',
-        //       start: '2021-11-16T13:00:00',
-        //       end: '2021-11-16T18:00:00',
-        //     },
-        //     { id: 3, title: 'event 3', start: '2021-11-17', end: '2021-11-21' },
-        //     { id: 4, title: 'event 3', start: '2021-11-16', end: '2021-11-18' },
-        //   ];
-        
+
         let calendar_list = this.state.events && this.state.events.map(event =>{
               if(this.state.flag[0] === 0){
                 if(event.start===event.end){
@@ -137,16 +122,14 @@ class List extends Component {
 
           let content_title = this.state.flag.map(flag =>{
             if(this.state.flag[0] === 0){
+              console.log("if문으로 들어감")
               return <div className = "RightButton_cl">
                     <span className = "C_content"><b><big><big className="Big" id="event_title_right">일정 목록</big></big></b></span>
                     <Create p_id={this.state.projectID}/>
                   </div>
                   }
             else{
-              this.loadingEvent().then(
-
-              )
-              if(this.state.creator == this.state.eventInfo.writer){
+              if(this.state.creator == this.state.eventWriter){
                 return <div className = "RightButton_cl">
                 <span className = "C_content"><b><big><big className="Big" id="event_title_right">일정 세부 내용</big></big></b></span>
                 <button type="button" className="P_btm" id="img_btn" onClick={this.closeInfo}><img src="/img/cancel.png" className="P_btm_image" alt = ""></img></button>
@@ -160,8 +143,6 @@ class List extends Component {
                     <button type="button" className="P_btm" id="img_btn" onClick={this.closeInfo}><img src="/img/cancel.png" className="P_btm_image" alt = ""></img></button>
                     </div>
               }
-              
-              
             }
           })
           
@@ -180,6 +161,7 @@ class List extends Component {
                       eventClick={(e) => {
                         this.setState({flag: [1]})
                         this.setState({eventID: e.event.id})
+                        this.setState({eventWriter: e.event._def.extendedProps.writer_id})
                       }}
                 />
                 
