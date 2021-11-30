@@ -45,37 +45,46 @@
 .ProjectInfo_pr {
   width: 100%;
   height: 69%;
-  border: 1px solid #737880;
+  border: 2px solid #9a9fa7;
   margin-bottom: 1%;
+  border-radius: 0.5em;
+  padding: 1%;
 }
 
 .TeamList_pr {
   width: 100%;
   height: 28.8%;
-  border: 1px solid #737880;
+  border: 2px solid #9a9fa7;
   margin-bottom: 1%;
+  border-radius: 0.5em;
+  padding: 1%;
 }
 
 .Progress_bar_pr {
   width: 100%;
   height: 14%;
-  border: 1px solid #737880;
+  border: 2px solid #9a9fa7;
   margin-bottom: 1%;
+  border-radius: 0.5em;
+  padding: 1%;
 }
 
 .Contribution_pr {
   width: 100%;
   height: 39%;
-  border: 1px solid #737880;
+  border: 2px solid #9a9fa7;
   margin-bottom: 1%;
+  border-radius: 0.5em;
+  padding: 1%;
 }
 
 .Memo_pr {
   width: 100%;
   height: 44.5%;
-  border: 1px solid #737880;
+  border: 2px solid #9a9fa7;
   background-color: #e5efff;
   margin-bottom: 1%;
+  border-radius: 0.5em;
 }
 
 .MemoSpan {
@@ -121,22 +130,26 @@
 .Alarm {
   width: 100%;
   height: 44%;
-  border: 1px solid #737880;
+  border: 2px solid #9a9fa7;
   margin-bottom: 1%;
+  border-radius: 0.5em;
+  padding: 1%;
 }
 
 .MyToDo {
   width: 100%;
   height: 54%;
-  border: 1px solid #737880;
+  border: 2px solid #9a9fa7;
   margin-bottom: 1%;
+  border-radius: 0.5em;
+  padding: 1%;
 }
 
 .P_Title {
   width: 80%;
   height: 10%;
   margin-left: 7%;
-  margin-top: 5%;
+  margin-top: 3%;
   font-size: 2vw;
   float: left;
   text-align: left;
@@ -294,7 +307,14 @@
 .MemberSpan {
   display: inline-block;
   margin-left: 7%;
-  height: 30px;
+  height: 50px;
+  width: 70%;
+  overflow: auto;
+}
+
+.MemberSpan::-webkit-scrollbar {
+  width: 5px;
+  background-color: none;
 }
 
 .ContributionSpan1 {
@@ -312,6 +332,22 @@
 .LeaderCrown {
   width: 20px;
   height: 20px;
+  margin-top: 2.5%;
+  margin-left: 3px;
+  margin-right: 3%;
+  float: right;
+}
+
+.MoreButton {
+  border: none;
+  background: none;
+  float: right;
+  margin-right: 1.5%;
+}
+
+.MemberMore {
+  width: 15px;
+  height: 15px;
   margin-bottom: 1%;
 }
 
@@ -358,6 +394,7 @@
   width: 100%;
   margin-top: 55px;
   height: 162px;
+  overflow-x: hidden;
 }
 
 .TeamScroll::-webkit-scrollbar {
@@ -368,7 +405,8 @@
 .ContributionScroll {
   width: 100%;
   margin-top: 55px;
-  height: 240px;
+  height: 230px;
+  overflow-x: hidden;
 }
 
 .ContributionScroll::-webkit-scrollbar {
@@ -380,6 +418,7 @@
   width: 100%;
   margin-top: 55px;
   height: 275px;
+  overflow-x: hidden;
 }
 
 .AlarmScroll::-webkit-scrollbar {
@@ -391,6 +430,7 @@
   width: 100%;
   margin-top: 55px;
   height: 350px;
+  overflow-x: hidden;
 }
 
 .MyToDoScroll::-webkit-scrollbar {

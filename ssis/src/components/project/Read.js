@@ -10,6 +10,7 @@ class Read extends Component {
     constructor(props) {
         super(props);
         this.state = {
+          myID: sessionStorage.getItem("id"),
           isModalOpen: false,
           show: false,
           setShow: false,
@@ -20,7 +21,26 @@ class Read extends Component {
           notification_i:[],
           leader: "",
           memo: "",
+          showMenu: false,
         };
+      }
+
+      showMenu(event) {
+        event.preventDefault();
+        this.setState({ showMenu: true }, () => {
+          document.addEventListener('click', this.closeMenu);
+        });
+      }
+
+      closeMenu(event) {
+    
+        if (!this.dropdownMenu.contains(event.target)) {
+          
+          this.setState({ showMenu: false }, () => {
+            document.removeEventListener('click', this.closeMenu);
+          });  
+          
+        }
       }
 
       openModal = () => {
@@ -130,16 +150,47 @@ class Read extends Component {
         console.log("ssis")
         console.log(this.state.memo)
            
+        // {
+        //     this.state.showMenu
+        //     ? (
+        //     <div
+        //         className="menu"
+        //         ref={(element) => {
+        //         this.dropdownMenu = element;
+        //         }}
+        //     >
+        //         <button> 팀장 위임 </button>
+        //         <button> 팀원 방출 </button>
+        //     </div>
+        //     )
+        //     : (
+        //     null
+        //     )
+        // }
         let member_list = this.state.member && this.state.member.map(member =>{
             if(member.leader === 1)
             return <div className="Memberlist_pr">
-                    <span className = "MemberSpan">{member.user_id} <img src = "/img/crown.png" className = "LeaderCrown"></img></span>
+                    <span className = "MemberSpan">
+                        {member.user_id}         
+                    </span>
+                    <img src = "/img/crown.png" className = "LeaderCrown"/> 
                 </div>
             else
-            return <div className="Memberlist_pr">
+            {
+                if(this.state.myID == this.state.project.leader){
+                    return <div className="Memberlist_pr">
+                        <span className = "MemberSpan">{member.user_id}</span>
+                        <button onClick={this.showMenu} className = "MoreButton">
+                            <img src = "/img/more.png" className = "MemberMore"/>
+                        </button>
+                    </div>
+                }
+                else{
+                    return <div className="Memberlist_pr">
                     <span className = "MemberSpan">{member.user_id}</span>
-                    
-                </div>
+                    </div>
+                }
+                }
                 }   
             ); 
 
