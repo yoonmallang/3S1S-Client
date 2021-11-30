@@ -26,7 +26,6 @@ class List extends Component {
                     }
                 });
                 this.setState({ file: res.data.file });
-                console.log(this.state.file)
             } catch (e) { 
                 console.log(e); 
             }
@@ -34,7 +33,6 @@ class List extends Component {
 
         showDetail = async (fileId) => {
             try {
-                console.log(fileId)
                 const res = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/files/${fileId}`);
                 this.setState({fileDetail : res.data.file, showFileDetail : true})
         } catch (e) {
