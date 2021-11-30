@@ -1,10 +1,17 @@
 .App {
   text-align: center;
+  font-family: "Cafe24Simplehae";
+  font-weight: bold;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+@font-face {
+  font-family: "Cafe24Simplehae";
+  src: url("./font/Cafe24Simplehae.ttf");
 }
 
 @media (prefers-reduced-motion: no-preference) {

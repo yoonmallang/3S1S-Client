@@ -224,6 +224,10 @@ class Read extends Component {
             ); 
 
         let contribution_list = this.state.member && this.state.member.map(member =>{
+            return <div className="MemberContribution">
+                        <span className = "ContributionSpan1">{member.user_id}</span>
+                        <span className = "ContributionSpan2">{member.contribution_rate}%</span>
+                </div>
                 }   
             ); 
 

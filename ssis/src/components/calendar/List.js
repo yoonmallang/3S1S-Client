@@ -133,7 +133,6 @@ class List extends Component {
 
           let content_title = this.state.flag.map(flag =>{
             if(this.state.flag[0] === 0){
-              console.log("if문으로 들어감")
               return <div className = "RightButton_cl">
                     <span className = "C_content"><b><big><big className="Big" id="event_title_right">일정 목록</big></big></b></span>
                     <Create p_id={this.state.projectID}/>

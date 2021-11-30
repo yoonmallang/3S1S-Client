@@ -81,7 +81,7 @@ class Create extends Component {
         }
     }
 
-    removeSelect = (id) => {
+    removeSelect = (id) => { 
         const newArr = this.state.seletedParticipants.filter(info => info !== id);
         this.setState({
             seletedParticipants : newArr

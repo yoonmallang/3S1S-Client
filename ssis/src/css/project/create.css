@@ -35,12 +35,12 @@
 }
 
 .Img_pc {
-  margin-left: 20%;
+  margin-left: 15%;
   margin-top: 5%;
   border: 1px;
-  border-radius: 60%;
-  width: 55%;
-  height: 55%;
+  border-radius: 30%;
+  width: 60%;
+  height: 60%;
   float: left;
   vertical-align: middle;
 }

@@ -15,7 +15,7 @@ class Create extends Component {
             start_date: "",
             end_date: "",
             color: "",
-            color_list: [`#737880`, `#7a9acc`, `#99C0FF`, `#B7EDCD`, `#FFD4C4`]
+            color_list: [[`#737880`, 0], [`#7a9acc`, 0], [`#99C0FF`, 0], [`#B7EDCD`, 0], [`#FFD4C4`, 0]],
         }
     }
 
@@ -56,11 +56,36 @@ class Create extends Component {
         this.setState({show: true});
     };
 
+    deleteColor = () => {
+        this.setState({color_list: [[`#737880`, 0], [`#7a9acc`, 0], [`#99C0FF`, 0], [`#B7EDCD`, 0], [`#FFD4C4`, 0]]})
+    }
+
     componentDidMount() {
         }
 
     render() {
         const show = this.state.show
+
+        let color = this.state.color_list.map(color=>{
+            if(color[1] === 0)
+            return <button type = "button" key = {color[0]} style = {{background:color[0]}}
+            onClick={(e) => {
+                this.setState({color: color[0]})
+                this.deleteColor()
+                color[1] = 1
+                console.log(this.state.color_list)
+                
+            }} className="color_button"/>
+            else
+            return <button type = "button" key = {color[0]} style = {{background:color[0], border:'3px solid black'}}
+            onClick={(e) => {
+                this.setState({color: color[0]})
+                this.deleteColor()
+                color[1] = 1
+                console.log(this.state.color_list)
+                
+            }} className="color_button"/>
+        })
 
         return (
             <div>
@@ -94,8 +119,9 @@ class Create extends Component {
                     <Form.Group className="div-form_cc" controlId="formGridPassword1">
                         <Form.Label className="text">색상 선택</Form.Label>
                         <div className="form_color">
-                            {this.state.color_list.map(color=>(<button type = "button" key = {color} style = {{background:color}} onClick={() => this.setState({color: color})} className="color_button"/>))}
+                            {color}
                         </div>
+
                     </Form.Group>  
                 </Form>
                 
