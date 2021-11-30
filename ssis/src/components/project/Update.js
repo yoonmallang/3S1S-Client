@@ -68,6 +68,7 @@ class Update extends Component {
 
     handleClose = () => {
         this.setState({show: false});
+        this.setState({img_url: ""});
     };
 
     handleShow = () => {    
@@ -77,20 +78,15 @@ class Update extends Component {
     componentDidMount(){ //한번만 실행
         const {loadingData} = this;
         loadingData();
-        // console.log("진짜?")
-        // console.log(window.localStorage.getItem("id"))
-        // console.log(this.state.member)
-        // console.log("??????")
-        // console.log(this.state.project.title)
     }
 
     render() {
         const show = this.state.show
 
         const onChange2 = (e) => {
-          const img = e.target.files[0];
-          const formData = new FormData();
-          formData.append('file', img);
+            const img = e.target.files[0];
+            const imgURL = URL.createObjectURL(img)
+            this.setState({img_url: imgURL})
       }
 
         return (
@@ -104,15 +100,18 @@ class Update extends Component {
                 <Modal.Body>
                 <Form>
                     <div className = "ImageBox_pc">
-                      <div className = "Image_pc">
-                          <img src = "/img/group.png" className = "Img_pc" id= "image" alt = "/img/group.png"></img>
+                    <div className = "Image_pc1">
+                          <img src = {this.state.img_url} className = "Img_pc1" id="image" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/teamwork.png"}}></img>
                       </div>
                       <div>
-                        <input type='file' 
+                          <input type='file' 
                             accept='image/jpg,impge/png,image/jpeg,image/gif' 
                             name='profile_img' 
-                            onChange={onChange2}>
-                        </input>
+                            id="uploadImage"
+                            placeholder = ''
+                            className = "uploadImage"
+                            onChange={onChange2}/>
+                            <label for="uploadImage" className="selectfile"><span className="imageLabel">이미지 첨부</span></label>
                       </div>
                     </div>
                     <Form.Group className="div-form1_pc" controlId="formProject">

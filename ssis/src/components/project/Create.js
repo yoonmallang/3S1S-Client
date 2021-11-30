@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import '../../css/project/create.css';
@@ -49,6 +49,7 @@ class Create extends Component {
 
     handleClose = () => {
         this.setState({show: false});
+        this.setState({img_url: ""});
     };
 
     handleShow = () => {    
@@ -60,8 +61,8 @@ class Create extends Component {
 
         const onChange = (e) => {
           const img = e.target.files[0];
-          const formData = new FormData();
-          formData.append('file', img);
+          const imgURL = URL.createObjectURL(img)
+          this.setState({img_url: imgURL})
       }
 
         return (
@@ -75,15 +76,18 @@ class Create extends Component {
                 <Modal.Body>
                 <Form>
                     <div className = "ImageBox_pc">
-                      <div className = "Image_pc">
-                          <img src = "/img/group.png" className = "Img_pc" id= "image" alt = "/img/group.png"></img>
+                      <div className = "Image_pc1">
+                          <img src = {this.state.img_url} className = "Img_pc1" id="image" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/teamwork.png"}}></img>
                       </div>
                       <div>
-                        <input type='file' 
+                          <input type='file' 
                             accept='image/jpg,impge/png,image/jpeg,image/gif' 
                             name='profile_img' 
-                            onChange={onChange}>
-                        </input>
+                            id="uploadImage"
+                            placeholder = ''
+                            className = "uploadImage"
+                            onChange={onChange}/>
+                            <label for="uploadImage" className="selectfile"><span className="imageLabel">이미지 첨부</span></label>
                       </div>
                     </div>
                     <Form.Group className="div-form1_pc" controlId="formProject">
@@ -91,22 +95,22 @@ class Create extends Component {
                         <Form.Control className="dataInput-form_pc" placeholder="프로젝트 제목을 입력하세요." onChange={this.titleChange}/>
                     </Form.Group>
                 
-                    <Form.Group className="div-form1_pc" controlId="formTeam">
+                    <Form.Group className="div-form1_pc1" controlId="formTeam">
                         <Form.Label className="text">팀명<span className="spanRed">*</span></Form.Label>
                         <Form.Control className="dataInput-form_pc" placeholder="팀 이름을 입력하세요." onChange={this.teamChange}/>
                     </Form.Group>
                     
-                    <Form.Group className="div-form_pc" controlId="formGridPassword1">
+                    <Form.Group className="div-form_pc1" controlId="formGridPassword1">
                         <Form.Label className="text">프로젝트 개요<span className="spanRed">*</span></Form.Label>
                         <Form.Control as="textarea" rows={3} placeholder="프로젝트 개요를 입력하세요." onChange={this.descriptionChange}/>
                     </Form.Group>
                 
-                    <Form.Group className="div-form_pc" controlId="formGridPassword1">
+                    <Form.Group className="div-form_pc1" controlId="formGridPassword1">
                         <Form.Label className="text">과목</Form.Label>
                         <Form.Control className="dataInput-form_pc" placeholder="프로젝트 과목을 입력하세요." onChange={this.subjectChange}/>
                     </Form.Group>
 
-                    <Form.Group className="div-form_pc" controlId="formGridPassword1">
+                    <Form.Group className="div-form_pc1" controlId="formGridPassword1">
                         <Form.Label className="text">목적</Form.Label>
                         <Form.Control className="dataInput-form_pc" placeholder="프로젝트 목적을 입력하세요." onChange={this.purposeChange}/>
                     </Form.Group>    
