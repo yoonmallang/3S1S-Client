@@ -35,6 +35,15 @@
   border: none;
 }
 
+.color_button_selected {
+  width: 40px;
+  height: 40px;
+  margin-left: 3%;
+  margin-right: 5%;
+  border-radius: 30px;
+  border: 3px solid black;
+}
+
 .form_color {
   margin-top: 20px;
   width: 100%;

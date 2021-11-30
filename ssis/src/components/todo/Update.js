@@ -93,8 +93,11 @@ class Update extends Component {
     
 
     render() {
+        const show = this.state.show
+        const participants = this.state.participants
+        const modifiedParticipants = this.state.modifiedParticipants
         return (
-        <Modal show={this.state.show} onHide={this.handleClose}>
+        <Modal show={show} onHide={this.handleClose}>
             <Modal.Header closeButton>
                 <Modal.Title>ToDo 수정</Modal.Title>
             </Modal.Header>
@@ -125,14 +128,14 @@ class Update extends Component {
                 <div>
                     <Form.Select className="participant-form" onChange={this.handleSelect}>
                         <option value="none" hidden>참여자를 선택하세요.</option>
-                        {this.state.participants.map((item)=> {
+                        {participants.map((item)=> {
                             return (
                                 <option key={item.id} value={item.name}>{item.name}</option>
                             )
                         })}
                     </Form.Select>
                     <div className="participant-form">
-                        {this.state.modifiedParticipants.map((item)=> {
+                        {modifiedParticipants.map((item)=> {
                             return (
                                 <div>
                                     <span>{item}</span>

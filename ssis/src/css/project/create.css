@@ -4,8 +4,14 @@
   float: right;
 }
 
-.div-form_pc {
-  margin-top: 1%;
+.div-form1_pc1 {
+  margin-top: 3%;
+  width: 60%;
+  float: right;
+}
+
+.div-form_pc1 {
+  margin-top: 3%;
   width: 100%;
   float: right;
 }
@@ -22,27 +28,47 @@
   float: right;
 }
 
+.uploadImage {
+  display: none;
+}
+
+.selectfile {
+  width: 60%;
+  margin-top: 2%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
 .ImageBox_pc {
   width: 40%;
   float: left;
   vertical-align: middle;
 }
 
-.Image_pc {
+.imageLabel {
+  background-color: beige;
+}
+
+.Image_pc1 {
   width: 100%;
   margin-top: 5%;
   vertical-align: middle;
+  border-radius: 30%;
 }
 
-.Img_pc {
-  margin-left: 20%;
+.Img_pc1 {
+  margin-left: 15%;
   margin-top: 5%;
   border: 1px;
-  border-radius: 60%;
-  width: 55%;
-  height: 55%;
+  width: 60%;
+  height: 60%;
   float: left;
   vertical-align: middle;
+}
+
+.ImageUpdate {
+  overflow: hidden;
+  display: block;
 }
 
 .btm_add_pc {
