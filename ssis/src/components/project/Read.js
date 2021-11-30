@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Dropdown} from 'react-bootstrap';
 import '../../css/project/read.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios'; 
@@ -19,28 +20,12 @@ class Read extends Component {
           member:[],
           notification_p:[],
           notification_i:[],
-          leader: "",
+          leader: "kdsvip123",
+          delMember: "",
           memo: "",
           showMenu: false,
+
         };
-      }
-
-      showMenu(event) {
-        event.preventDefault();
-        this.setState({ showMenu: true }, () => {
-          document.addEventListener('click', this.closeMenu);
-        });
-      }
-
-      closeMenu(event) {
-    
-        if (!this.dropdownMenu.contains(event.target)) {
-          
-          this.setState({ showMenu: false }, () => {
-            document.removeEventListener('click', this.closeMenu);
-          });  
-          
-        }
       }
 
       openModal = () => {
@@ -122,12 +107,61 @@ class Read extends Component {
             const id = this.props.match.params.id;
             const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${id}/memo`);         
             this.setState({memo: response.data.item})
-            console.log("memo내용");
-            console.log(response.data);
-            console.log(this.state.memo);
         } catch (e) 
         { console.log(e); }
       };
+
+      authLeader = () => {
+        const id = this.props.match.params.id;
+        axios.put(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/members/authleader`, {
+            project: id,
+            leader: this.state.leader,
+        }).then((res) => {
+            console.log(res.data);
+            if (res.status === 200) {
+                document.location.href = `/project/${id}`;
+            }
+            else if (res.status === 210) {
+                alert(res.data.message);
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+      }
+
+      deleteMember = () => {
+        const id = this.props.match.params.id;
+        axios.post(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/members/delete`, {
+            project: id,
+            user: this.state.delMember,
+        }).then((res) => {
+            console.log(res.data);
+            if (res.status === 200) {
+                document.location.href = `/project/${id}`;
+            }
+            else if (res.status === 210) {
+                alert(res.data.message);
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+      }
+
+      confirmAuthModal() {
+        if (window.confirm("해당 팀원에게 팀장을 위임하시겠습니까?")) {
+          this.authLeader();
+        } else {
+          console.log("취소. 변화 없음");
+        }
+      }
+
+      confirmDeleteModal() {
+        if (window.confirm("해당 팀원을 방출하시겠습니까?")) {
+          this.deleteMember();
+        } else {
+          console.log("취소. 변화 없음");
+        }
+      }
     
     componentDidMount(){ //한번만 실행
         const {loadingData, loadingMember, loadingNotification_p, loadingNotification_i, getmemo} = this;
@@ -136,7 +170,6 @@ class Read extends Component {
         loadingNotification_p();
         loadingNotification_i();
         getmemo();
-        console.log(window.localStorage.getItem("id"))
     }
 
     render() {
@@ -145,28 +178,8 @@ class Read extends Component {
         console.log(localStorage)
         localStorage.setItem("description", this.state.project.description)
         let description = localStorage.getItem("description")
-        localStorage.removeItem("description")
-
-        console.log("ssis")
-        console.log(this.state.memo)
-           
-        // {
-        //     this.state.showMenu
-        //     ? (
-        //     <div
-        //         className="menu"
-        //         ref={(element) => {
-        //         this.dropdownMenu = element;
-        //         }}
-        //     >
-        //         <button> 팀장 위임 </button>
-        //         <button> 팀원 방출 </button>
-        //     </div>
-        //     )
-        //     : (
-        //     null
-        //     )
-        // }
+        localStorage.removeItem("description")           
+        
         let member_list = this.state.member && this.state.member.map(member =>{
             if(member.leader === 1)
             return <div className="Memberlist_pr">
@@ -180,9 +193,25 @@ class Read extends Component {
                 if(this.state.myID == this.state.project.leader){
                     return <div className="Memberlist_pr">
                         <span className = "MemberSpan">{member.user_id}</span>
-                        <button onClick={this.showMenu} className = "MoreButton">
-                            <img src = "/img/more.png" className = "MemberMore"/>
-                        </button>
+                        <Dropdown className="MoreButton">
+                            <Dropdown.Toggle className="more_dropButton">
+                                <div className="more_button">
+                                    <img src = "/img/more.png" className = "MemberMore"/>
+                                </div>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu className="more_menu">
+                                <Dropdown.Item onClick={async () => {
+                                    let a = await this.setState({leader: member.user_id})
+                                    this.confirmAuthModal()
+                                }
+                                }>팀장 위임</Dropdown.Item>
+                                <Dropdown.Divider />
+                                <Dropdown.Item onClick={async () => {
+                                    let a = await this.setState({delMember: member.user_id})
+                                    this.confirmDeleteModal()
+                                }}>팀원 방출</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </div>
                 }
                 else{
@@ -195,10 +224,6 @@ class Read extends Component {
             ); 
 
         let contribution_list = this.state.member && this.state.member.map(member =>{
-            return <div className="MemberContribution">
-                    <span className = "ContributionSpan1">{member.user_id}</span>
-                    <span className = "ContributionSpan2">{member.contribution_rate}%</span>
-            </div>
                 }   
             ); 
 

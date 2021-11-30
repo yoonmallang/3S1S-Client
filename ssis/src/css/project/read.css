@@ -338,11 +338,30 @@
   float: right;
 }
 
+.more_dropButton {
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: transparent;
+  border: none;
+  padding: 0;
+  height: 30px;
+}
+
+.more_menu {
+  z-index: 10;
+}
+
 .MoreButton {
   border: none;
   background: none;
   float: right;
-  margin-right: 1.5%;
+  margin-right: 5%;
+  height: auto;
+}
+
+.more_button {
+  margin-bottom: 2%;
+  margin-right: 5%;
 }
 
 .MemberMore {
@@ -393,7 +412,7 @@
 .TeamScroll {
   width: 100%;
   margin-top: 55px;
-  height: 162px;
+  height: 150px;
   overflow-x: hidden;
 }
 
