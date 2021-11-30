@@ -19,12 +19,11 @@ class List extends Component {
             creator : sessionStorage.getItem("id"),
             projectID: "",
             events : [],
+            lists : [],
             flag : [0],
             eventID : "",
             eventWriter : "",
             eventInfo: [],
-            year: "",
-            month:"",
             isWriter: "",
         }
     }
@@ -45,10 +44,19 @@ class List extends Component {
       { console.log(e); }
     };
 
-    loadingEvent = async () => { 
+    loadingList = async () => { 
       try { 
-          const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/schedules/${this.state.eventID}`);           
-          this.setState({eventInfo: response.data.schedule_content})
+        let a = await this.setState({projectID: this.props.match.params.id})
+          console.log(this.props.match.params.id)
+          console.log(this.state.projectID)
+          const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/schedules`,{
+            params:{
+              project : this.state.projectID,
+              type : "list"
+            }
+          });            
+          console.log(response.data.schedule_list)
+          this.setState({lists: response.data.schedule_list})
       } catch (e) 
       { console.log(e); }
     };
@@ -75,28 +83,31 @@ class List extends Component {
     };
 
     componentDidMount() {
-      const {loadingData} = this;
+      const {loadingData, loadingList} = this;
         loadingData();
-      let now = new Date();
-      this.setState({month: now.getMonth()+1})
-      this.setState({year: now.getFullYear})
+        loadingList();
       }
 
     render() {
 
-        let calendar_list = this.state.events && this.state.events.map(event =>{
+        console.log("lists")
+        console.log(this.state.lists)
+        let calendar_list = this.state.lists && this.state.lists.map(event =>{
               if(this.state.flag[0] === 0){
-                if(event.start===event.end){
-                  return <div className="CalendarEvent">
-                  <p className = "EventSpan1_1"> {Moment(event.start).format('MM/D')}</p>
-                  <p className = "EventSpan2">{event.title}</p>
+                if(event.is_end == true)
+                {
+                  if(event.start_date===event.end_date){
+                    return <div className="CalendarEvent">
+                    <p className = "EventSpan1_1"> {Moment(event.start_date).format('MM/D')}</p>
+                    <p className = "EventSpan2">{event.title}</p>
+                    </div>
+                  }
+                  else{
+                    return <div className="CalendarEvent">
+                          <p className = "EventSpan1_2"> {Moment(event.start_date).format('MM/D')}~{Moment(event.end_date).format('MM/D')} </p>
+                          <p className = "EventSpan2">{event.title}</p>
                   </div>
-                }
-                else{
-                  return <div className="CalendarEvent">
-                        <p className = "EventSpan1_2"> {Moment(event.start).format('MM/D')}~{Moment(event.end).format('MM/D')} </p>
-                        <p className = "EventSpan2">{event.title}</p>
-                </div>
+                  }
                 }
               }
               else{
@@ -151,6 +162,7 @@ class List extends Component {
             <Middlebar id={this.props.match.params}/>
             <div className = "Calendar_cl">
                 <div className="LeftContent_cl">
+                <div className = "fullCalender">
                 <FullCalendar
                     plugins={[dayGridPlugin, interactionPlugin]} //, timeGridPlugin, interactionPlugin
                     initialView="dayGridMonth"
@@ -164,7 +176,7 @@ class List extends Component {
                         this.setState({eventWriter: e.event._def.extendedProps.writer_id})
                       }}
                 />
-                
+                </div>
                 </div>
                 <div className="RightContent_cl">
                   {content_title}
