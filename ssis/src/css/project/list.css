@@ -60,17 +60,18 @@
 
 .Image_pl {
   width: 40%;
+  width: 40%;
   margin-top: 5%;
   vertical-align: middle;
 }
 
 .Img_pl {
-  margin-left: 15%;
-  margin-top: 5%;
+  margin-left: 10%;
+  margin-top: 1%;
   border: 1px;
   border-radius: 30%;
-  width: 60%;
-  height: 60%;
+  width: 80px;
+  height: 80px;
   float: left;
   vertical-align: middle;
 }

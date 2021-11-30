@@ -1,7 +1,6 @@
 .App {
   text-align: center;
   font-family: "Cafe24Simplehae";
-  font-weight: bold;
 }
 
 .App-logo {
@@ -11,7 +10,7 @@
 
 @font-face {
   font-family: "Cafe24Simplehae";
-  src: url("./font/Cafe24Simplehae.ttf");
+  src: url("./font/SDSamliphopangcheTTFBasic.ttf");
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -112,9 +112,13 @@
 }
 
 .MemoPage {
-  margin: 2%;
+  margin-left: 3%;
+  margin-top: 2%;
+  margin-bottom: 3%;
+  margin-right: 2%;
   width: 96%;
   height: 83%;
+  font-family: none;
   background-color: none;
   border: none;
   background: transparent;
@@ -266,6 +270,7 @@
 .Big {
   color: black;
   border-bottom: 5px solid #96bcf8;
+  font-weight: 550;
 }
 
 .P_contentBox {

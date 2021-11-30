@@ -262,7 +262,7 @@ class Read extends Component {
                                 <p className = "P_teamName">{this.state.project.team}</p>
                             </div>
                             <div className = "P_contentBox">
-                                <p className = "P_content"><b><big className="Big">프로젝트 개요</big></b></p>
+                                <p className = "P_content"><big className="Big">프로젝트 개요</big></p>
                                 <p className = "P_content1">
                                     {
                                 description.split("\n").map(line => {
@@ -272,16 +272,16 @@ class Read extends Component {
                                 </p>
                             </div>
                             <div className = "P_contentBox1">
-                                <p className = "P_content"><b><big className="Big">과목</big></b></p>
+                                <p className = "P_content"><big className="Big">과목</big></p>
                                 <p className = "P_content2">{this.state.project.subject}</p>
                             </div>
                             <div className = "P_contentBox1">
-                                <p className = "P_content"><b><big className="Big">목적</big></b></p>
+                                <p className = "P_content"><big className="Big">목적</big></p>
                                 <p className = "P_content2">{this.state.project.purpose}</p>
                             </div>
                         </div>
                         <div className = "TeamList_pr">
-                            <p className = "P_contentName"><b><big className="Big">팀원 리스트</big></b></p>
+                            <p className = "P_contentName"><big className="Big">팀원 리스트</big></p>
                             <Search p_id={this.state.projectID}/>
                             <div className = "TeamScroll">
                                 {member_list}
@@ -290,32 +290,32 @@ class Read extends Component {
                     </div>
                     <div className = "CenterContent_pr">
                         <div className = "Progress_bar_pr">
-                            <p className = "P_contentName"><b><big className="Big">진행률</big></b></p>
-                            <p className = "P_progressRate"><b><big>{this.state.project.progress_rate}%</big></b></p>
+                            <p className = "P_contentName"><big className="Big">진행률</big></p>
+                            <p className = "P_progressRate"><big>{this.state.project.progress_rate}%</big></p>
                             <progress value={this.state.project.progress_rate} max="100" className="ProgressBar_pr"></progress>
                         </div>
                         <div className = "Contribution_pr">
-                            <p className = "P_contentName"><b><big className="Big">멤버별 기여</big></b></p>
+                            <p className = "P_contentName"><big className="Big">멤버별 기여</big></p>
                             <div className = "ContributionScroll">
                                 {contribution_list}
                             </div>
                         </div>
                         <div className = "Memo_pr">
-                            <p className = "P_contentName"><b><big className="Big">프로젝트 메모장</big></b></p>
+                            <p className = "P_contentName"><big className="Big">프로젝트 메모장</big></p>
                             <button className="Memobutton" id="img_btn" onClick={this.onClickMemoSubmit}><img src="/img/check.png" className="P_btm_image_memo" alt = ""></img></button>
-                            <textarea type = "text" className = "MemoPage" defaultValue={this.state.memo} onChange={this.memoChange} />
+                            <textarea type = "text" className = "MemoPage" defaultValue={this.state.memo} onChange={this.memoChange}/>
                         </div>
                     </div>
                     <div className = "RightContent_pr">
                         <div className = "Alarm">
-                            <p className = "P_contentName"><b><big className="Big">프로젝트 알림</big></b></p>
+                            <p className = "P_contentName"><big className="Big">프로젝트 알림</big></p>
                             <p className = "AlertNum"><b><big>{this.state.notification_p.length}</big></b></p>
                             <div className="AlarmScroll">
                                 {notification_list_p}
                             </div>
                         </div>
                         <div className = "MyToDo">
-                            <p className = "P_contentName"><b><big className="Big">내 할 일 보기</big></b></p>
+                            <p className = "P_contentName"><big className="Big">내 할 일 보기</big></p>
                             <p className = "AlertNum"><b><big>{this.state.notification_i.length}</big></b></p>
                             <div className="MyToDoScroll">
                                 {notification_list_i}

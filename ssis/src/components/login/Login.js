@@ -118,12 +118,12 @@ class Login extends Component {
         </Button>
         <Link to="/register" style={{ textDecoration: "none" }}>
           <Button className="lg-register-Button" variant="primary">
-            회원가입
+          회원가입
           </Button>
         </Link>
         <Link to="/findIdPwd" style={{ textDecoration: "none" }}>
           <Button className="lg-find-Button" variant="primary">
-            Id/Pw 찾기
+          ID/PW 찾기
           </Button>
         </Link>
       </div>
