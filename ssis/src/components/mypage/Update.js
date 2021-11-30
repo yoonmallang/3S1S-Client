@@ -73,7 +73,7 @@ class Update extends Component {
         return (
             <div className="mypage-page">
                     <img alt="" src={profileImg} className="mp-profile-img"/>
-                    <hr style={{width:'200px'}}/>
+                    <hr style={{width:'250px'}}/>
                     <Form>
                         <Form.Group className="mp-input">
                             <Form.Control type="text" value={this.state.user.name}/>
@@ -96,7 +96,6 @@ class Update extends Component {
                             <Button className="mpup-update-Button" variant="primary" onClick={this.modifyInfo}>
                                 확인
                             </Button>
-        
                     </div>
             </div>
         );

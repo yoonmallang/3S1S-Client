@@ -41,7 +41,7 @@ class Read extends Component {
         return (
             <div className="mypage-page">
                     <img alt="" src={profileImg} className="mp-profile-img"/>
-                    <hr style={{width:'200px'}}/>
+                    <hr style={{width:'250px'}}/>
                     <p className="mp-text">{this.state.user.name}</p>
                     <p className="mp-text">{this.state.user.email}</p>
                     <p className="mp-text">{this.state.user.belong}</p>
