@@ -39,8 +39,9 @@
   float: left;
   font-weight: 700;
   font-size: 25px;
-  padding-left: 15px;
+  padding-left: 20px;
   margin-bottom: 50px;
+  margin-top: 25px;
 }
 
 .title__find--pw {
@@ -50,7 +51,8 @@
   font-weight: 700;
   font-size: 25px;
   padding-left: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
+  margin-top: 20px;
 }
 
 .form__findId {
@@ -69,7 +71,7 @@
   width: 60%;
   float: left;
   margin-right: 10%;
-  margin-bottom: 30px;
+  margin-bottom: 22px;
 }
 
 .btn__find--id {
@@ -77,8 +79,7 @@
   height: 30px;
   float: right;
   margin-right: 10%;
-  margin-top: 12.5%;
-  margin-bottom: 10%;
+  margin-top: 15px;
 }
 
 .btn__find--pw {
@@ -86,5 +87,9 @@
   height: 30px;
   float: right;
   margin-right: 10%;
-  margin-bottom: 10%;
+  margin-top :0;
+}
+
+.find__id {
+  margin-top:43%;
 }

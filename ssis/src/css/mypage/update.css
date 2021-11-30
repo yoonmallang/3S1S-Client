@@ -1,0 +1,25 @@
+.mp-input {
+    margin-bottom: 16px;
+}
+
+
+.mpup-update-Button {
+    float: left;
+    font-size: 12px;
+    width: 45%;
+    color: black;
+    background-color: #99c0ff;
+    border-color: #99c0ff;
+    border-radius: 8%;
+    margin-right: 3%;
+  }
+  
+  .mpup-cancel-Button {
+    float: right;
+    font-size: 12px;
+    width: 45%;
+    color: #fff;
+    background-color: #788088;
+    border-color: #6c757d;
+    border-radius: 8%;
+  }
