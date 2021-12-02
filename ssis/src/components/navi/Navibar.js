@@ -42,15 +42,9 @@ class Navibar extends Component {
     render() {
         const isLogin = this.state.isLogin;
         let username;
-        let profile;
 
         if (isLogin) {
             username = this.state.loginedName;
-            profile = "/img/blank-person.png";
-        }
-        else {
-            username = "xxx";
-            profile = "/img/blank-person.png";
         }
 
         if (isLogin) {
@@ -66,8 +60,7 @@ class Navibar extends Component {
                                 <Dropdown className="user-name-dropdown">
                                     <Dropdown.Toggle className="person-dropButoon">
                                         <div className="navi-person">
-                                            <img alt="" src={profile} className="img-person"/>
-                                            <span className="text-person">{username}</span>
+                                            <span className="text-person">{username} 님</span>
                                         </div>
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
