@@ -173,9 +173,6 @@ class Read extends Component {
     }
 
     render() {
-        
-        console.log("로컬스토리지")
-        console.log(localStorage)
         localStorage.setItem("description", this.state.project.description)
         let description = localStorage.getItem("description")
         localStorage.removeItem("description")           

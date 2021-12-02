@@ -114,12 +114,6 @@ class Create extends Component {
         const show = this.state.show
         let profileImg = "";
 
-        const onChange = (e) => {
-          const img = e.target.files[0];
-          const imgURL = URL.createObjectURL(img)
-          this.setState({img_url: imgURL})
-      }
-
       if (this.state.previewImg !== "") {
         profileImg = this.state.previewImg;
         }
