@@ -117,7 +117,7 @@
   margin-bottom: 3%;
   margin-right: 2%;
   width: 96%;
-  height: 83%;
+  height: 81%;
   font-family: none;
   background-color: none;
   border: none;
@@ -452,7 +452,7 @@
 .AlarmScroll {
   width: 100%;
   margin-top: 55px;
-  height: 275px;
+  height: 265px;
   overflow-x: hidden;
 }
 
@@ -464,7 +464,7 @@
 .MyToDoScroll {
   width: 100%;
   margin-top: 55px;
-  height: 350px;
+  height: 340px;
   overflow-x: hidden;
 }
 

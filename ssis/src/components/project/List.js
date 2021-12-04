@@ -34,6 +34,7 @@ class List extends Component {
     
     render() { //계속 업데이트
         const projects = this.state.projects
+        console.log(this.state.projects)
 
         function confirmModal(id) {
             if (window.confirm("프로젝트를 삭제하시겠습니까?")) {
@@ -50,8 +51,22 @@ class List extends Component {
 
         function deleteProject(id) {
             console.log('You clicked delete.');
+            console.log(sessionStorage.getItem("id"))
             try { 
-                axios.delete("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/" + id);
+                axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/members/delete",{
+                    "project": id,
+                    "user": sessionStorage.getItem("id")
+                })
+                .then((res) => {
+                    console.log("res.data");
+                    console.log(res.data);
+                    if (res.status === 210) {
+                        alert(res.data.message);
+                    }
+                    else if(res.status === 210) {
+                        alert("200왔어요");
+                    }
+                });
                 window.location.replace("/project")
             } catch (e) 
             { console.log(e); }

@@ -30,9 +30,10 @@ class Search extends Component {
             invitees: this.state.selectedParticipants,
             inviter: this.state.creator,
         }).then((res) => {
-            console.log(res.data);
-            if (res.status === 201) {
-                document.location.href = "/project";
+            console.log("res.status")
+            console.log(res.status);
+            if (res.status === 200) {
+                alert("초대를 완료하였습니다.")
             }
             else if (res.status === 210) {
                 alert(res.data.message);
