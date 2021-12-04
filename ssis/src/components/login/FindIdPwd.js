@@ -106,7 +106,7 @@ class FindIdPwd extends Component {
           }
 
           <div className="container__find--pw ">
-            <span className="title__find--pw">비밀번호 찾기</span>
+            <span className="title__find--pw">임시 비밀번호 발급</span>
             <form className="form__findPw">
               <div className="div__content">
                 <span className="span__content">아이디</span>

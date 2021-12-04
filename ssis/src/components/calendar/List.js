@@ -116,9 +116,9 @@ class List extends Component {
                     <span className="EventInfoTitle">제목</span>
                     <span className="EventInfoContent">{event.title}</span>
                     <span className="EventInfoTitle">시작 일자</span>
-                    <span className="EventInfoContent">{Moment(event.start).format('YYYY/MM/D')}</span>
+                    <span className="EventInfoContent">{Moment(event.start_date).format('YYYY/MM/D')}</span>
                     <span className="EventInfoTitle">종료 일자</span>
-                    <span className="EventInfoContent">{Moment(event.end).format('YYYY/MM/D')}</span>
+                    <span className="EventInfoContent">{Moment(event.end_date).format('YYYY/MM/D')}</span>
                     <span className="EventInfoTitle2">내용</span>
                     <span className="EventInfoContent2">
                           {event.description.split("\n").map(line => {

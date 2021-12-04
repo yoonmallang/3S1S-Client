@@ -14,7 +14,7 @@ class Create extends Component {
             description: "",
             start_date: "",
             end_date: "",
-            color: "",
+            color: "#7a9acc",
             color_list: [[`#737880`, 0], [`#7a9acc`, 0], [`#99C0FF`, 0], [`#a4e2bd`, 0], [`#FFD4C4`, 0]],
         }
     }
