@@ -3,6 +3,22 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import '../../css/document/create.css';
 import axios from 'axios';
 
+import AWS from 'aws-sdk';
+
+const S3_BUCKET = process.env.REACT_APP_BUCKET_NAME;
+const REGION = process.env.REACT_APP_REGION;
+
+
+AWS.config.update({
+    accessKeyId: process.env.REACT_APP_ACCESS_KEY,
+    secretAccessKey: process.env.REACT_APP_SECRET_KEY
+  });
+  
+const myBucket = new AWS.S3({
+    params: { Bucket: S3_BUCKET},
+    region: REGION,
+});
+
 class Create extends Component {
     constructor(props) {
         super(props);
@@ -13,8 +29,10 @@ class Create extends Component {
             title: "",
             description: "",
             file_name :"",
-            file_url :"url",
-            ddd :""
+            file_url :"",
+            selectFile : "",
+
+            progress : ""
         }
     }
 
@@ -27,8 +45,6 @@ class Create extends Component {
             file_name :this.state.file_name,
             file_url :this.state.file_url
         }).then((res) => {
-            console.log(res.data);
-            console.log(this.state.ddd)
             document.location.href = `/project/${this.state.project}/document`;
         }).catch((err) => {
             console.log(err);
@@ -37,8 +53,34 @@ class Create extends Component {
 
     titleChange = (e) => {this.setState({title: e.target.value})};
     descriptionChange = (e) => {this.setState({description: e.target.value})};
-    fileNameChange = (e) => {this.setState({file_name: e.target.files[0]['name']})};
-    fileUrlChange = (e) => {this.setState({file_url: e.target.value})};
+    //fileNameChange = (e) => {this.setState({file_name: e.target.files[0]['name']})};
+    // fileUrlChange = (e) => {this.setState({file_url: e.target.value})};
+    fileUrlChange = (e) => {
+        const file = e.target.files[0];
+        let fileName = encodeURI(file.name)
+        this.setState({
+            file_url: `https://dgusogongssis.s3.ap-northeast-2.amazonaws.com/${fileName}`,
+            selectFile : file,
+            file_name: e.target.files[0]['name']
+        })
+    }
+
+    uploadFile = (file) => {
+        const params = {
+          ACL: 'public-read',
+          Body: file,
+          Bucket: S3_BUCKET,
+          Key: file.name
+        };
+        
+        myBucket.putObject(params)
+          .on('httpUploadProgress', (evt) => {
+            this.setState({progress : Math.round((evt.loaded / evt.total) * 100)})
+          })
+          .send((err) => {
+            if (err) console.log(err)
+          })
+      }
 
     handleClose = () => {
         this.setState({show: false});
@@ -74,7 +116,7 @@ class Create extends Component {
 
                     <Form.Group className="tdd-div-form">
                         <Form.Label className="text">파일</Form.Label>
-                        <Form.Control type="file" size="sm" onChange={this.fileNameChange}/>
+                        <Form.Control type="file" size="sm" onChange={this.fileUrlChange}/>
                     </Form.Group>
                 </Form> 
                 </Modal.Body>
@@ -82,7 +124,7 @@ class Create extends Component {
                     <Button variant="secondary" onClick={this.handleClose}>
                         취소
                     </Button>
-                    <Button className="create-Button" type="submit" onClick={this.onClickSubmit}>
+                    <Button className="create-Button" type="submit" onClick={()=> {this.onClickSubmit(); this.uploadFile(this.state.selectFile)}}>
                         공유
                     </Button>
                 </Modal.Footer>

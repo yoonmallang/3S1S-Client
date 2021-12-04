@@ -3,6 +3,22 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import '../../css/project/create.css';
 
+import AWS from 'aws-sdk';
+
+const S3_BUCKET = process.env.REACT_APP_BUCKET_NAME;
+const REGION = process.env.REACT_APP_REGION;
+
+
+AWS.config.update({
+    accessKeyId: process.env.REACT_APP_ACCESS_KEY,
+    secretAccessKey: process.env.REACT_APP_SECRET_KEY
+  });
+  
+const myBucket = new AWS.S3({
+    params: { Bucket: S3_BUCKET},
+    region: REGION,
+});
+
 class Update extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +32,9 @@ class Update extends Component {
             purpose: "",
             img_url: "",
             project:[],
+
+            selectImg : "",
+            previewImg : "",
         }
     }
 
@@ -48,8 +67,8 @@ class Update extends Component {
             img_url: this.state.img_url,
         }).then((res) => {
             console.log(res.data);
-            if (res.status === 201) {
-                document.location.href = "/project";
+            if (res.status === 200) {
+                document.location.href = `/project/${id}`;
             }
             else if (res.status === 210) {
                 alert(res.data.message);
@@ -64,7 +83,42 @@ class Update extends Component {
     descriptionChange = (e) => {this.setState({description: e.target.value})};
     subjectChange = (e) => {this.setState({subject: e.target.value})};
     purposeChange = (e) => {this.setState({purpose: e.target.value})};
-    img_urlChange = (e) => {this.setState({img_url: e.target.value})};
+
+    img_urlChange = (e) => {
+        e.preventDefault();
+        let reader = new FileReader();
+        const file = e.target.files[0];
+        let fileName = encodeURI(file.name)
+        this.setState({
+            img_url: `https://dgusogongssis.s3.ap-northeast-2.amazonaws.com/${fileName}`,
+            selectImg : file
+        })
+        reader.onloadend = () => {
+            this.setState({
+                previewImg : reader.result
+            })
+        }
+
+        reader.readAsDataURL(file)
+    }
+
+    uploadImg = (file) => {
+        const params = {
+          ACL: 'public-read',
+          Body: file,
+          Bucket: S3_BUCKET,
+          Key: file.name
+        };
+        
+        myBucket.putObject(params)
+          .on('httpUploadProgress', (evt) => {
+            this.setState({progress : Math.round((evt.loaded / evt.total) * 100)})
+          })
+          .send((err) => {
+            if (err) console.log(err)
+          })
+      }
+
 
     handleClose = () => {
         this.setState({show: false});
@@ -83,11 +137,17 @@ class Update extends Component {
     render() {
         const show = this.state.show
 
-        const onChange2 = (e) => {
-            const img = e.target.files[0];
-            const imgURL = URL.createObjectURL(img)
-            this.setState({img_url: imgURL})
-      }
+        let profileImg = "";
+
+      if (this.state.previewImg !== "") {
+        profileImg = this.state.previewImg;
+        }
+        else if (this.state.img_url === "") {
+            profileImg = "/img/teamwork.png";
+        }
+        else {
+            profileImg = this.state.img_url;
+        }
 
         return (
             <div>
@@ -101,16 +161,16 @@ class Update extends Component {
                 <Form>
                     <div className = "ImageBox_pc">
                     <div className = "Image_pc1">
-                          <img src = {this.state.img_url} className = "Img_pc1" id="image" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/teamwork.png"}}></img>
+                          <img src = {profileImg} className = "Img_pc1" id="image" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/teamwork.png"}}></img>
                       </div>
                       <div>
                           <input type='file' 
-                            accept='image/jpg,impge/png,image/jpeg,image/gif' 
+                            accept='image/*'  
                             name='profile_img' 
                             id="uploadImage"
                             placeholder = ''
                             className = "uploadImage"
-                            onChange={onChange2}/>
+                            onChange={this.img_urlChange}/>
                             <label for="uploadImage" className="selectfile"><span className="imageLabel">이미지 첨부</span></label>
                       </div>
                     </div>
@@ -145,7 +205,7 @@ class Update extends Component {
                     <Button variant="secondary" onClick={this.handleClose}>
                         취소
                     </Button>
-                    <Button className="create-Button" type="submit" onClick={()=>{this.onClickSubmit()}}>
+                    <Button className="create-Button" type="submit" onClick={()=>{this.onClickSubmit(); this.uploadImg(this.state.selectImg)}}>
                         수정
                     </Button>
                 </Modal.Footer>
