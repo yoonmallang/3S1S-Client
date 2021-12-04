@@ -123,7 +123,7 @@ class Login extends Component {
         </Link>
         <Link to="/findIdPwd" style={{ textDecoration: "none" }}>
           <Button className="lg-find-Button" variant="primary">
-          ID/PW 찾기
+          ID/PW 분실
           </Button>
         </Link>
       </div>
