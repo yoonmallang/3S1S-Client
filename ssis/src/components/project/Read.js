@@ -180,8 +180,9 @@ class Read extends Component {
         let member_list = this.state.member && this.state.member.map(member =>{
             if(member.leader === 1)
             return <div className="Memberlist_pr">
+                    <img src = {member.profile_img} className = "memberImage" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/blank-person.png"}}></img>
                     <span className = "MemberSpan">
-                        {member.user_id}         
+                        {member.name}         
                     </span>
                     <img src = "/img/crown.png" className = "LeaderCrown"/> 
                 </div>
@@ -189,7 +190,8 @@ class Read extends Component {
             {
                 if(this.state.myID == this.state.project.leader){
                     return <div className="Memberlist_pr">
-                        <span className = "MemberSpan">{member.user_id}</span>
+                        <img src = {member.profile_img} className = "memberImage" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/blank-person.png"}}></img>
+                        <span className = "MemberSpan">{member.name}</span>
                         <Dropdown className="MoreButton">
                             <Dropdown.Toggle className="more_dropButton">
                                 <div className="more_button">
@@ -213,7 +215,8 @@ class Read extends Component {
                 }
                 else{
                     return <div className="Memberlist_pr">
-                    <span className = "MemberSpan">{member.user_id}</span>
+                    <img src = {member.profile_img} className = "memberImage" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/blank-person.png"}}></img>
+                    <span className = "MemberSpan">{member.name}</span>
                     </div>
                 }
                 }
@@ -222,7 +225,8 @@ class Read extends Component {
 
         let contribution_list = this.state.member && this.state.member.map(member =>{
             return <div className="MemberContribution">
-                        <span className = "ContributionSpan1">{member.user_id}</span>
+                        <img src = {member.profile_img} className = "memberImage" alt = "" onError={(e)=>{e.target.onerror = null; e.target.src="/img/blank-person.png"}}></img>
+                        <span className = "ContributionSpan1">{member.name}</span>
                         <span className = "ContributionSpan2">{member.contribution_rate}%</span>
                 </div>
                 }   
