@@ -53,7 +53,11 @@ class Create extends Component {
     };
 
     handleShow = () => {    
-        this.setState({show: true});
+        this.setState({show: true});   
+        var curr = new Date();
+        curr.setDate(curr.getDate());
+        var date = curr.toISOString().substr(0,10);
+        this.setState({start_date :date, end_date : date})
     };
 
     deleteColor = () => {
@@ -104,11 +108,11 @@ class Create extends Component {
                 
                     <Form.Group className="date1-form_cc">
                         <Form.Label className="text">날짜</Form.Label>
-                        <input type="date" className="form-control" onChange={this.startdateChange}/>
+                        <input type="date" className="form-control" onChange={this.startdateChange} defaultValue={this.state.start_date}/>
                     </Form.Group>
 
                     <Form.Group className="date2-form_cc">
-                        <input type="date" className="form-control"  onChange={this.enddateChange}/>
+                        <input type="date" className="form-control"  onChange={this.enddateChange} defaultValue={this.state.end_date}/>
                     </Form.Group>
                     
                     <Form.Group className="div-form_cc" controlId="formGridPassword1">

@@ -214,8 +214,8 @@ class List extends Component {
                     <div style={{ width: '1100px', margin: '0px auto', marginTop:'30px'}}>
                         <Create id={this.props.match.params}/>
                         <div style={{ width: '500px',margin: '0px auto'}}>
-                        <p style={{ float: 'left', marginBottom:'0px'}}>진행률</p>
-                        <p style={{ float: 'right', marginBottom:'0px'}}>{pgValues}%</p>
+                        <p style={{ float: 'left', marginBottom:'0px', fontSize:'20px'}}>진행률</p>
+                        <p style={{ float: 'right', marginBottom:'0px',fontSize:'20px'}}>{pgValues}%</p>
                         <progress value = {pgValues} max="100" className="todo-progress"></progress>
                     </div>
                 </div>

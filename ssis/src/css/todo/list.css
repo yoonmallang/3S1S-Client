@@ -63,25 +63,28 @@
 
 .p1 {
   text-align: left;
-  background-color: beige;
+  background-color: #FFD4C4;
+  padding:3px;
   width: auto;
-  font-size: 20px;
+  font-size: 25px;
   border-radius: 3px;
 }
 
 .p2 {
   text-align: left;
-  background-color: aquamarine;
+  background-color: #DC9BEB;
+  padding:3px;
   width: auto;
-  font-size: 20px;
+  font-size: 25px;
   border-radius: 3px;
 }
 
 .p3 {
   text-align: left;
-  background-color: burlywood;
+  background-color: #B7EDCD;
+  padding:3px;
   width: auto;
-  font-size: 20px;
+  font-size: 25px;
   border-radius: 3px;
   text-align: center;
 }

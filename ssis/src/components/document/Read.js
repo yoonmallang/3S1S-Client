@@ -45,7 +45,7 @@ class Read extends Component {
         const file = e.target.files[0];
         let fileName = encodeURI(file.name)
         this.setState({
-            modifiedFileUrl: `https://dgusogongssis.s3.ap-northeast-2.amazonaws.com/${this.state.documentDetail.id}`,
+            modifiedFileUrl: `https://dgusogongssis.s3.ap-northeast-2.amazonaws.com/${fileName}`,
             selectFile : file,
             modifiedFileName : file['name']
         })
@@ -94,7 +94,7 @@ class Read extends Component {
             file_name : this.state.modifiedFileName,
             file_url : this.state.modifiedFileUrl
         }).then((res) => {
-            console.log(res)
+            alert("파일 수정 완료")
             this.handleClose();
         }).catch((err) => {
             console.log(err);
@@ -152,9 +152,10 @@ class Read extends Component {
                             </div>
                         </div>
                     </Modal.Body>
-                    <Modal.Footer>
-                    <button className="dc-download-button" style={{width:'100%'}}onClick={() => window.open(`${this.state.documentDetail.file_url}`, '_blank')}>파일 </button>
-                        {this.state.documentDetail.file_url}
+                    <Modal.Footer style={{textAlign:"left"}}>
+                        <p style={{float:'left', width:'100%'}}>파일명 : {this.state.documentDetail.file_name}</p>
+                        <button className="dc-download-button" style={{width:'100%'}}onClick={() => window.open(`${this.state.documentDetail.file_url}`, '_blank')}>파일 다운로드</button>
+                        
                     </Modal.Footer>
                 </Modal>
             );

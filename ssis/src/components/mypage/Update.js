@@ -54,7 +54,6 @@ class Update extends Component {
                 previewImg : reader.result
             })
         }
-
         reader.readAsDataURL(file)
     }
 
@@ -107,6 +106,7 @@ class Update extends Component {
         }).catch((err) => {
             console.log(err);
         })
+
     }
 
     componentDidMount() { 
@@ -129,6 +129,7 @@ class Update extends Component {
 
         return (
             <div className="mypage-page">
+
                     <Form>
                         <img alt="" src={profileImg} className="mp-profile-img"/>
                         <label className="mp-img-button" for="input-file">
@@ -137,7 +138,7 @@ class Update extends Component {
                         <Form.Group className="mp-input">
                             <Form.Control type="file" id="input-file" style={{display:"none"}}className="mp-imgupload"accept="image/*" onChange={this.profileChange}/>
                         </Form.Group>
-                        <hr style={{width:'250px'}}/>
+                        <hr style={{width:'300px'}}/>
 
                         <Form.Group className="mp-input">
                             <Form.Control type="text" value={this.state.user.name}/>
