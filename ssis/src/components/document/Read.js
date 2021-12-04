@@ -3,6 +3,22 @@ import { Modal, Button,Form } from 'react-bootstrap';
 import '../../css/document/read.css';
 import axios from "axios";
 
+import AWS from 'aws-sdk';
+
+const S3_BUCKET = process.env.REACT_APP_BUCKET_NAME;
+const REGION = process.env.REACT_APP_REGION;
+
+
+AWS.config.update({
+    accessKeyId: process.env.REACT_APP_ACCESS_KEY,
+    secretAccessKey: process.env.REACT_APP_SECRET_KEY
+  });
+  
+const myBucket = new AWS.S3({
+    params: { Bucket: S3_BUCKET},
+    region: REGION,
+});
+
 class Read extends Component {
     constructor(props) {
         super(props);
@@ -13,14 +29,53 @@ class Read extends Component {
             modifydocument : false,
             modifiedTitle : this.props.detail.title,
             modifiedDesription : this.props.detail.description,
-            modifiedFileName : this.props.detail.description.file_name
+            modifiedFileName : this.props.detail.file_name,
+            modifiedFileUrl : this.props.detail.file_url,
+
+            selectFile : "",
         }
     }
 
     titleChange = (e) => {this.setState({modifiedTitle: e.target.value})};
     descriptionChange = (e) => {this.setState({modifiedDesription: e.target.value})};
-    fileNameChange = (e) => {this.setState({modifiedFileName: e.target.files[0]['name']})};
-    
+ 
+    fileUrlChange = (e) => {
+        e.preventDefault();
+        let reader = new FileReader();
+        const file = e.target.files[0];
+        let fileName = encodeURI(file.name)
+        this.setState({
+            modifiedFileUrl: `https://dgusogongssis.s3.ap-northeast-2.amazonaws.com/${this.state.documentDetail.id}`,
+            selectFile : file,
+            modifiedFileName : file['name']
+        })
+        reader.onloadend = () => {
+            this.setState({
+                previewImg : reader.result
+            })
+        }
+
+        reader.readAsDataURL(file)
+    }
+
+    uploadFile = (file) => {
+        const params = {
+          ACL: 'public-read',
+          Body: file,
+          Bucket: S3_BUCKET,
+          Key: file.name
+        };
+        
+        myBucket.putObject(params)
+          .on('httpUploadProgress', (evt) => {
+            this.setState({progress : Math.round((evt.loaded / evt.total) * 100)})
+          })
+          .send((err) => {
+            if (err) console.log(err)
+          })
+
+      }
+
     handleClose = () => {
         this.setState({show: false});
         this.props.handleClose();
@@ -32,16 +87,12 @@ class Read extends Component {
         console.log(this.state.modifiedTitle)
     }
 
-    // modfiedIdClear = () => {
-    //     this.setState({ modifydocument: false, modifiedTitle: "", modifiedDesription: "", modifiedFileName: ""});
-    // }
-
     modifyComment = (fileId) => {
         axios.put(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/files/${fileId}`, {
             title : this.state.modifiedTitle,
             description : this.state.modifiedDesription,
             file_name : this.state.modifiedFileName,
-            file_url : "newUrl",
+            file_url : this.state.modifiedFileUrl
         }).then((res) => {
             console.log(res)
             this.handleClose();
@@ -68,14 +119,18 @@ class Read extends Component {
                         <div style={{width:"100%"}}>
                         <Modal.Title>
                             <b style={{float:'left'}}>{this.state.documentDetail.title} </b>
-                            <div className="document-buttons">
-                                <Button className="document-modify-button" onClick={()=>this.modifyButton()}>
-                                    <img alt="" src="/img/pencil.png" className="document-modify-img"></img>
-                                </Button>
-                                <Button className="document-delete-button" onClick={()=>this.deleteComment(this.state.documentDetail.id)}>
-                                    <img alt="" src="/img/delete.png" className="document-delete-img"></img>
-                                </Button>
-                            </div>
+                            {
+                                this.props.detail.writer_id === sessionStorage.getItem('id')
+                                ?   <div className="document-buttons">
+                                        <Button className="document-modify-button" onClick={()=>this.modifyButton()}>
+                                            <img alt="" src="/img/pencil.png" className="document-modify-img"></img>
+                                        </Button>
+                                        <Button className="document-delete-button" onClick={()=>this.deleteComment(this.state.documentDetail.id)}>
+                                            <img alt="" src="/img/delete.png" className="document-delete-img"></img>
+                                        </Button>
+                                    </div>
+                                : null
+                            }
                         </Modal.Title>
                         </div>
                     </Modal.Header>
@@ -98,7 +153,8 @@ class Read extends Component {
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        {this.state.documentDetail.file_name}
+                    <button className="dc-download-button" style={{width:'100%'}}onClick={() => window.open(`${this.state.documentDetail.file_url}`, '_blank')}>파일 </button>
+                        {this.state.documentDetail.file_url}
                     </Modal.Footer>
                 </Modal>
             );
@@ -123,7 +179,7 @@ class Read extends Component {
 
                     <Form.Group className="tdd-div-form">
                         <Form.Label className="text">파일</Form.Label>
-                        <Form.Control type="file" size="sm" onChange={this.fileNameChange}/>
+                        <Form.Control type="file" size="sm" onChange={this.fileUrlChange}/>
                     </Form.Group>
                 </Form> 
                 </Modal.Body>
@@ -131,7 +187,7 @@ class Read extends Component {
                     <Button variant="secondary" onClick={this.handleClose}>
                         취소
                     </Button>
-                    <Button className="create-Button" type="submit" onClick={()=>this.modifyComment(this.state.documentDetail.id)}>
+                    <Button className="create-Button" type="submit" onClick={()=>{this.modifyComment(this.state.documentDetail.id); this.uploadFile(this.state.selectFile)}}>
                         수정
                     </Button>
                 </Modal.Footer>

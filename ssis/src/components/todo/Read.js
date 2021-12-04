@@ -71,14 +71,18 @@ class Read extends Component {
                         <div style={{width:"100%"}}>
                         <Modal.Title>
                             <b style={{float:'left'}}>{this.state.todoDetail.title} </b>
-                                <div className="td-buttons">
-                                    <Button className="td-modify-button" onClick={()=>this.modifyButton()}>
-                                        <img alt="" src="/img/pencil.png" className="td-modify-img"></img>
-                                    </Button>
-                                    <Button className="td-delete-button" onClick={()=>this.deleteTodo(this.state.todoDetail.id)}>
-                                        <img alt="" src="/img/delete.png" className="td-delete-img"></img>
-                                    </Button>
-                            </div>
+                            {
+                                this.state.todoDetail.writer === sessionStorage.getItem('id')
+                                ?   <div className="td-buttons">
+                                        <Button className="td-modify-button" onClick={()=>this.modifyButton()}>
+                                            <img alt="" src="/img/pencil.png" className="td-modify-img"></img>
+                                        </Button>
+                                        <Button className="td-delete-button" onClick={()=>this.deleteTodo(this.state.todoDetail.id)}>
+                                            <img alt="" src="/img/delete.png" className="td-delete-img"></img>
+                                        </Button>
+                                    </div>
+                                : null
+                            }                        
                         </Modal.Title>
                         </div>
                     </Modal.Header>

@@ -37,6 +37,7 @@ class Create extends Component {
     }
 
     onClickSubmit = () => {
+        console.log(this.state)
         axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/files", {
             project: this.state.project,
             writer : this.state.writer,
@@ -56,6 +57,7 @@ class Create extends Component {
     //fileNameChange = (e) => {this.setState({file_name: e.target.files[0]['name']})};
     // fileUrlChange = (e) => {this.setState({file_url: e.target.value})};
     fileUrlChange = (e) => {
+        e.preventDefault();
         const file = e.target.files[0];
         let fileName = encodeURI(file.name)
         this.setState({
