@@ -83,6 +83,7 @@
   width: auto;
   font-size: 20px;
   border-radius: 3px;
+  text-align: center;
 }
 
 .todo-progress {
@@ -100,4 +101,19 @@
 .todoScroll::-webkit-scrollbar {
   width: 5px;
   background-color: none;
+}
+
+.td-switch {
+ width: 100%;
+}
+
+.react-switch-bg {
+  width: 40px !important;
+  height: 10px !important;
+}
+
+.react-switch-handle {
+  width: 10px !important;
+  height: 10px !important;
+  border-color:black;
 }

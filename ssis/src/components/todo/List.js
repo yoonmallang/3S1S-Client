@@ -7,6 +7,7 @@ import Read from './Read.js'
 import Middlebar from '../navi/Middlebar'
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { Card } from 'react-bootstrap';
+import Switch from 'react-switch';
 
 class List extends Component {
     constructor(props) {
@@ -15,11 +16,16 @@ class List extends Component {
             todos_0 : [],
             todos_1 : [],
             todos_2 : [],
+            todos_f2 : [],
+            todos_t2 : [],
             project_id : this.props.match.params.id,
             progressValue : 0,
             columns : [],
             todoDetail : [],
-            showTodoDetail : false 
+            showTodoDetail : false,
+
+            toggleChecked : true,
+            handleToggle : this.handleToggle.bind(this)
         }
         this.showDetail= this.showDetail.bind(this)
     }
@@ -54,12 +60,26 @@ class List extends Component {
                 params: {
                     project: this.state.project_id,
                     state: 2,
+                    ispast : false
                 }
             });
-            this.setState({ todos_2: res.data.todo_list });
+            this.setState({ todos_f2: res.data.todo_list });
         } catch (e) { 
             console.log(e); 
         }
+
+        try { 
+          const res = await axios.get("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/todos", {
+              params: {
+                  project: this.state.project_id,
+                  state: 2,
+                  ispast : true
+              }
+          });
+          this.setState({ todos_t2: res.data.todo_list });
+      } catch (e) { 
+          console.log(e); 
+      }
 
         this.setState({columns : {
             "0": {
@@ -74,7 +94,7 @@ class List extends Component {
             },
             "2": {
               name: "완료",
-              items: this.state.todos_2,
+              items: this.state.todos_f2,
               state : 2
             }
           }})
@@ -152,7 +172,31 @@ class List extends Component {
           });
         }
       };
-
+    
+    handleToggle = () => {
+      if (this.state.toggleChecked === true) {
+        this.setState({toggleChecked : false })
+        this.setState({columns : {
+          ...this.state.columns,
+          "2": {
+            name: "완료",
+            items: this.state.todos_t2,
+            state : 2
+          }
+        }})
+      } else {
+        this.setState({toggleChecked : true })
+        this.setState({
+          columns : {
+            ...this.state.columns,
+          "2": {
+            name: "완료",
+            items: this.state.todos_f2,
+            state : 2
+          }
+        }})
+      }
+    }
     componentDidMount() { 
         const { loadingTodos, loadingProgress } = this; 
         loadingTodos(); 
@@ -184,7 +228,16 @@ class List extends Component {
               flexDirection: "column",
               alignItems: "center"
             }} key={columnId}>
+              <div>
               <span className={titleClassName[index]}>{column.name}</span>
+              {
+                column.name === '완료'
+                ? <label  className="td-switch">
+                    <Switch uncheckedIcon='' checkedIcon='' onChange={this.handleToggle} checked={this.state.toggleChecked}></Switch>
+                  </label>
+                : <div style={{marginBottom:'24px'}}></div>
+              }
+              </div>
               <div className="todoScroll" style={{ marginLeft : 70, marginRight :70, marginTop:30}}>
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
@@ -204,8 +257,9 @@ class List extends Component {
                                     userSelect: "none",
                                     padding: 2,
                                     margin: "0 0 12px 0",
-                                    minHeight: "130px",  
-                                    ...provided.draggableProps.style
+                                    minHeight: "130px",
+                                    ...provided.draggableProps.style,
+                                    backgroundColor : `${item.color}`
                                   }}
                                   onClick={() => this.showDetail(item.id)}>
                                     <Card.Body style={{paddingBottom:'0px', paddingTop:'10px'}}>
