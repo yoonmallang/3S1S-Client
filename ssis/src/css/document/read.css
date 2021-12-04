@@ -60,3 +60,10 @@
 .document-buttons {
   float: right;
 }
+
+.dc-download-button {
+    color: black;
+    background-color: #99c0ff;
+    border-color: #99c0ff;
+  
+}
