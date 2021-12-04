@@ -37,6 +37,7 @@ class Read extends Component {
         .then((res) => {
             console.log(res)
             this.handleClose();
+            document.location.href=`/project/${this.state.todoDetail.project}/todo`
         }).catch((err) => {
             console.log(err);
         })
