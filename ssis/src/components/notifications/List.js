@@ -33,6 +33,7 @@ class List extends Component {
         }).then((res) => {
             alert(res.data.message)
             this.loadingAlarms();
+            document.location.href = '/project'
         }).catch((err) => {
             console.log(err);
         })
