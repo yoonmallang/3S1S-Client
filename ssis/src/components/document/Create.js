@@ -31,13 +31,13 @@ class Create extends Component {
             file_name :"",
             file_url :"",
             selectFile : "",
-
+            
+            preview : "",
             progress : ""
         }
     }
 
     onClickSubmit = () => {
-        console.log(this.state)
         axios.post("http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/files", {
             project: this.state.project,
             writer : this.state.writer,
@@ -46,6 +46,7 @@ class Create extends Component {
             file_name :this.state.file_name,
             file_url :this.state.file_url
         }).then((res) => {
+            alert("파일 생성 완료")
             document.location.href = `/project/${this.state.project}/document`;
         }).catch((err) => {
             console.log(err);
@@ -58,6 +59,7 @@ class Create extends Component {
     // fileUrlChange = (e) => {this.setState({file_url: e.target.value})};
     fileUrlChange = (e) => {
         e.preventDefault();
+        let reader = new FileReader();
         const file = e.target.files[0];
         let fileName = encodeURI(file.name)
         this.setState({
@@ -65,17 +67,25 @@ class Create extends Component {
             selectFile : file,
             file_name: e.target.files[0]['name']
         })
+
+        reader.onloadend = () => {
+            this.setState({
+                preview : reader.result
+            })
+        }
+        reader.readAsDataURL(file)
     }
 
     uploadFile = (file) => {
         const params = {
-          ACL: 'public-read',
-          Body: file,
-          Bucket: S3_BUCKET,
-          Key: file.name
-        };
+            ACL: 'public-read',
+            Body: file,
+            Bucket: S3_BUCKET,
+            Key: file.name
+          };
         
-        myBucket.putObject(params)
+    
+          myBucket.putObject(params)
           .on('httpUploadProgress', (evt) => {
             this.setState({progress : Math.round((evt.loaded / evt.total) * 100)})
           })
@@ -126,7 +136,7 @@ class Create extends Component {
                     <Button variant="secondary" onClick={this.handleClose}>
                         취소
                     </Button>
-                    <Button className="create-Button" type="submit" onClick={()=> {this.onClickSubmit(); this.uploadFile(this.state.selectFile)}}>
+                    <Button className="create-Button" onClick={()=> {this.onClickSubmit(); this.uploadFile(this.state.selectFile)}}>
                         공유
                     </Button>
                 </Modal.Footer>

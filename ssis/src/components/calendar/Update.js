@@ -95,7 +95,7 @@ class Update extends Component {
         
                 <Modal show={show} onHide={this.handleClose} className="modal">
                 <Modal.Header closeButton>
-                    <Modal.Title>일정 생성</Modal.Title>
+                    <Modal.Title>일정 수정</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 <Form>
