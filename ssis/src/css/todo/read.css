@@ -25,10 +25,23 @@
   margin-bottom: 8px;
 }
 
-.td-Info-participants {
+.tdd-participant-line {
+  margin-top:8px;
   width: 45%;
-  display: inline-block;
-  margin-top: 8px;
+  float:left;
+}
+
+.tdd-participant-img {
+  float :left;
+  width:20px;
+  height:20px;
+  margin-right : 7px;
+  border-radius: 15px;
+}
+
+.td-Info-participants {
+  text-align: left;
+  float: left;
 }
 
 .td-state0 {
