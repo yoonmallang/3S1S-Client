@@ -30,6 +30,7 @@ class Update extends Component {
         this.setState({show: false});
         this.setState({modifiedParticipants: []});
         this.props.handleClose();
+        this.props.handleLoding();
     };
 
     handleSelect = (e) => {

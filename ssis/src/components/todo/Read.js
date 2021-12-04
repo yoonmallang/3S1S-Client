@@ -13,14 +13,9 @@ class Read extends Component {
             todoDetail : this.props.detail,
             stateArray : ["시작전", "진행중" , "완료"],
             stateCL : ["td-state0", "td-state1", "td-state2"],
-            modifytodo:  false
+            modifytodo:  false,
         }
     }
-
-    titleChange = (e) => {this.setState({modifiedTitle: e.target.value})};
-    descriptionChange = (e) => {this.setState({modifiedDesription: e.target.value})};
-    startDateChange = (e) => {this.setState({modifiedStartDate: e.target.value})};
-    endDateChange = (e) => {this.setState({modifiedParticipants: e.target.value})};
 
     handleClose = () => {
         this.setState({show: false});
@@ -35,21 +30,6 @@ class Read extends Component {
 
     handleShow = () => {    
         this.setState({show: true});
-    };
-
-    modifyTodo = (todoId) => {
-        axios.put(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/todos/${todoId}`, {
-            title : this.state.modifiedTitle,
-            description : this.state.modifiedDesription, 
-            start_date: this.state.modifiedStartDate,
-            end_date: this.state.modifiedEndDate,
-            participants: this.state.modifiedParticipants
-        }).then((res) => {
-            console.log(res)
-            this.handleClose();
-        }).catch((err) => {
-            console.log(err);
-        })
     }
 
     deleteTodo = (todoId) => {
@@ -63,7 +43,6 @@ class Read extends Component {
     }
     
     render() {
-
         if(!this.state.modifytodo) {
             return (
                 <Modal  show={this.state.show} onHide={this.handleClose}>
@@ -139,7 +118,7 @@ class Read extends Component {
         }
         else {
             return (
-                <Update detail={this.state.todoDetail} handleClose={this.handleClose}/>
+                <Update detail={this.state.todoDetail} handleClose={this.handleClose} handleLoding={this.props.handleLoding()}/>
             );
         }
     }
