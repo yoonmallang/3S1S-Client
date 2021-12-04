@@ -24,7 +24,7 @@ class Update extends Component {
         super(props);
         this.state = {
             show : false,
-            creator : localStorage.getItem("id"),
+            creator : sessionStorage.getItem("id"),
             title: "",
             team: "",
             description: "",

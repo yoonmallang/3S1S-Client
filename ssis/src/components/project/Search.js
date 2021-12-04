@@ -8,7 +8,7 @@ class Search extends Component {
         super();
         this.state = {
             show : false,
-            creator : localStorage.getItem("id"),
+            creator : sessionStorage.getItem("id"),
             project_id : "",
             search_name: "",
             search_list:[],

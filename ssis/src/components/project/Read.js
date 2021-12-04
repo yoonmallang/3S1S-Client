@@ -73,7 +73,7 @@ class Read extends Component {
             const id = this.props.match.params;
             const response = await axios.get(`http://ec2-3-34-73-102.ap-northeast-2.compute.amazonaws.com/projects/${id.id}/mytodos`, {
                 params:{
-                    user : window.localStorage.getItem("id"),
+                    user : sessionStorage.getItem("id"),
                 }
             });
             this.setState({notification_i: response.data.todo_list})
@@ -173,9 +173,9 @@ class Read extends Component {
     }
 
     render() {
-        localStorage.setItem("description", this.state.project.description)
-        let description = localStorage.getItem("description")
-        localStorage.removeItem("description")           
+        sessionStorage.setItem("description", this.state.project.description)
+        let description = sessionStorage.getItem("description")
+        sessionStorage.removeItem("description")           
         
         let member_list = this.state.member && this.state.member.map(member =>{
             if(member.leader === 1)
