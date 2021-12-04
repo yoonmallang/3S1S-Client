@@ -179,13 +179,13 @@ class List extends Component {
       <DragDropContext onDragEnd={result => this.onDragEnd(result, this.state.columns)}>
         {Object.entries(this.state.columns).map(([columnId, column], index) => {
           return (
-            <div  style={{
+            <div style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center"
             }} key={columnId}>
               <span className={titleClassName[index]}>{column.name}</span>
-              <div style={{ marginLeft : 70, marginRight :70, marginTop:30}}>
+              <div className="todoScroll" style={{ marginLeft : 70, marginRight :70, marginTop:30}}>
                 <Droppable droppableId={columnId} key={columnId}>
                   {(provided, snapshot) => {
                     return (
@@ -208,7 +208,7 @@ class List extends Component {
                                     ...provided.draggableProps.style
                                   }}
                                   onClick={() => this.showDetail(item.id)}>
-                                    <Card.Body>
+                                    <Card.Body style={{paddingBottom:'0px', paddingTop:'10px'}}>
                                         <div className ="one-line">
                                             <Card.Title className = "todo-title">{item.title}</Card.Title>
                                             <span className = "todo-dday">{item.d_day}</span>
@@ -217,7 +217,10 @@ class List extends Component {
                                             {
                                                 item.participants.map((member)=> {
                                                     return (
-                                                        <Card.Text key={member.user_id} className ="participant">{member.name}</Card.Text>
+                                                        <div className="td-participant-line">
+                                                          <img alt="" src={member.img_url} className="td-participant-img"/>
+                                                          <Card.Text key={member.user_id} className ="participant">{member.name}</Card.Text>
+                                                        </div>
                                                     )
                                                 })
                                             }

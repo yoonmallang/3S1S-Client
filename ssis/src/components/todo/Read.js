@@ -97,7 +97,10 @@ class Read extends Component {
                                 <br/>
                                 {this.state.todoDetail.participants.map((item)=> {
                                         return (
-                                            <span className="td-Info-participants" key={item.user_id}>{item.name}</span>
+                                            <div className="tdd-participant-line">
+                                                 <img alt="" src={item.profile_img} className="tdd-participant-img"/>
+                                                <span className="td-Info-participants" key={item.user_id}>{item.name}</span>
+                                            </div>
                                         )
                                     })}
                             </div>

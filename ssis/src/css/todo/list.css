@@ -40,11 +40,24 @@
   height: auto;
 }
 
+.td-participant-line {
+  float : left;
+  width: 50%;
+  margin-bottom : 15px;
+}
+
+.td-participant-img {
+  float :left;
+  width:20px;
+  height:20px;
+  margin-right : 7px;
+  border-radius: 15px;
+}
+
 .participant {
   margin-bottom: 5px;
   text-align: left;
   float: left;
-  width: 47%;
   font-size: 14px;
 }
 
@@ -76,4 +89,15 @@
   width: 500px;
   height: 30px;
   margin-bottom: 30px;
+}
+
+.todoScroll {
+  margin-top: 55px;
+  height: 700px;
+  overflow-x: hidden;
+}
+
+.todoScroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: none;
 }
