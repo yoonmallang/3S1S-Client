@@ -49,6 +49,7 @@ class Create extends Component {
         }).then((res) => {
             console.log(res.data);
             if (res.status === 201) {
+                alert(res.data.message);
                 document.location.href = "/project";
             }
             else if (res.status === 210) {

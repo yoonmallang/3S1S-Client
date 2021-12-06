@@ -68,6 +68,7 @@ class Update extends Component {
         }).then((res) => {
             console.log(res.data);
             if (res.status === 200) {
+                alert(res.data.message);
                 document.location.href = `/project/${id}`;
             }
             else if (res.status === 210) {
