@@ -257,7 +257,11 @@ class Read extends Component {
                             <div className = "P_Title">
                                 {this.state.project.title}
                             </div>
-                            <Update id={this.props.match.params}/>
+                            {   
+                                this.state.myID === this.state.project.leader
+                                ? <Update id={this.props.match.params}/>
+                                : null
+                            }
                             <div className = "P_ImgTeam">
                                 <img src = {this.state.project.img_url} className = "P_Img" alt = "팀 사진" onError={(e)=>{e.target.onerror = null; e.target.src="/img/teamwork.png"}}></img>
                                 <p className = "P_teamName">{this.state.project.team}</p>
@@ -283,7 +287,11 @@ class Read extends Component {
                         </div>
                         <div className = "TeamList_pr">
                             <p className = "P_contentName"><big className="Big">팀원 리스트</big></p>
-                            <Search p_id={this.state.projectID}/>
+                            {   
+                                this.state.myID === this.state.project.leader
+                                ? <Search p_id={this.state.projectID}/>
+                                : null
+                            }
                             <div className = "TeamScroll">
                                 {member_list}
                             </div>
