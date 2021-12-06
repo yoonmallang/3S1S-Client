@@ -37,12 +37,11 @@ class Register extends Component {
         }).then((res) => {
             console.log(res)
             if (res.status === 210) {
-                console.log(res.data)
                 alert(res.data.message)
-                document.location.href = "/";
             }
             else {
                 alert(res.data.message)
+                document.location.href = "/";
             }
         }).catch((err) => {
             console.log(err);

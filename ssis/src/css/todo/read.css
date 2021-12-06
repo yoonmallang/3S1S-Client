@@ -45,24 +45,29 @@
 }
 
 .td-state0 {
-  background-color: beige;
+  background-color: #FFD4C4;
   background-size: 50%;
   border-radius: 3px;
   margin-bottom: 8px;
+  padding:3px;
+
 }
 
 .td-state1 {
-  background-color: aquamarine;
+  background-color: #DC9BEB;
   background-size: auto;
   border-radius: 3px;
   margin-bottom: 8px;
+  padding:3px;
+
 }
 
 .td-state2 {
-  background-color: burlywood;
+  background-color: #B7EDCD;
   background-size: auto;
   border-radius: 3px;
   margin-bottom: 8px;
+  padding:3px;
 }
 
 .td-delete-button {

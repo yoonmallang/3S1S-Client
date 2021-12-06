@@ -153,7 +153,7 @@ class Update extends Component {
                     취소
                 </Button>
                 <Button className="create-Button" type="submit" onClick={()=>this.modifyTodo(this.state.todoDetail['id'])}>
-                    생성
+                    수정
                 </Button>
             </Modal.Footer>
             </Modal>
